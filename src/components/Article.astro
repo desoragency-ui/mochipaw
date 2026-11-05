@@ -1,0 +1,73 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Photo from './Photo.astro';
+import Base from '../layouts/Base.astro';
+import type { Locale } from '../lib/types';
+
+interface Props {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  heading: string;
+  jsonLd?: object[];
+  photo?: { name: string; alt: string; width?: number; height?: number; cutout?: boolean };
+}
+
+const { locale, path, title, description, heading, jsonLd, photo } = Astro.props;
+---
+
+<Base locale={locale} path={path} title={title} description={description} jsonLd={jsonLd}>
+  <Breadcrumbs locale={locale} items={[{ label: title }]} />
+  <article class="shell mt-4">
+    <h1 class="display text-5xl text-purple sm:text-7xl">{heading}</h1>
+    <div class="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,48rem)_1fr]">
+      <div class="article rounded-card bg-white p-6 font-semibold sm:p-9">
+        <slot />
+      </div>
+      {
+        photo && (
+          <div class={photo.cutout ? 'relative overflow-hidden rounded-panel bg-purple px-6 pt-6' : ''}>
+            <Photo
+              name={photo.name}
+              alt={photo.alt}
+              sizes="(min-width: 1024px) 480px, 95vw"
+              width={photo.width}
+              height={photo.height}
+              class={photo.cutout ? 'mx-auto' : 'rounded-panel'}
+            />
+          </div>
+        )
+      }
+    </div>
+  </article>
+</Base>
+
+<style is:global>
+  .article h2 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+    font-size: 1.6rem;
+  }
+
+  .article h2:first-child {
+    margin-top: 0;
+  }
+
+  .article p + p {
+    margin-top: 0.7rem;
+  }
+
+  .article ul {
+    list-style: disc;
+    padding-inline-start: 1.3rem;
+  }
+
+  .article .todo {
+    margin-bottom: 1.1rem;
+    border-radius: 1.2rem;
+    background: var(--color-blush);
+    padding: 0.75rem 1.1rem;
+    font-weight: 800;
+  }
+</style>

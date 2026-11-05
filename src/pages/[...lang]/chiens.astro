@@ -1,0 +1,21 @@
+---
+import Listing from '../../components/Listing.astro';
+import { langPaths, t } from '../../i18n';
+import { productsForPet } from '../../lib/catalog';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Listing
+  locale={locale}
+  path="/chiens"
+  title={d.dogs.title}
+  intro={d.dogs.intro}
+  label={d.nav.dogs}
+  seoTitle="Nourriture et accessoires pour chien au Maroc"
+  products={productsForPet('chien')}
+  photo={{ name: 'dogs-hero', alt: 'Un golden retriever qui trotte vers nous sur fond orange' }}
+  tone="orange"
+/>

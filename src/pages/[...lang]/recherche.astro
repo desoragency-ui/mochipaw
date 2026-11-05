@@ -1,0 +1,16 @@
+---
+import { SearchResults } from '../../components/react/SearchResults';
+import { langPaths, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Base locale={locale} path="/recherche" title={d.nav.search}>
+  <div class="shell mt-8">
+    <h1 class="display mb-6 text-5xl text-purple sm:text-7xl">{d.search.title}</h1>
+    <SearchResults client:load locale={locale} />
+  </div>
+</Base>

@@ -1,0 +1,21 @@
+---
+import { langPaths, localePath, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Base locale={locale} path="/compte" title={d.nav.account}>
+  <div class="shell mt-8">
+    <h1 class="display mb-6 text-5xl text-purple sm:text-7xl">{d.account.title}</h1>
+    <div class="max-w-xl rounded-card bg-white p-8">
+      <p class="text-lg font-semibold">{d.account.intro}</p>
+      <div class="mt-5 flex flex-wrap gap-2.5">
+        <a href={localePath(locale, '/favoris')} class="btn btn-purple">{d.account.wishlist}</a>
+        <a href={localePath(locale, '/confirmation')} class="btn btn-ghost">{d.account.order}</a>
+      </div>
+    </div>
+  </div>
+</Base>

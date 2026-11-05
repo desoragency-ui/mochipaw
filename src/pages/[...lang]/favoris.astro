@@ -1,0 +1,16 @@
+---
+import { WishlistPage } from '../../components/react/WishlistPage';
+import { langPaths, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Base locale={locale} path="/favoris" title={d.nav.wishlist}>
+  <div class="shell mt-8">
+    <h1 class="display mb-6 text-5xl text-purple sm:text-7xl">{d.wishlist.title}</h1>
+    <WishlistPage client:load locale={locale} />
+  </div>
+</Base>

@@ -1,0 +1,29 @@
+---
+import Listing from '../../../components/Listing.astro';
+import { categories } from '../../../data/categories';
+import { langPaths } from '../../../i18n';
+import { productsInCategory } from '../../../lib/catalog';
+
+export function getStaticPaths() {
+  return langPaths().flatMap((entry) =>
+    categories.map((category) => ({
+      params: { ...entry.params, slug: category.slug },
+      props: { ...entry.props, category },
+    })),
+  );
+}
+
+const { locale, category } = Astro.props;
+---
+
+<Listing
+  locale={locale}
+  path={`/categorie/${category.slug}`}
+  title={category.name.toUpperCase()}
+  intro={category.description}
+  label={category.name}
+  seoTitle={`${category.name} au Maroc`}
+  products={productsInCategory(category.slug)}
+  hideCategories
+  tone={category.pet === 'chien' ? 'orange' : 'purple'}
+/>

@@ -1,0 +1,8 @@
+MochiPaw, Moroccan online pet shop for cats and dogs, French site. Young adults, families, first-time owners. Playful DTC tone but must stay trustworthy, also through checkout. Pick one option per question, reason max 14 words. Form: Q1: X - reason.
+Q1 How should the site speak to customers in French?
+A: vous everywhere (a heading becomes TOUT POUR VOS PETITS COMPAGNONS)
+B: tu everywhere (hero line becomes Tout ce qu'il faut pour tes boules de poils)
+C: tu in fun headings, vous in shop and checkout text
+Q2 The traced logo has two tiny white marks inside the letters M and C, coming from the brand board. Remove them for a cleaner logo, or keep them as drawn?
+A: Remove
+B: Keep

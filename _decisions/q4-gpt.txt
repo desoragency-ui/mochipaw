@@ -1,0 +1,17 @@
+VERIFIED
+- Aucun lien/source fourni dans le contexte.
+
+INFERRED
+- H1 : CHOISIR PAR CATÉGORIE
+- H2 : LES FAVORIS DE NOS COMPAGNONS
+- H3 : PLUS DE BONHEUR, MOINS DE DÉPENSES
+- H4 : CHAQUE PATTE MÉRITE LE BONHEUR
+- H5 : NOS NOUVEAUTÉS POUR VOS COMPAGNONS
+- H6 : POURQUOI CHOISIR MOCHIPAW [للتأكيد]
+- H7 : CRÉONS DE BEAUX MOMENTS ENSEMBLE
+- H8 : DE BELLES TROUVAILLES POUR VOS COMPAGNONS
+- H9 : OUPS ! CETTE PATTE S’EST ÉGARÉE
+
+Gaps: Le nom de marque « MochiPaw » est fourni dans le brief ; les autres éléments factuels éventuels restent [للتأكيد].
+
+Spend (kie credits): gpt-5-6-luna=0.03

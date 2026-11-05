@@ -1,0 +1,20 @@
+---
+import Listing from '../../components/Listing.astro';
+import { langPaths, t } from '../../i18n';
+import { productsForPet } from '../../lib/catalog';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Listing
+  locale={locale}
+  path="/chats"
+  title={d.cats.title}
+  intro={d.cats.intro}
+  label={d.nav.cats}
+  seoTitle="Nourriture et accessoires pour chat au Maroc"
+  products={productsForPet('chat')}
+  photo={{ name: 'cats-hero', alt: 'Un chat tigré assis, fier, sur fond violet' }}
+/>

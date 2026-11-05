@@ -1,0 +1,10 @@
+### VERIFIED
+- No source/link was provided in the context, so no items are independently verified.
+
+### INFERRED
+- Q1: **C** - Fun headings can feel playful; vous in shopping and checkout preserves trust.
+- Q2: **B** - Keep them unless the brand board confirms they are tracing artifacts, not intentional marks.
+
+Gaps: Need the brand board/source file to confirm whether the two marks are intentional.
+
+Spend (kie credits): gpt-5-6-luna=0.02

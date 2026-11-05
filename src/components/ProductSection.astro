@@ -1,0 +1,29 @@
+---
+import { ProductGrid } from './react/ProductGrid';
+import type { Locale, Product } from '../lib/types';
+
+interface Props {
+  title: string;
+  products: Product[];
+  locale: Locale;
+  link?: { href: string; label: string };
+}
+
+const { title, products, locale, link } = Astro.props;
+---
+
+{
+  products.length > 0 && (
+    <section class="shell mt-20" data-reveal>
+      <div class="mb-7 flex flex-wrap items-end justify-between gap-3">
+        <h2 class="display max-w-3xl text-4xl text-purple sm:text-6xl">{title}</h2>
+        {link && (
+          <a href={link.href} class="font-extrabold text-purple underline underline-offset-4">
+            {link.label}
+          </a>
+        )}
+      </div>
+      <ProductGrid client:visible products={products} locale={locale} />
+    </section>
+  )
+}

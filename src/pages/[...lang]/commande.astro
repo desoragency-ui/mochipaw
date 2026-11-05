@@ -1,0 +1,16 @@
+---
+import { CheckoutForm } from '../../components/react/CheckoutForm';
+import { langPaths, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Base locale={locale} path="/commande" title="Votre commande">
+  <div class="shell mt-8">
+    <h1 class="display mb-6 text-5xl text-purple sm:text-7xl">{d.checkout.title}</h1>
+    <CheckoutForm client:load locale={locale} />
+  </div>
+</Base>

@@ -1,0 +1,224 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/fredoka/wght.css';
+@import '@fontsource-variable/nunito-sans/wght.css';
+
+/* MochiPaw design tokens. Palette and radius come from the brand board. */
+@theme {
+  --color-purple: #5e3edf;
+  --color-purple-deep: #4a2fc0;
+  --color-orange: #ff5e36;
+  --color-orange-deep: #d9441f;
+  --color-brown: #220f06;
+  --color-cream: #faf5eb;
+  --color-cream-deep: #f1e8d6;
+  --color-blush: #ffd9cc;
+
+  --font-display: 'Fredoka Variable', 'Fredoka', ui-rounded, system-ui, sans-serif;
+  --font-sans: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif;
+
+  --radius-card: 28px;
+  --radius-panel: 40px;
+
+  --shadow-soft: 0 12px 32px rgba(34, 15, 6, 0.12);
+  --shadow-lift: 0 18px 44px rgba(34, 15, 6, 0.18);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-cream);
+    color: var(--color-brown);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-orange);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  [dir='rtl'] {
+    font-family: 'Noto Sans Arabic', var(--font-sans);
+  }
+}
+
+@layer components {
+  .shell {
+    width: min(100% - 2rem, 1320px);
+    margin-inline: auto;
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 0.95;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 999px;
+    font-weight: 800;
+    transition:
+      transform 0.25s var(--ease-out-soft),
+      background-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  .btn-orange {
+    background: var(--color-orange);
+    color: var(--color-brown);
+  }
+
+  .btn-orange:hover {
+    background: #ff734f;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-purple {
+    background: var(--color-purple);
+    color: #fff;
+  }
+
+  .btn-purple:hover {
+    background: var(--color-purple-deep);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-cream {
+    background: var(--color-cream);
+    color: var(--color-purple);
+  }
+
+  .btn-cream:hover {
+    background: #fff;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-purple);
+    box-shadow: inset 0 0 0 2px var(--color-purple);
+  }
+
+  .btn-ghost:hover {
+    background: var(--color-purple);
+    color: #fff;
+  }
+
+  .field {
+    width: 100%;
+    min-height: 3.25rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 18px;
+    border: 2px solid var(--color-cream-deep);
+    background: #fff;
+    color: var(--color-brown);
+    font-weight: 600;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--color-purple);
+    box-shadow: 0 0 0 4px rgb(94 62 223 / 0.15);
+  }
+
+  .field[aria-invalid='true'] {
+    border-color: var(--color-orange-deep);
+  }
+}
+
+/* Scroll reveal. Hidden only when the script runs, so content never depends on it. */
+.js [data-reveal],
+.js [data-reveal] [data-reveal-item] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+}
+
+.js [data-reveal] [data-reveal-item] {
+  transition-delay: calc(var(--i, 0) * 70ms + 100ms);
+}
+
+.js [data-reveal].is-in,
+.js [data-reveal].is-in [data-reveal-item] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-announce] {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+[data-announce].is-leaving {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Paw, bone and star pattern: only used on the purple promo band and the footer. */
+.pattern {
+  background-image: url('/images/brand/pattern.svg');
+  background-size: 220px;
+}
+
+@view-transition {
+  navigation: auto;
+}

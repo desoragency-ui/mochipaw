@@ -1,0 +1,28 @@
+---
+import CategoryGrid from '../../components/CategoryGrid.astro';
+import HomeHero from '../../components/HomeHero.astro';
+import HomeSections from '../../components/HomeSections.astro';
+import ProductSection from '../../components/ProductSection.astro';
+import { langPaths, localePath, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+import { featuredProducts, newProducts } from '../../lib/catalog';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Base locale={locale} path="/">
+  <HomeHero locale={locale} />
+  <CategoryGrid locale={locale} />
+  <ProductSection
+    title={d.home.bestSellers}
+    products={featuredProducts().slice(0, 4)}
+    locale={locale}
+    link={{ href: localePath(locale, '/boutique'), label: d.home.bestSellersLink }}
+  />
+  <HomeSections locale={locale} part="promo" />
+  <HomeSections locale={locale} part="story" />
+  <ProductSection title={d.home.newArrivals} products={newProducts().slice(0, 4)} locale={locale} />
+  <HomeSections locale={locale} part="closing" />
+</Base>

@@ -1,0 +1,36 @@
+---
+import Article from '../../components/Article.astro';
+import { langPaths } from '../../i18n';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+
+const questions = [
+  { q: 'Que vend MochiPaw ?', a: 'De la nourriture, des friandises, des jouets, de la litière, des produits de toilettage et des accessoires pour chats et chiens.' },
+  { q: 'Comment passer commande ?', a: 'Ajoutez vos produits au panier, remplissez vos coordonnées, puis confirmez votre commande sur WhatsApp.' },
+  { q: 'Comment payer ?', a: 'Le paiement se fait à la livraison.' },
+  { q: 'Combien coûte la livraison ?', a: 'Le prix et le délai de livraison sont confirmés avec vous sur WhatsApp avant l’envoi.' },
+  { q: 'Puis-je garder mes produits préférés ?', a: 'Oui. Touchez le cœur d’un produit pour le retrouver dans vos favoris.' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: questions.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<Article
+  locale={locale}
+  path="/faq"
+  title="FAQ"
+  heading="VOS QUESTIONS"
+  description="Les réponses aux questions fréquentes sur les commandes, le paiement et la livraison chez MochiPaw."
+  jsonLd={[faqSchema]}
+>
+  {questions.map((item) => (<><h2>{item.q}</h2><p>{item.a}</p></>))}
+</Article>

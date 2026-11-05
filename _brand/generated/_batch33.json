@@ -1,0 +1,116 @@
+{
+ "treats": {
+  "state": "saved",
+  "note": "already here"
+ },
+ "toys": {
+  "state": "saved",
+  "note": "already here"
+ },
+ "grooming": {
+  "state": "saved",
+  "note": "already here"
+ },
+ "cat-litter": {
+  "task": "fcfe574183fb929b3788f7ce4302fa33",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "cat-litter.png"
+ },
+ "accessories": {
+  "task": "94fbd3e980fec8265c034a539d2f6bc4",
+  "state": "saved",
+  "file": "accessories.png"
+ },
+ "promo-wag": {
+  "task": "b0366ffca7d62f9e5a0df4ab1161c345",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "promo-wag.png"
+ },
+ "story-owner": {
+  "task": "f85f0c207e063a675fb20dc1e978851d",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "story-owner.png"
+ },
+ "social-01": {
+  "task": "780618d23473d26b249ccb0fed6fe211",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "social-01.png"
+ },
+ "social-02": {
+  "task": "133e500d895db537e6b8e8f6b05b722c",
+  "state": "saved",
+  "file": "social-02.png"
+ },
+ "social-03": {
+  "task": "b263be30a1767863aa7fbad6f2c463a6",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "social-03.png"
+ },
+ "social-04": {
+  "task": "d3b683d0f36762c1bd84acfcacaf1df1",
+  "state": "saved",
+  "file": "social-04.png"
+ },
+ "social-05": {
+  "task": "970592049550b62b1c4443c0ea683849",
+  "state": "saved",
+  "file": "social-05.png"
+ },
+ "social-06": {
+  "task": "ef8a82d00640f9f9e77ab95306e3da0a",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "social-06.png"
+ },
+ "newsletter-cat": {
+  "task": "ba043bdd411fa9e2dff50720bc06c01c",
+  "state": "saved",
+  "credits": 6.0,
+  "file": "newsletter-cat.png"
+ },
+ "cats-hero": {
+  "task": "e842b35d19d09fa6c7eb6f0dce99a616",
+  "state": "saved",
+  "file": "cats-hero.png"
+ },
+ "dogs-hero": {
+  "task": "64b44a20ec57a0c2c8319ee87ba1ec63",
+  "state": "saved",
+  "file": "dogs-hero.png"
+ },
+ "offers-duo": {
+  "task": "9e366e24107384dff9426ca222254679",
+  "state": "saved",
+  "file": "offers-duo.png"
+ },
+ "about-walk": {
+  "task": "9b032cede20c05ec5dbe23c6cbf834fe",
+  "state": "saved",
+  "file": "about-walk.png"
+ },
+ "contact-puppy": {
+  "task": "13f26a9254f9f234a71687a05ecec0f8",
+  "state": "saved",
+  "file": "contact-puppy.png"
+ },
+ "404-cat": {
+  "task": "d67b7c01268d96ce79486f09b422b657",
+  "state": "saved",
+  "file": "404-cat.png"
+ },
+ "empty-cart": {
+  "task": "89a1df16b8829b2d46218f667a258b87",
+  "state": "saved",
+  "file": "empty-cart.png"
+ },
+ "order-success": {
+  "task": "76d42d241c7a5cfbff9b07c32ffc9b95",
+  "state": "saved",
+  "file": "order-success.png"
+ }
+}

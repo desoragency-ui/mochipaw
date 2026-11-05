@@ -1,0 +1,30 @@
+---
+import { localePath, t } from '../i18n';
+import type { Locale } from '../lib/types';
+
+export interface Crumb {
+  label: string;
+  path?: string;
+}
+
+const { locale, items } = Astro.props as { locale: Locale; items: Crumb[] };
+const d = t(locale);
+const all: Crumb[] = [{ label: d.pages.home, path: '/' }, ...items];
+---
+
+<nav aria-label="Fil d'Ariane" class="shell pt-5 text-sm font-bold text-brown/70">
+  <ol class="flex flex-wrap items-center gap-1.5">
+    {
+      all.map((item, index) => (
+        <li class="flex items-center gap-1.5">
+          {index > 0 && <span aria-hidden="true">/</span>}
+          {item.path ? (
+            <a href={localePath(locale, item.path)} class="hover:text-purple">{item.label}</a>
+          ) : (
+            <span aria-current="page">{item.label}</span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

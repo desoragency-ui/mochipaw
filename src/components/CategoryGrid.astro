@@ -1,0 +1,79 @@
+---
+import { existsSync } from 'node:fs';
+import { Bone, Cat, Dog, Scissors, Shovel, Tag, ToyBrick } from 'lucide-react';
+import { categories } from '../data/categories';
+import { localePath, t } from '../i18n';
+import { imagePath, imageSrcSet } from '../lib/format';
+import type { Locale } from '../lib/types';
+
+const { locale } = Astro.props as { locale: Locale };
+const d = t(locale);
+
+const icons = {
+  'nourriture-chat': Cat,
+  'nourriture-chien': Dog,
+  friandises: Bone,
+  jouets: ToyBrick,
+  toilettage: Scissors,
+  litiere: Shovel,
+  accessoires: Tag,
+};
+
+// Different sizes on purpose: the grid should not read as a row of equal boxes.
+const layout = [
+  'col-span-2 lg:col-span-5 lg:row-span-2',
+  'col-span-2 sm:col-span-1 lg:col-span-4 lg:row-span-2',
+  'lg:col-span-3',
+  'lg:col-span-3',
+  'lg:col-span-4',
+  'lg:col-span-4',
+  'col-span-2 sm:col-span-1 lg:col-span-4',
+];
+const tones = ['bg-orange text-brown', 'bg-purple text-cream', 'bg-blush text-brown', 'bg-purple text-cream', 'bg-orange text-brown', 'bg-cream-deep text-brown', 'bg-purple text-cream'];
+
+const cards = categories.map((item, index) => ({
+  ...item,
+  Icon: icons[item.slug as keyof typeof icons],
+  hasPhoto: existsSync(`public/images/categories/${item.image}-480.webp`),
+  layout: layout[index],
+  tone: tones[index],
+}));
+---
+
+<section class="shell mt-20" aria-labelledby="categories-title" data-reveal>
+  <h2 id="categories-title" class="display mb-7 max-w-3xl text-4xl text-purple sm:text-6xl">{d.home.categories}</h2>
+  <ul class="grid auto-rows-[190px] grid-cols-2 gap-3 sm:gap-5 lg:auto-rows-[220px] lg:grid-cols-12">
+    {
+      cards.map((item) => (
+        <li class={item.layout} data-reveal-item>
+          <a
+            href={localePath(locale, `/categorie/${item.slug}`)}
+            class={`group relative flex h-full overflow-hidden rounded-card ${item.tone}`}
+          >
+            {item.hasPhoto ? (
+              <img
+                src={imagePath('categories', item.image)}
+                srcset={imageSrcSet('categories', item.image)}
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                alt=""
+                width="960"
+                height="960"
+                loading="lazy"
+                decoding="async"
+                class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+              />
+            ) : (
+              <>
+                <span class="absolute -bottom-10 -end-8 h-40 w-40 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] bg-white/15 transition duration-500 group-hover:scale-110" aria-hidden="true" />
+                <item.Icon size={84} strokeWidth={1.6} aria-hidden="true" className="absolute end-5 top-5 opacity-80 transition duration-500 group-hover:-rotate-6 group-hover:scale-110" />
+              </>
+            )}
+            <span class="relative mt-auto m-3 rounded-full bg-cream px-4 py-2 font-display text-lg font-semibold text-brown shadow-soft sm:text-xl">
+              {item.name}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

@@ -1,0 +1,24 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Studio Pop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--p:#5E3EDF;--o:#FF5E36;--b:#220F06;--c:#FAF5EB}
+*{box-sizing:border-box;margin:0}body{background:var(--c);color:var(--b);font-family:'Nunito Sans',sans-serif;overflow-x:hidden}
+.bar{background:var(--b);color:var(--c);text-align:center;font-size:14px;font-weight:700;padding:9px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 40px}
+nav img{height:50px}nav ul{display:flex;gap:30px;list-style:none;padding:0;font-weight:800;font-size:15px}
+.icons{display:flex;gap:18px;align-items:center}.dot{width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:16px}.dot.c{background:var(--o);color:#fff;font-weight:800}
+.hero{position:relative;margin:6px 24px 0;height:calc(100vh - 124px);min-height:620px;max-height:820px;background:var(--p);border-radius:40px;overflow:hidden}
+.blob{position:absolute;right:-90px;bottom:-140px;width:760px;height:700px;background:var(--o);border-radius:58% 42% 46% 54%/56% 48% 52% 44%}
+.giant{position:absolute;left:48px;top:58px;color:var(--c);font-family:Fredoka;font-weight:700;line-height:.9;font-size:clamp(70px,8.7vw,132px);letter-spacing:-.015em}
+.giant span{display:block}.giant .two{color:#FFD9CC}
+.pets{position:absolute;right:30px;bottom:0;height:96%;max-height:790px}
+.copy{position:absolute;left:48px;bottom:44px;max-width:430px;color:var(--c)}
+.copy p{font-size:21px;font-weight:700;line-height:1.35;margin-bottom:22px}
+.btn{display:inline-block;padding:16px 30px;border-radius:999px;font-weight:800;font-size:17px;margin-right:10px}.b1{background:var(--o);color:#fff}.b2{background:var(--c);color:var(--p)}
+.star{position:absolute;color:var(--c);font-size:44px}@media(max-width:760px){.star{display:none}}.tag{position:absolute;left:48px;top:calc(34px + 2 * clamp(86px,12.2vw,186px) * .9 + 18px);color:var(--c);font-family:Fredoka;font-weight:600;font-size:20px;opacity:.9}
+@media(max-width:760px){nav{padding:12px 16px}nav ul{display:none}nav img{height:38px}.dot{width:36px;height:36px}.hero{margin:0 10px;height:690px;min-height:0;border-radius:30px}.giant{left:22px;top:22px;font-size:11.4vw}.tag{display:none}.blob{width:420px;height:400px;right:-120px;bottom:-110px}.pets{right:-16px;height:62%}.copy{left:22px;right:22px;top:calc(22px + 2 * 11.4vw * .9 + 12px);bottom:auto}.copy p{font-size:17px;margin-bottom:14px}.btn{padding:13px 22px;font-size:15px}.b2{display:none}}
+</style></head><body>
+<div class="bar">Tout pour vos animaux, à petits prix</div>
+<nav><img src="../../public/images/brand/logo.svg" alt="MochiPaw"><ul><li>Accueil</li><li>Boutique</li><li>Chats</li><li>Chiens</li><li>Accessoires</li><li>Offres</li></ul><div class="icons"><span class="dot">⌕</span><span class="dot">♡</span><span class="dot c">0</span></div></nav>
+<section class="hero"><div class="blob"></div><h1 class="giant"><span>GRAND AMOUR.</span><span class="two">PETITS PRIX.</span></h1><img class="pets" src="studio-pop-hero-clean.webp" alt=""><div class="copy"><p>Tout ce qu'il faut pour vos boules de poils, à des prix qui font plaisir.</p><span class="btn b1">Découvrir la boutique</span><span class="btn b2">Voir les offres</span></div><span class="star" style="left:46%;top:58%">✦</span></section>
+</body></html>

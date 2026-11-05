@@ -1,0 +1,8 @@
+[aistudio] gemini-3.8-flash busy, used gemini-3.6-flash
+**Pick:** C
+
+**Reason:** 
+It balances clean, scalable DTC branding and equal cat/dog representation above the fold with warm, authentic local relevance below.
+
+**Biggest risk:** 
+A visual style clash between bold studio graphics and realistic lifestyle imagery.

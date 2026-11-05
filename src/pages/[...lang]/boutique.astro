@@ -1,0 +1,19 @@
+---
+import Listing from '../../components/Listing.astro';
+import { langPaths, t } from '../../i18n';
+import { products } from '../../lib/catalog';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+const d = t(locale);
+---
+
+<Listing
+  locale={locale}
+  path="/boutique"
+  title={d.shop.title}
+  intro={d.shop.intro}
+  label={d.nav.shop}
+  seoTitle="Boutique pour chats et chiens au Maroc"
+  products={products}
+/>

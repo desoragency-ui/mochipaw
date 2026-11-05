@@ -1,0 +1,33 @@
+---
+import Article from '../../components/Article.astro';
+import { site } from '../../data/site';
+import { langPaths } from '../../i18n';
+import { formatPrice } from '../../lib/format';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+---
+
+<Article
+  locale={locale}
+  path="/livraison"
+  title="Livraison"
+  heading="LA LIVRAISON"
+  description="Comment fonctionne la livraison des commandes MochiPaw au Maroc."
+>
+  {
+    site.shippingZones.length > 0 ? (
+      <ul>
+        {site.shippingZones.map((zone) => (
+          <li>{zone.name} : {formatPrice(zone.price)}{zone.delay ? `, ${zone.delay}` : ''}</li>
+        ))}
+      </ul>
+    ) : (
+      <>
+        <p class="todo">À compléter avant la mise en ligne : villes, prix et délais de livraison.</p>
+        <p>Le prix et le délai de livraison sont confirmés avec vous sur WhatsApp avant l’envoi de votre commande.</p>
+      </>
+    )
+  }
+  {site.payment.cashOnDelivery && <p>Vous payez votre commande à la livraison.</p>}
+</Article>

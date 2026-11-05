@@ -1,0 +1,54 @@
+MochiPaw is a new Moroccan online pet shop for cats and dogs. Tagline: Little Paws, Big Happiness. Palette: purple #5E3EDF, orange #FF5E36, brown #220F06, cream #FAF5EB. Must look like a professional international DTC pet brand: playful, warm, trustworthy, affordable but not cheap, never childish. Brand board has a golden retriever and tabby cat, bold studio photos on purple and orange, and a hand-drawn illustration system. Images are made with AI (GPT Image at about 1536 px) because no real photos exist. The site is French first, Arabic RTL later. Products and prices come later from the owner, so the first preview uses samples.
+
+Pick ONE option per question with one short reason (max 16 words). Be decisive. Answer in exactly this form: Q1: X - reason.
+
+Q1 Visual direction for the whole website
+A: Studio Pop. Real-looking pets on flat purple and orange studio backgrounds, cut-outs, giant type behind the pet's head, lifestyle photos only where a person is needed
+B: Sunny Home. Warm lifestyle photos of owners and pets at home, colour only from page blocks
+C: Paw World. Hand-drawn illustrations lead, photos are small windows
+
+Q2 Hero image size
+A: 1K like all other images
+B: 2K for the home hero and the 2 landing heroes only
+C: 1K now, upscale later
+
+Q3 Cut-out method for pets
+A: Generate with transparent background directly
+B: Generate on flat colour, then remove the background with a tool
+C: Transparent first, flat colour plus removal only for failures
+
+Q4 Header logo file
+A: Crop from the brand board and trace to vector, free, keeps the exact letters
+B: AI edit at 2K with transparent background, may redraw letters slightly
+C: Redraw by hand as vector
+
+Q5 Placeholder product images until real photos arrive
+A: Blank unbranded product shapes in brand colours, tagged as sample
+B: Blank packs with the MochiPaw logo added on top, looks like own-label products
+C: Clean colour tiles with a paw icon, no product image at all
+
+Q6 People in photos (only 2 images show people)
+A: A Moroccan woman, bare head
+B: A mix: one hijab-wearing woman and one man
+C: Hands and silhouettes only, no faces
+
+Q7 Social photo grid on the homepage
+A: AI mood images, no handles, no fake likes, marked as illustrative
+B: Grey tiles until real photos exist
+C: Real photos of the team's own pets, supplied later
+
+Q8 Moroccan settings
+A: Riad courtyard and zellige tile in 1 or 2 social shots
+B: International neutral only
+C: Moroccan feel only in lifestyle photos, studio series stays neutral
+
+Q9 Honesty note for AI images showing people
+A: Small "Image illustrative" note under those photos
+B: One line in the footer only
+C: No note
+
+Q10 Bandana on the dog
+A: Plain purple bandana, safest for AI
+B: Purple bandana with a white paw as on the brand board, AI may draw it badly
+
+Q11 Write your best French hero headline (max 6 words, punchy, warm, in capitals, not a word-for-word translation of BIG LOVE FOR LITTLE PAWS) and a French support line (max 12 words) saying everything for your pets at prices you will love. No false claims.

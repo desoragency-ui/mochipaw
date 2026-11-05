@@ -1,0 +1,24 @@
+[aistudio] gemini-3.8-flash busy, used gemini-3.6-flash
+**Q1: A** - Matches the brand board’s high-contrast studio shots, bold typography, and modern DTC aesthetic perfectly.
+
+**Q2: B** - Prevents pixelation on modern desktop screens for the primary full-width hero banners.
+
+**Q3: B** - AI generators handle subject edges and lighting far better on flat background colors.
+
+**Q4: A** - Preserves exact brand board letterforms cleanly without AI distortion or expensive redraws.
+
+**Q5: B** - Matches the branded packaging on the brand board, creating a strong proprietary shop feel.
+
+**Q6: B** - Represents authentic, diverse Moroccan demographics realistically while building relatable local trust.
+
+**Q7: A** - Keeps the homepage visual layout polished and complete for preview without empty placeholders.
+
+**Q8: C** - Maintains sleek DTC studio consistency while authentically grounding human lifestyle photos locally.
+
+**Q9: A** - Maintains customer trust and ethical transparency directly where AI-generated human subjects appear.
+
+**Q10: A** - Prevents AI artifacts and warped logo patterns on fabric folds, ensuring clean renders.
+
+**Q11:**
+**HEADLINE:** PETITES PATTES, GRAND BONHEUR !
+**SUPPORT LINE:** Tout pour vos compagnons à des prix que vous allez aimer.

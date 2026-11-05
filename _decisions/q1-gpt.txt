@@ -1,0 +1,14 @@
+Q1: B - Astro + React islands reduces build complexity and suits a mostly static, mobile-first storefront.
+
+Q2: A - A clean mock data layer avoids premature backend complexity while keeping future integration straightforward.
+
+Q3: B - WhatsApp matches the stated Moroccan ordering workflow without requiring a backend.
+
+Q4: B - Keeps the punchy brand identity while making the rest of the French storefront locally clear.
+
+- **VERIFIED:** The brief states the PC is weak, there are no real products/prices/backend, French is first, Arabic RTL and Darija are planned, and WhatsApp/COD are common workflows.
+- **INFERRED:** Astro is the best fit for the current technical constraints; mock data is preferable until real commerce requirements exist; WhatsApp is the simplest interim checkout; keeping the English brand line preserves identity.
+
+Gaps: No confirmed WhatsApp number, product catalog, final brand guidelines, or backend requirements.
+
+Spend (kie credits): gpt-5-6-luna=0.02

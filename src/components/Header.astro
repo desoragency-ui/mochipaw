@@ -1,0 +1,77 @@
+---
+import { HeaderActions } from './react/HeaderActions';
+import { MobileNav } from './react/MobileNav';
+import { activeLocales, localeNames, localePath, t } from '../i18n';
+import type { Locale } from '../lib/types';
+
+interface Props {
+  locale: Locale;
+  path: string;
+}
+
+const { locale, path } = Astro.props;
+const d = t(locale);
+const links = [
+  { href: localePath(locale, '/'), label: d.nav.home },
+  { href: localePath(locale, '/boutique'), label: d.nav.shop },
+  { href: localePath(locale, '/chats'), label: d.nav.cats },
+  { href: localePath(locale, '/chiens'), label: d.nav.dogs },
+  { href: localePath(locale, '/accessoires'), label: d.nav.accessories },
+  { href: localePath(locale, '/offres'), label: d.nav.offers },
+];
+const current = localePath(locale, path);
+---
+
+<div class="bg-brown px-4 py-2 text-center text-sm font-bold text-cream">
+  <span class="inline-block" data-announce={JSON.stringify(d.announcements)}>{d.announcements[0]}</span>
+</div>
+
+<header data-header class="sticky top-0 z-40 bg-cream transition-shadow duration-300 data-compact:shadow-soft">
+  <div class="shell flex items-center justify-between gap-3 py-3 transition-[padding] duration-300 in-data-compact:py-1.5">
+    <div class="flex items-center gap-2">
+      <MobileNav client:idle locale={locale} links={links} />
+      <a href={localePath(locale, '/')} aria-label="MochiPaw" class="shrink-0">
+        <img
+          src="/images/brand/logo.svg"
+          alt="MochiPaw"
+          width="150"
+          height="50"
+          class="h-10 w-auto transition-[height] duration-300 sm:h-12 in-data-compact:h-9 sm:in-data-compact:h-10"
+        />
+      </a>
+    </div>
+
+    <nav aria-label={d.nav.shop} class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                aria-current={link.href === current ? 'page' : undefined}
+                class="rounded-full px-4 py-2.5 font-extrabold transition-colors hover:bg-white hover:text-purple aria-[current=page]:text-purple"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      {
+        activeLocales.length > 1 && (
+          <nav aria-label={d.nav.language} class="hidden items-center gap-1 text-sm font-extrabold sm:flex">
+            {activeLocales.map((item) => (
+              <a href={localePath(item, path)} lang={item} aria-current={item === locale ? 'true' : undefined} class="rounded-full px-2.5 py-1 aria-[current=true]:bg-white">
+                {localeNames[item]}
+              </a>
+            ))}
+          </nav>
+        )
+      }
+      <HeaderActions client:idle locale={locale} />
+    </div>
+  </div>
+</header>

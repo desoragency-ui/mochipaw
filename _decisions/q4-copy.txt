@@ -1,0 +1,11 @@
+MochiPaw, a Moroccan online pet shop for cats and dogs, French first. Tone: warm, playful, energetic, human, short. Never corporate. Hero headline already chosen: GRAND AMOUR. PETITS PRIX. Tagline stays English: Little Paws, Big Happiness.
+Write your single best French version of each homepage line. Capital letters for the headings, max 7 words each. Adapt, do not translate word for word. No invented claims, no free delivery, no guarantees. Answer exactly in this form, one line each, no comments.
+H1 (category section, was SHOP BY CATEGORY):
+H2 (best sellers, was FAVORITES FOR FURRY FRIENDS):
+H3 (promo, was MORE TAIL WAGS. LESS SPENDING.):
+H4 (brand story, was WE BELIEVE EVERY PAW DESERVES HAPPINESS.):
+H5 (new arrivals):
+H6 (why shop with us):
+H7 (social grid, was LET'S MAKE SOME PAWSOME MOMENTS!):
+H8 (newsletter, was GOOD THINGS FOR GOOD PETS.):
+H9 (404 page, was Oops! This paw led us nowhere.):

@@ -1,0 +1,8 @@
+[aistudio] gemini-3.8-flash busy, used gemini-3.6-flash
+Q1: B - Astro uses minimal memory during dev and delivers ultra-fast, SEO-ready static pages for low-spec PCs.
+
+Q2: A - Keeps dev lightweight on weak hardware while allowing full frontend layout flexibility before backend integration.
+
+Q3: B - Matches Moroccan shopping habits (COD via WhatsApp) and delivers immediate business value without requiring a backend.
+
+Q4: C - Ensures maximum clarity and local SEO for French customers while keeping the global brand tag in the logo.

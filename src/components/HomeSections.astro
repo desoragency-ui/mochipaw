@@ -1,0 +1,160 @@
+---
+import { BadgePercent, HeartHandshake, PawPrint, Smartphone } from 'lucide-react';
+import Photo from './Photo.astro';
+import { Newsletter } from './react/Newsletter';
+import { site } from '../data/site';
+import { localePath, t } from '../i18n';
+import { imagePath, imageSrcSet } from '../lib/format';
+import type { Locale } from '../lib/types';
+
+interface Props {
+  locale: Locale;
+  part: 'promo' | 'story' | 'closing';
+}
+
+const { locale, part } = Astro.props;
+const d = t(locale);
+const link = (path: string) => localePath(locale, path);
+const whyIcons = [BadgePercent, PawPrint, Smartphone, HeartHandshake];
+
+// Two large tiles and four small ones fill the grid with no gap.
+const socialNames = ['social-01', 'social-02', 'social-03', 'social-05', 'social-04', 'social-06'];
+const isLargeTile = (index: number) => index === 0 || index === 3;
+---
+
+{
+  part === 'promo' && (
+    <section class="relative mx-[clamp(0.6rem,1.7vw,1.5rem)] mt-20 overflow-hidden rounded-panel bg-purple text-cream" data-reveal>
+      <div class="pattern absolute inset-0 opacity-[0.07]" aria-hidden="true" />
+      <div class="relative grid items-center gap-6 px-6 py-12 sm:px-12 lg:grid-cols-[1.25fr_1fr] lg:py-16">
+        <div>
+          <h2 class="display text-5xl sm:text-7xl">{d.home.promo}</h2>
+          <p class="mt-4 max-w-lg text-lg font-bold">{d.home.promoText}</p>
+          <a href={link('/offres')} class="btn btn-orange mt-6">{d.home.promoCta}</a>
+        </div>
+        <div class="relative mx-auto w-full max-w-md">
+          <span data-drift class="absolute -inset-4 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] bg-orange" aria-hidden="true" />
+          <Photo name="promo-wag" alt="Un jack russell joyeux en plein saut" sizes="(min-width: 1024px) 440px, 90vw" class="relative">
+            <img
+              src={imagePath('categories', 'dog-food')}
+              srcset={imageSrcSet('categories', 'dog-food')}
+              sizes="(min-width: 1024px) 440px, 90vw"
+              alt="Un labrador sable se léchant les babines devant sa gamelle orange"
+              width="960"
+              height="960"
+              loading="lazy"
+              class="relative rounded-panel"
+            />
+          </Photo>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{
+  part === 'story' && (
+    <section class="shell mt-20 grid items-center gap-8 lg:grid-cols-2" data-reveal>
+      <div class="relative">
+        <span data-drift class="absolute -start-6 -top-6 h-56 w-56 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] bg-orange" aria-hidden="true" />
+        <div class="relative flex aspect-[4/5] items-end overflow-hidden rounded-panel bg-purple">
+          <Photo
+            name="story-owner"
+            alt="Une jeune femme souriante serre contre sa joue un chat roux"
+            sizes="(min-width: 1024px) 620px, 95vw"
+            width={960}
+            height={1280}
+            class="h-full w-full object-cover"
+          >
+            <img
+              src="/images/hero/home-hero-duo-720.webp"
+              alt="Un chien et un chat complices"
+              width="720"
+              height="960"
+              loading="lazy"
+              class="mx-auto w-[92%]"
+            />
+          </Photo>
+        </div>
+      </div>
+      <div>
+        <h2 class="display text-5xl text-purple sm:text-7xl">{d.home.story}</h2>
+        <p class="mt-5 max-w-lg text-lg font-semibold">{d.home.storyText}</p>
+        <a href={link('/a-propos')} class="btn btn-ghost mt-6">{d.home.storyCta}</a>
+      </div>
+    </section>
+  )
+}
+
+{
+  part === 'closing' && (
+    <>
+      <section class="shell mt-20" aria-labelledby="why-title" data-reveal>
+        <h2 id="why-title" class="display mb-7 text-4xl text-purple sm:text-6xl">{d.home.why}</h2>
+        <ul class="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          {d.home.whyItems.map((item, index) => {
+            const Icon = whyIcons[index];
+            return (
+              <li class="rounded-card bg-white p-6" data-reveal-item>
+                <span class={`mb-4 grid h-14 w-14 place-items-center rounded-[22px] ${index % 2 ? 'bg-orange text-brown' : 'bg-purple text-cream'}`}>
+                  <Icon size={26} aria-hidden="true" />
+                </span>
+                <h3 class="text-2xl">{item.title}</h3>
+                <p class="mt-1.5 font-semibold text-brown/75">{item.text}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+
+      {site.demoMode && (
+        <section class="shell mt-20" aria-labelledby="reviews-title" data-reveal>
+          <h2 id="reviews-title" class="display mb-2 text-4xl text-purple sm:text-6xl">{d.home.reviews}</h2>
+          <p class="mb-7 font-semibold text-brown/70">{d.home.reviewsNote}</p>
+          <ul class="grid gap-3 sm:grid-cols-3 sm:gap-5">
+            {[1, 2, 3].map(() => (
+              <li class="flex min-h-36 items-center justify-center rounded-card border-2 border-dashed border-purple/30 p-6 text-center font-bold text-brown/70">
+                {d.home.reviewsPlaceholder}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <section class="shell mt-20" aria-labelledby="social-title" data-reveal>
+        <div class="mb-7 flex flex-wrap items-end justify-between gap-3">
+          <h2 id="social-title" class="display max-w-3xl text-4xl text-purple sm:text-6xl">{d.home.social}</h2>
+          {site.social.instagram ? (
+            <a href={site.social.instagram} class="btn btn-purple">{d.home.socialCta}</a>
+          ) : (
+            <p class="font-extrabold text-brown/70">{d.home.socialSoon}</p>
+          )}
+        </div>
+        <ul class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-6">
+          {socialNames.map((name, index) => (
+            <li class={`overflow-hidden rounded-card ${isLargeTile(index) ? 'col-span-2 row-span-2' : ''}`} data-reveal-item>
+              <Photo name={name} alt="" sizes={isLargeTile(index) ? '(min-width: 1024px) 420px, 95vw' : '(min-width: 1024px) 200px, 48vw'} class="aspect-square h-full w-full object-cover">
+                <div class="grid aspect-square h-full place-items-center bg-cream-deep text-purple">
+                  <PawPrint size={44} aria-hidden="true" />
+                </div>
+              </Photo>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-3 text-sm font-semibold text-brown/70">{d.home.socialNote}</p>
+      </section>
+
+      <section class="relative mx-[clamp(0.6rem,1.7vw,1.5rem)] mt-20 overflow-hidden rounded-panel bg-orange text-brown" data-reveal>
+        <span data-drift class="absolute -end-20 -top-24 h-72 w-72 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] bg-blush/60" aria-hidden="true" />
+        <Photo name="newsletter-cat" alt="" sizes="300px" class="absolute -bottom-3 end-2 hidden w-64 lg:block xl:end-10 xl:w-80" />
+        <div class="relative mx-auto max-w-3xl px-6 py-14 text-center">
+          <h2 class="display text-4xl sm:text-6xl">{d.newsletter.title}</h2>
+          <p class="mx-auto mb-6 mt-3 max-w-xl text-lg font-bold">{d.newsletter.text}</p>
+          <div class="mx-auto max-w-xl text-start">
+            <Newsletter client:visible locale={locale} />
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}

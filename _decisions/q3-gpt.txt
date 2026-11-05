@@ -1,0 +1,6 @@
+- **VERIFIED:** No source or link was provided in the context.
+- **INFERRED — PICK: C.** Studio Pop gives MochiPaw a consistent, branded system; Sunny Home adds emotional Moroccan relevance without compromising dog-and-cat balance.
+- **BIGGEST RISK:** Two visual systems may feel disconnected unless color, typography, and art direction clearly unify them.
+- **Gaps:** No user-testing, conversion data, audience research, or actual design mockups provided.
+
+Spend (kie credits): gpt-5-6-luna=0.02

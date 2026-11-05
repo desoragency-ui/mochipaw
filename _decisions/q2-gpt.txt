@@ -1,0 +1,15 @@
+Q1: A - Strongest fit for a polished, recognizable DTC pet brand.  
+Q2: B - Prioritizes visual impact where first impressions matter most.  
+Q3: C - Preserves flexibility while reducing unnecessary cleanup.  
+Q4: A - Keeps the exact existing lettering without risking AI distortion.  
+Q5: A - Clearly communicates samples without implying own-label products.  
+Q6: B - Gives broader representation while keeping the imagery human.  
+Q7: A - Keeps the homepage lively while being transparent about AI.  
+Q8: C - Adds Moroccan character without weakening the international studio system.  
+Q9: A - Makes AI usage clear exactly where people appear.  
+Q10: A - Gives the cleanest, most reliable AI result.  
+Q11: **LE BONHEUR À QUATRE PATTES** — Tout pour vos animaux, à des prix que vous allez adorer.
+
+Gaps: VERIFIED: No external sources were provided. INFERRED: All recommendations above are strategic judgments from the brief.
+
+Spend (kie credits): gpt-5-6-luna=0.03

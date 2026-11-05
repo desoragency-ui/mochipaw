@@ -1,0 +1,77 @@
+---
+import { categories } from '../data/categories';
+import { site } from '../data/site';
+import { localePath, t } from '../i18n';
+import type { Locale } from '../lib/types';
+
+const { locale } = Astro.props as { locale: Locale };
+const d = t(locale);
+const link = (path: string) => localePath(locale, path);
+const socials = Object.entries(site.social).filter(([, url]) => url);
+const { phone, email, address, city } = site.contact;
+const hasContact = Boolean(phone || email || address);
+---
+
+<footer class="relative mt-20 overflow-hidden rounded-t-panel bg-purple text-cream">
+  <div class="pattern absolute inset-0 opacity-[0.06]" aria-hidden="true"></div>
+  <div class="shell relative grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+    <div>
+      <div class="inline-block rounded-3xl bg-cream px-4 py-3">
+        <img src="/images/brand/logo.svg" alt="MochiPaw" width="150" height="50" loading="lazy" class="h-11 w-auto" />
+      </div>
+      <p class="mt-4 max-w-xs font-semibold">{d.footer.about}</p>
+      <p class="mt-3 font-display text-xl font-semibold" lang="en">{site.tagline}</p>
+    </div>
+
+    <nav aria-label={d.footer.shop}>
+      <h2 class="mb-3 text-xl">{d.footer.shop}</h2>
+      <ul class="flex flex-col gap-1.5 font-semibold">
+        {categories.map((item) => <li><a class="hover:underline" href={link(`/categorie/${item.slug}`)}>{item.name}</a></li>)}
+        <li><a class="hover:underline" href={link('/offres')}>{d.nav.offers}</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-label={d.footer.help}>
+      <h2 class="mb-3 text-xl">{d.footer.help}</h2>
+      <ul class="flex flex-col gap-1.5 font-semibold">
+        <li><a class="hover:underline" href={link('/contact')}>{d.pages.contact}</a></li>
+        <li><a class="hover:underline" href={link('/faq')}>{d.pages.faq}</a></li>
+        <li><a class="hover:underline" href={link('/livraison')}>{d.pages.shipping}</a></li>
+        <li><a class="hover:underline" href={link('/retours')}>{d.pages.returns}</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="mb-3 text-xl">{d.footer.legal}</h2>
+      <ul class="flex flex-col gap-1.5 font-semibold">
+        <li><a class="hover:underline" href={link('/a-propos')}>{d.pages.about}</a></li>
+        <li><a class="hover:underline" href={link('/confidentialite')}>{d.pages.privacy}</a></li>
+        <li><a class="hover:underline" href={link('/conditions')}>{d.pages.terms}</a></li>
+      </ul>
+      <div class="mt-5 font-semibold">
+        {
+          hasContact ? (
+            <address class="not-italic">
+              {phone && <p>{phone}</p>}
+              {email && <p>{email}</p>}
+              {address && <p>{address}, {city}</p>}
+            </address>
+          ) : (
+            <p class="opacity-85">{d.footer.contactSoon}</p>
+          )
+        }
+      </div>
+      {
+        socials.length > 0 && (
+          <ul class="mt-3 flex gap-3 font-extrabold capitalize">
+            {socials.map(([name, url]) => <li><a class="underline" href={url}>{name}</a></li>)}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+  <div class="shell relative flex flex-wrap items-center justify-between gap-3 border-t border-cream/25 py-5 text-sm font-semibold">
+    <p>© {new Date().getFullYear()} MochiPaw. {d.footer.rights}</p>
+    {site.payment.cashOnDelivery && <p class="rounded-full bg-cream/15 px-4 py-1.5">{d.footer.payment}</p>}
+  </div>
+</footer>

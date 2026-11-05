@@ -1,0 +1,15 @@
+---
+import { OrderSuccess } from '../../components/react/OrderSuccess';
+import { langPaths } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+---
+
+<Base locale={locale} path="/confirmation" title="Confirmation de commande">
+  <div class="shell mt-8">
+    <h1 class="sr-only">Confirmation de commande</h1>
+    <OrderSuccess client:load locale={locale} />
+  </div>
+</Base>

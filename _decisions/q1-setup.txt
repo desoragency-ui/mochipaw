@@ -1,0 +1,25 @@
+MochiPaw is a new Moroccan online pet shop (cats and dogs). We are building its full e-commerce website: homepage, shop with filters, product pages, cart, checkout, wishlist, search, 10 extra pages. French first, Arabic RTL and Darija prepared. Must be fast on mobile, SEO-ready, beautifully animated. No real products, prices or backend exist yet. Cash on delivery is the normal way to pay in Morocco, and many shops confirm orders by WhatsApp.
+Constraints: built on a weak PC (Celeron N3450, 3.8 GB RAM, 11 GB free disk), so heavy builds are slow. The agency has shipped Next.js 15 + Tailwind 3 sites and plain static sites. The owner is a beginner and will not edit code.
+
+Pick ONE option per question and give one short reason (max 18 words). Be decisive. Answer in exactly this form: Q1: X - reason.
+
+Q1 Tech stack
+A: Next.js 15 App Router + TypeScript + Tailwind + Motion, pre-rendered pages
+B: Astro + React islands + Tailwind, mostly static
+C: Vite + React single-page app
+
+Q2 Store engine for now
+A: Our own front end with a clean mock data layer, real backend connected later
+B: Connect Shopify from the start as the backend
+C: Connect WooCommerce on WordPress from the start as the backend
+D: Own front end with Supabase database for products and orders from the start
+
+Q3 What happens when a customer confirms an order, before any real backend exists
+A: Development checkout only, clearly labelled as demo, no order is sent
+B: Send the order summary to the shop's WhatsApp number, cash on delivery
+C: Save the order to a simple database plus a WhatsApp notification
+
+Q4 Headline language on the French version
+A: Everything in French, including the big headlines
+B: Keep the punchy English brand lines (Big Love for Little Paws), all the rest in French
+C: French headlines with the English tagline kept only in the logo

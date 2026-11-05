@@ -1,0 +1,18 @@
+---
+import Article from '../../components/Article.astro';
+import { langPaths } from '../../i18n';
+
+export const getStaticPaths = langPaths;
+const { locale } = Astro.props;
+---
+
+<Article
+  locale={locale}
+  path="/retours"
+  title="Retours et remboursements"
+  heading="RETOURS ET REMBOURSEMENTS"
+  description="La politique de retours et de remboursements de MochiPaw."
+>
+  <p class="todo">À compléter avant la mise en ligne : la politique de retours de MochiPaw (délais, produits concernés, remboursement).</p>
+  <p>Un problème avec votre commande ? Contactez-nous et nous regarderons cela ensemble.</p>
+</Article>

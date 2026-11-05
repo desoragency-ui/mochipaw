@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { CartDrawer } from '../components/react/CartDrawer';
+import { SearchOverlay } from '../components/react/SearchOverlay';
+import { hasWhatsApp, site } from '../data/site';
+import { activeLocales, isRtl, localePath, t } from '../i18n';
+import type { Locale } from '../lib/types';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  /** Page path without language, for canonical and language links. */
+  path: string;
+  image?: string;
+  jsonLd?: object[];
+}
+
+const { locale, title, description, path, image = '/images/hero/home-hero-duo.webp', jsonLd = [] } = Astro.props;
+const d = t(locale);
+const pageTitle = title ? `${title} | MochiPaw` : d.meta.title;
+const pageDescription = description ?? d.meta.description;
+const siteUrl = Astro.site?.origin ?? '';
+const canonical = new URL(localePath(locale, path), Astro.site).href;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'OnlineStore',
+  name: site.name,
+  slogan: site.tagline,
+  url: siteUrl,
+  logo: `${siteUrl}/images/brand/logo.svg`,
+  description: d.meta.description,
+  areaServed: 'MA',
+  currenciesAccepted: 'MAD',
+  ...(site.contact.phone ? { telephone: site.contact.phone } : {}),
+  ...(site.contact.email ? { email: site.contact.email } : {}),
+};
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: siteUrl, inLanguage: 'fr-MA' };
+const schemas = [organization, website, ...jsonLd];
+---
+
+<!doctype html>
+<html lang={locale === 'ary' ? 'ar-MA' : locale} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/images/brand/favicon.svg" />
+    <meta name="theme-color" content="#5E3EDF" />
+    {site.demoMode && <meta name="robots" content="noindex" />}
+    {activeLocales.length > 1 &&
+      activeLocales.map((item) => (
+        <link rel="alternate" hreflang={item === 'ary' ? 'ar-MA' : item} href={new URL(localePath(item, path), Astro.site).href} />
+      ))}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MochiPaw" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site).href} />
+    <meta property="og:locale" content="fr_MA" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={new URL(image, Astro.site).href} />
+    {schemas.map((schema) => <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:font-extrabold">
+      {d.nav.skip}
+    </a>
+    {
+      site.demoMode && (
+        <p class="bg-blush px-4 py-1 text-center text-xs font-extrabold text-brown">{d.demo.ribbon}</p>
+      )
+    }
+    <Header locale={locale} path={path} />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+    <CartDrawer client:idle locale={locale} />
+    <SearchOverlay client:idle locale={locale} />
+    {
+      hasWhatsApp() && (
+        <a
+          href={`https://wa.me/${site.contact.whatsapp}`}
+          aria-label={d.whatsapp}
+          class="fixed bottom-20 end-4 z-30 grid h-13 w-13 place-items-center rounded-full bg-purple font-extrabold text-white shadow-lift lg:bottom-6"
+        >
+          WA
+        </a>
+      )
+    }
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

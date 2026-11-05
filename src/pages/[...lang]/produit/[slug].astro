@@ -1,0 +1,111 @@
+---
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ProductSection from '../../../components/ProductSection.astro';
+import { ProductGallery } from '../../../components/react/ProductGallery';
+import { ProductPurchase } from '../../../components/react/ProductPurchase';
+import { categoryBySlug } from '../../../data/categories';
+import { langPaths, localePath, t } from '../../../i18n';
+import Base from '../../../layouts/Base.astro';
+import { products, relatedProducts } from '../../../lib/catalog';
+import { imagePath } from '../../../lib/format';
+
+export function getStaticPaths() {
+  return langPaths().flatMap((entry) =>
+    products.map((product) => ({
+      params: { ...entry.params, slug: product.slug },
+      props: { ...entry.props, product },
+    })),
+  );
+}
+
+const { locale, product } = Astro.props;
+const d = t(locale);
+const category = categoryBySlug(product.category);
+const url = new URL(localePath(locale, `/produit/${product.slug}`), Astro.site).href;
+
+// Structured data only describes real products, never sample ones.
+const productSchema = product.sample
+  ? []
+  : [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: product.description,
+        sku: product.sku,
+        image: product.images.map((file) => new URL(imagePath('products', file), Astro.site).href),
+        ...(product.brand ? { brand: { '@type': 'Brand', name: product.brand } } : {}),
+        offers: {
+          '@type': 'Offer',
+          url,
+          price: product.price,
+          priceCurrency: 'MAD',
+          availability: `https://schema.org/${product.stock === 'in_stock' ? 'InStock' : 'OutOfStock'}`,
+        },
+      },
+    ];
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: d.pages.home, item: new URL(localePath(locale, '/'), Astro.site).href },
+    ...(category
+      ? [{ '@type': 'ListItem', position: 2, name: category.name, item: new URL(localePath(locale, `/categorie/${category.slug}`), Astro.site).href }]
+      : []),
+    { '@type': 'ListItem', position: category ? 3 : 2, name: product.name, item: url },
+  ],
+};
+
+const specs = [
+  ...Object.entries(product.attributes),
+  ...(product.weight ? [[d.product.weight, product.weight]] : []),
+  ...(product.brand ? [[d.product.brand, product.brand]] : []),
+  [d.product.sku, product.sku],
+];
+---
+
+<Base
+  locale={locale}
+  path={`/produit/${product.slug}`}
+  title={product.name}
+  description={product.shortDescription}
+  image={product.images[0] ? imagePath('products', product.images[0]) : undefined}
+  jsonLd={[...productSchema, breadcrumbSchema]}
+>
+  <Breadcrumbs
+    locale={locale}
+    items={[...(category ? [{ label: category.name, path: `/categorie/${category.slug}` }] : []), { label: product.name }]}
+  />
+
+  <div class="shell mt-4 grid items-start gap-8 pb-24 lg:grid-cols-2 lg:gap-12 lg:pb-0">
+    <ProductGallery client:visible images={product.images} name={product.name} locale={locale} />
+    <div class="flex flex-col gap-4">
+      {product.brand && <p class="text-sm font-extrabold uppercase tracking-wide text-brown/70">{product.brand}</p>}
+      {product.sample && <p class="w-fit rounded-full bg-brown px-3 py-1 text-xs font-bold text-cream">{d.demo.tag}</p>}
+      <h1 class="display text-4xl text-purple sm:text-6xl">{product.name}</h1>
+      <p class="text-lg font-semibold">{product.shortDescription}</p>
+      <ProductPurchase client:load product={product} locale={locale} />
+    </div>
+  </div>
+
+  <div class="shell mt-14 grid gap-5 lg:grid-cols-2">
+    <section class="rounded-card bg-white p-6 sm:p-8">
+      <h2 class="mb-2 text-3xl">{d.product.description}</h2>
+      <p class="font-semibold">{product.description}</p>
+      {product.ingredients && (<><h3 class="mb-1 mt-5 text-2xl">{d.product.composition}</h3><p class="font-semibold">{product.ingredients}</p></>)}
+      {product.nutrition && (<><h3 class="mb-1 mt-5 text-2xl">{d.product.nutrition}</h3><p class="font-semibold">{product.nutrition}</p></>)}
+      {product.usage && (<><h3 class="mb-1 mt-5 text-2xl">{d.product.usage}</h3><p class="font-semibold">{product.usage}</p></>)}
+    </section>
+    <section class="rounded-card bg-white p-6 sm:p-8">
+      <h2 class="mb-3 text-3xl">{d.product.specs}</h2>
+      <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 font-semibold">
+        {specs.map(([label, value]) => (<><dt class="text-brown/70">{label}</dt><dd>{value}</dd></>))}
+      </dl>
+      <h2 class="mb-1 mt-7 text-3xl">{d.product.reviews}</h2>
+      <p class="font-semibold text-brown/70">{d.product.noReviews}</p>
+    </section>
+  </div>
+
+  <ProductSection title={d.product.related} products={relatedProducts(product)} locale={locale} />
+</Base>
