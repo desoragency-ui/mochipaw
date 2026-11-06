@@ -14,19 +14,19 @@ Puis ouvrir http://localhost:4321. Pour fabriquer la version finale : `npm run b
 
 Avec beaucoup de produits et de photos, `npm run dev` charge les images lentement. Pour voir le site comme en ligne, rapide : `npm run site` (construit le site, puis l'ouvre sur http://localhost:4321 ; compter environ 1 min 30 avant que la page réponde).
 
-## Mise en ligne (Cloudflare Pages)
+## Mise en ligne (Cloudflare Workers, fichiers statiques)
 
-Le site est publié sur Cloudflare Pages, relié au dépôt GitHub : chaque `git push` sur `main` relance la publication.
+Le site est publié sur Cloudflare, relié au dépôt GitHub : chaque `git push` sur `main` relance la publication.
+`wrangler.jsonc` dit à Cloudflare de servir le dossier `dist` (page 404 incluse). Le nom du projet dans Cloudflare doit rester `mochipaw`, comme dans ce fichier.
 
-| Réglage Cloudflare | Valeur |
+| Réglage Cloudflare (Settings > Builds) | Valeur |
 |---|---|
-| Framework | Astro |
 | Commande de build | `npm run build` |
-| Dossier de sortie | `dist` |
-| Variable `NODE_VERSION` | `22.23.4` (aussi dans `.node-version`) |
+| Commande de déploiement | `npx wrangler deploy` |
+| Variable `NODE_OPTIONS` | `--max-old-space-size=4096` |
 | Variable `SITE_URL` | l'adresse publique du site (pour le plan du site) |
 
-`public/_headers` règle le cache des images. Cloudflare sert `chats.html` à l'adresse `/chats` sans réglage de plus.
+La version de Node vient de `.node-version`. `public/_headers` règle le cache des images. Cloudflare sert `chats.html` à l'adresse `/chats` sans réglage de plus.
 
 ## Ce que l'on change sans toucher au code
 
