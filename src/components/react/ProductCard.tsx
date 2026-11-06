@@ -63,7 +63,7 @@ export function ProductCard({ product, locale, eager }: Props) {
           aria-pressed={liked}
           aria-label={`${liked ? d.product.wishlistRemove : d.product.wishlistAdd} : ${product.name}`}
           onClick={() => toggleWishlist(product.id)}
-          className="absolute end-2 top-2 grid h-11 w-11 place-items-center rounded-full bg-white shadow-soft transition duration-200 hover:scale-110 active:scale-90"
+          className="absolute end-2 top-2 z-10 grid h-11 w-11 place-items-center rounded-full bg-white shadow-soft transition duration-200 hover:scale-110 active:scale-90"
         >
           <Heart size={19} aria-hidden="true" className={liked ? 'fill-orange text-orange' : 'text-brown'} />
         </button>

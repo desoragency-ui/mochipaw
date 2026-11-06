@@ -38,18 +38,19 @@ const breadcrumb = {
 
 <Base locale={locale} path={path} title={seoTitle} description={intro} jsonLd={[breadcrumb]}>
   <Breadcrumbs locale={locale} items={[{ label }]} />
-  <header class={`relative mx-[clamp(0.6rem,1.7vw,1.5rem)] mt-4 flex flex-col overflow-hidden rounded-panel px-6 py-10 sm:px-12 sm:py-14 ${tone === 'purple' ? 'bg-purple text-cream' : 'bg-orange text-brown'}`}>
+  <header class={`relative mx-[clamp(0.6rem,1.7vw,1.5rem)] mt-4 flex flex-col overflow-hidden rounded-panel px-6 py-10 sm:px-12 sm:py-14 ${!photo ? 'max-md:!pb-40' : ''} ${tone === 'purple' ? 'bg-purple text-cream' : 'bg-orange text-brown'}`}>
     {
       photo ? (
-        <Photo name={photo.name} alt={photo.alt} sizes="100vw" width={1600} height={900} eager class="relative order-last -mx-6 -mb-10 mt-6 aspect-[16/10] w-[calc(100%+3rem)] max-w-none object-cover object-right sm:-mx-12 sm:-mb-14 sm:w-[calc(100%+6rem)] md:absolute md:inset-0 md:m-0 md:aspect-auto md:h-full md:w-full">
+        <Photo name={photo.name} alt={photo.alt} sizes="100vw" width={1600} height={900} eager class="relative order-last -mx-6 -mb-10 mt-6 aspect-[16/10] w-[calc(100%+3rem)] max-w-none object-cover object-right sm:-mx-12 sm:-mb-14 sm:w-[calc(100%+6rem)] md:absolute md:inset-y-0 md:end-0 md:m-0 md:aspect-[16/9] md:h-full md:w-auto md:object-contain md:[mask-image:linear-gradient(to_right,transparent,#000_35%)] md:[-webkit-mask-image:linear-gradient(to_right,transparent,#000_35%)] rtl:md:-scale-x-100">
           <span class={`absolute -bottom-24 -end-16 h-72 w-80 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] ${tone === 'purple' ? 'bg-orange' : 'bg-purple'}`} aria-hidden="true" />
         </Photo>
       ) : (
         <span class={`absolute -bottom-24 -end-16 h-72 w-80 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] ${tone === 'purple' ? 'bg-orange' : 'bg-purple'}`} aria-hidden="true" />
       )
     }
-    {cutout && <Photo name={cutout.name} alt={cutout.alt} sizes="420px" eager class="absolute -bottom-2 end-3 hidden h-[115%] w-auto max-w-none sm:block lg:end-16" />}
-    <div class={`relative max-w-2xl ${photo ? 'md:max-w-[52%] md:py-8 lg:py-16' : ''}`}>
+    {cutout && <Photo name={cutout.name} alt={cutout.alt} sizes="420px" eager class="absolute -bottom-2 end-3 h-32 w-auto max-w-none sm:h-[115%] lg:end-16" />}
+    {!photo && !cutout && <img src="/images/hero/home-hero-duo-720.webp" alt="" aria-hidden="true" width="720" height="960" loading="eager" decoding="async" class="pointer-events-none absolute bottom-0 end-3 h-32 w-auto max-w-none md:end-4 md:h-[88%] lg:end-14 rtl:-scale-x-100" />}
+    <div class={`relative max-w-2xl ${photo ? 'md:max-w-[52%] md:py-8 lg:py-16' : !cutout ? 'md:max-w-[calc(100%-14rem)]' : ''}`}>
       <h1 class="display text-5xl sm:text-7xl">{title}</h1>
       <p class="mt-3 text-lg font-bold">{intro}</p>
     </div>

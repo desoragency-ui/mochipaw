@@ -31,8 +31,19 @@ const layout = [
 ];
 const tones = ['bg-orange text-brown', 'bg-purple text-cream', 'bg-blush text-brown', 'bg-purple text-cream', 'bg-orange text-brown', 'bg-cream-deep text-brown', 'bg-purple text-cream'];
 
+// Where each square photo is anchored inside its wide tile, so the key product stays in frame:
+// ball (toys), brush (grooming), litter box and scoop, collar and tag.
+const focus: Record<string, string> = {
+  friandises: '50% 35%',
+  jouets: '30% 0%',
+  toilettage: '50% 80%',
+  litiere: '50% 65%',
+  accessoires: '50% 70%',
+};
+
 const cards = categories.map((item, index) => ({
   ...item,
+  focus: focus[item.slug] ?? '50% 50%',
   Icon: icons[item.slug as keyof typeof icons],
   hasPhoto: existsSync(`public/images/categories/${item.image}-480.webp`),
   layout: layout[index],
@@ -60,6 +71,7 @@ const cards = categories.map((item, index) => ({
                 height="960"
                 loading="lazy"
                 decoding="async"
+                style={`object-position: ${item.focus}`}
                 class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
               />
             ) : (
