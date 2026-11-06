@@ -1,7 +1,9 @@
 ---
 import { BadgePercent, HeartHandshake, PawPrint, Smartphone } from 'lucide-react';
 import Photo from './Photo.astro';
+import ReviewCard from './ReviewCard.astro';
 import { Newsletter } from './react/Newsletter';
+import reviewsData from '../data/demo-reviews.json';
 import { site } from '../data/site';
 import { localePath, t } from '../i18n';
 import { imagePath, imageSrcSet } from '../lib/format';
@@ -16,6 +18,14 @@ const { locale, part } = Astro.props;
 const d = t(locale);
 const link = (path: string) => localePath(locale, path);
 const whyIcons = [BadgePercent, PawPrint, Smartphone, HeartHandshake];
+
+// Sample reviews (preview only): one 5-star review per language style, then two 4-star ones.
+const allReviews = reviewsData.reviews;
+const reviewAverage = (allReviews.reduce((sum, review) => sum + review.rating, 0) / allReviews.length).toFixed(1).replace('.', ',');
+const homeReviews = [
+  ...['fr', 'darija-latin', 'darija-ar', 'mixed'].map((language) => allReviews.find((review) => review.language === language && review.rating === 5)),
+  ...allReviews.filter((review) => review.rating === 4).slice(0, 2),
+].filter((review): review is (typeof allReviews)[number] => Boolean(review));
 
 // Two large tiles and four small ones fill the grid with no gap.
 const socialNames = ['social-01', 'social-02', 'social-03', 'social-05', 'social-04', 'social-06'];
@@ -109,14 +119,14 @@ const isLargeTile = (index: number) => index === 0 || index === 3;
       {site.demoMode && (
         <section class="shell mt-20" aria-labelledby="reviews-title" data-reveal>
           <h2 id="reviews-title" class="display mb-2 text-4xl text-purple sm:text-6xl">{d.home.reviews}</h2>
-          <p class="mb-7 font-semibold text-brown/70">{d.home.reviewsNote}</p>
-          <ul class="grid gap-3 sm:grid-cols-3 sm:gap-5">
-            {[1, 2, 3].map(() => (
-              <li class="flex min-h-36 items-center justify-center rounded-card border-2 border-dashed border-purple/30 p-6 text-center font-bold text-brown/70">
-                {d.home.reviewsPlaceholder}
-              </li>
+          <p class="mb-2 font-extrabold text-brown/80">{d.home.reviewsNote}</p>
+          <p class="mb-7 font-semibold text-brown/70">{d.reviews.summary(reviewAverage, allReviews.length)}</p>
+          <ul class="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+            {homeReviews.map((review) => (
+              <li data-reveal-item><ReviewCard review={review} locale={locale} /></li>
             ))}
           </ul>
+          <a href={link('/avis')} class="btn btn-purple mt-7">{d.reviews.seeAll(allReviews.length)}</a>
         </section>
       )}
 

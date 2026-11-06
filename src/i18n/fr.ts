@@ -58,7 +58,7 @@ export const fr = {
       { title: 'Une marque qui aime', text: 'Nous choisissons chaque produit en pensant à votre compagnon.' },
     ],
     reviews: 'ILS EN PARLENT',
-    reviewsNote: 'Les avis de vos clients apparaîtront ici dès qu’ils existeront.',
+    reviewsNote: 'Avis d’exemple pour l’aperçu du site : ce ne sont pas des témoignages de vrais clients.',
     reviewsPlaceholder: 'Emplacement pour un vrai avis client',
     social: 'PARTAGEZ VOS MOMENTS TROP CRAQUANTS',
     socialCta: 'Suivez-nous sur Instagram',
@@ -254,6 +254,18 @@ export const fr = {
     cta: 'Retour à l’accueil',
   },
   whatsapp: 'Écrire sur WhatsApp',
+  reviews: {
+    title: 'AVIS D’EXEMPLE',
+    tag: 'Exemple',
+    note: 'Ces avis sont fictifs : ils servent uniquement à l’aperçu du site. Ils disparaîtront à la mise en ligne.',
+    summary: (average: string, count: number) => `${average} / 5 · ${count} avis d’exemple`,
+    outOf: (rating: number) => `${rating} ${rating > 1 ? 'étoiles' : 'étoile'} sur 5`,
+    stars: (rating: number) => `${rating} ${rating > 1 ? 'étoiles' : 'étoile'}`,
+    seeAll: (count: number) => `Voir les ${count} avis d’exemple`,
+    cat: 'Chat',
+    dog: 'Chien',
+    intro: 'Voici à quoi ressemblera l’espace d’avis clients.',
+  },
 };
 
 export type Dictionary = typeof fr;

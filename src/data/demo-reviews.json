@@ -1,0 +1,2978 @@
+{
+  "schemaVersion": "1.0",
+  "store": "MochiPaw",
+  "locale": "ma-MA",
+  "description": "164 fictional review records for UI/development preview only. These are not real customer testimonials.",
+  "important": "Do not publish as genuine customer reviews. Replace with feedback from actual customers before enabling reviews on the live store.",
+  "ratingSummary": {
+    "count": 164,
+    "distribution": {
+      "5": 82,
+      "4": 64,
+      "3": 18,
+      "2": 0,
+      "1": 0
+    },
+    "average": 4.39,
+    "sampleOnly": true
+  },
+  "reviews": [
+    {
+      "id": "demo-review-001",
+      "author": "Adil (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Commande facile",
+      "content": "Sra7a site wade7, l9it croquettes li kan9elleb 3lihom bla ma ndoukh. La navigation khfifa même mn téléphone.",
+      "topics": [
+        "website",
+        "ordering",
+        "food"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-002",
+      "author": "Dounia (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Zwin w taman mzyan",
+      "content": "L'idée dyal taman m3a9oul 3ajbatni. Ila lproduit b nafs qualité li kayban, ghadi ykoun choix mzyan l'achat dyal kol chhar.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-003",
+      "author": "Meryem (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Mochi ghadi y7kem",
+      "content": "Mon chat picky بزاف, donc kanb9a n9elleb 3la options. Les catégories sont bien rangées, khasni ghir détails aktar 3la composition.",
+      "topics": [
+        "website",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-004",
+      "author": "Rania (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Tout f blassa wa7da",
+      "content": "Zwin nلقى nourriture, friandises w accessoires f nafs lblassa. Kayrbe7 lia lwe9t dyal recherche.",
+      "topics": [
+        "assortment",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-005",
+      "author": "Aymane (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Tajربة بسيطة",
+      "content": "Lcommande ma katbanch m3e9da. Kanbghi ghir nchouf frais de livraison w délai b woudou7 9bel ma nconfirmi.",
+      "topics": [
+        "website",
+        "delivery-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-006",
+      "author": "Yassine (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Ljouet 3jebni",
+      "content": "Corde à nœuds katban pratique l اللعب. Mon chien kay7eb yched f chi 7aja, w had type dyal jouets kaynaسبو.",
+      "topics": [
+        "toys",
+        "product-range"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-007",
+      "author": "Bilal (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Prix kay3awn",
+      "content": "F les produits li chft, les prix kaybano raisonnables. Mzyan ila bghiti t9ارن avant ما تشري.",
+      "topics": [
+        "price",
+        "comparison"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-008",
+      "author": "Malak (démo)",
+      "city": "Kénitra",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Wa7ed site mratab",
+      "content": "Dkhelt n9elleb 3la litière w mal9itch rassi daye3. Les rubriques Chat / Chien واضحين.",
+      "topics": [
+        "website",
+        "litter"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-009",
+      "author": "Salma (démo)",
+      "city": "Marrakech",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "darija-latin",
+      "title": "Bghit infos ktar",
+      "content": "Lpresentation nadya, walakin bghit photos réelles mn plusieurs angles w fiche produit فيها taille w matière b détail.",
+      "topics": [
+        "product-information",
+        "photos"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-010",
+      "author": "Lina (démo)",
+      "city": "Oujda",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Mzyan mn téléphone",
+      "content": "Jربت nصفح mn portable, les pages kayt7ello b tari9a sahla w les boutons baynin. Hadi مهمة عندي.",
+      "topics": [
+        "mobile",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-011",
+      "author": "Sami (démo)",
+      "city": "Fès",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Choix dyal friandises",
+      "content": "L9it catégories li kat3awn t9elleb. Bghit ghir filtres 7سب taille dyal lkalb w l'âge.",
+      "topics": [
+        "assortment",
+        "filters"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-012",
+      "author": "Hamza (démo)",
+      "city": "Mohammedia",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Lfikra 3ajbatni",
+      "content": "Une boutique spécialisée f les animaux w prix accessibles, c'est exactement le genre de concept li kan9elleb 3lih.",
+      "topics": [
+        "brand",
+        "price"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-013",
+      "author": "Karim (démo)",
+      "city": "Meknès",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Taman ma fihch lghla",
+      "content": "Les prix affichés f l'exemple kaybano m3قولين. Lmohim يبقاو واضحين بلا frais مفاجئين.",
+      "topics": [
+        "price",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-014",
+      "author": "Yasmine (démo)",
+      "city": "Rabat",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Kategoriyat wad7in",
+      "content": "Nourriture, jouets, toilettage, litière… kolchi m9assem مزيان. Sahl t9elleb 3la الحاجة اللي محتاج.",
+      "topics": [
+        "website",
+        "categories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-015",
+      "author": "Imane (démo)",
+      "city": "Tétouan",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "N9ta dyal livraison",
+      "content": "Bghit lcommande tkoun sahla, walakin l'information 3la délai w zones de livraison khasها tkoun bayna mn lwl.",
+      "topics": [
+        "delivery-information",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-016",
+      "author": "Nadia (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Lach la?",
+      "content": "J'aime bien l'approche: essentiels dyal pets b prix accessibles. Ma kaynch 3lach les produits de base ykouno compliqué t9elleb 3lihom.",
+      "topics": [
+        "brand",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-017",
+      "author": "Ayoub (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 3,
+      "language": "darija-latin",
+      "title": "Photos مهمين",
+      "content": "Site mratab, mais pour la nourriture kanحتاج نشوف composition, poids exact w date de péremption قبل ما نقرر.",
+      "topics": [
+        "product-information",
+        "food"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-018",
+      "author": "Omar (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Idée dyal offres",
+      "content": "Section offres katشد الانتباه. Ila kaynin packs pour les achats réguliers, ghadi ykouno مفيدين بزاف.",
+      "topics": [
+        "offers",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-019",
+      "author": "Soufiane (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Mochi kaytfarrej",
+      "content": "Les friandises pour chat kaybano intéressant. Kanتمنا fiches produits yوضحوا ingrédients باش نختار براحة.",
+      "topics": [
+        "treats",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-020",
+      "author": "Farah (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Sahl w direct",
+      "content": "Ma kaynch بزاف ديال الخطوات باش توصل للمنتج. Hadi نقطة زوينة ف shopping en ligne.",
+      "topics": [
+        "website",
+        "ordering"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-021",
+      "author": "Nour (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Taman f lbudget",
+      "content": "L'idée dyal petits prix مناسبة، خصوصاً ila 3andek أكثر من animal. Les dépenses كتجمع بسرعة.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-022",
+      "author": "Maha (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Accessoires متنوعة",
+      "content": "Collier, jouets, nourriture… assortiment kayban فيه الأساسيات. Bghit nchouf nouveautés m3a lwa9t.",
+      "topics": [
+        "assortment",
+        "accessories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-023",
+      "author": "Marouane (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Paiement عند الاستلام",
+      "content": "Option paiement à la livraison kat3ti ra7a lناس li kayفضلو yخلصو ملي يوصلهم الطلب.",
+      "topics": [
+        "payment",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-024",
+      "author": "Aya (démo)",
+      "city": "Mohammedia",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Navigation بلا صداع",
+      "content": "Lmenu واضح w ma kaykhليش الزبون يضيع. Même ila ma 3andekch fikra 3la smit produit, les catégories kat3awn.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-025",
+      "author": "Zakaria (démo)",
+      "city": "Meknès",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "darija-latin",
+      "title": "Khass détails dyal livraison",
+      "content": "Avant confirmation, bghit nعرف شحال غادي تاخد livraison w wach kayn suivi. Hadchi مهم باش ننظم راسي.",
+      "topics": [
+        "delivery-information",
+        "tracking"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-026",
+      "author": "Ikram (démo)",
+      "city": "Rabat",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Bidaya zwina",
+      "content": "L'identité dyal la boutique لطيفة وماشي مزعجة. L'essentiel howa qualité واضحة ومعلومات صحيحة على كل produit.",
+      "topics": [
+        "brand",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-027",
+      "author": "Mehdi (démo)",
+      "city": "Tétouan",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Bon rapport potentiel",
+      "content": "Les prix affichés donnent envie de comparer. Pour juger vraiment, khas les caractéristiques et poids يكونو واضحين.",
+      "topics": [
+        "price",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-028",
+      "author": "Ghita (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Litière f catégorie بوحدها",
+      "content": "3جبني أنها مفروزة بوحدها؛ ma b9itch ghadi نقلب وسط بزاف ديال المنتجات.",
+      "topics": [
+        "litter",
+        "categories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-029",
+      "author": "Rachid (démo)",
+      "city": "Salé",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Simple pour commander",
+      "content": "Le parcours d'achat kayban direct. Nتمنا يبقى confirmation واضحة وفيها récapitulatif dyal commande.",
+      "topics": [
+        "ordering",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-030",
+      "author": "Sara (démo)",
+      "city": "Agadir",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Taman dyal friandises",
+      "content": "39 DH f l'exemple kayban choix معقول, surtout ila lquantité w composition مكتوبين بوضوح.",
+      "topics": [
+        "price",
+        "treats"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-031",
+      "author": "Ilyas (démo)",
+      "city": "Casablanca",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Mzyan l أصحاب pets",
+      "content": "Kanظن boutique spécialisée تقدر توفر علينا الوقت. Zيدو guides sghar باش نختارو حسب عمر وحجم الحيوان.",
+      "topics": [
+        "brand",
+        "guides"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-032",
+      "author": "Nawal (démo)",
+      "city": "Kénitra",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Mochi approved?",
+      "content": "Lsite cute w مرتب. باقي خاصني نعرف رأي قطّي فالمذاق، حيت هو اللي عندو الكلمة الأخيرة.",
+      "topics": [
+        "website",
+        "humor"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-033",
+      "author": "Anas (démo)",
+      "city": "Marrakech",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Offres intéressantes",
+      "content": "Les réductions باينين بسهولة. Ghadi يكون أحسن ila prix avant/après w مدة العرض واضحين.",
+      "topics": [
+        "offers",
+        "price-transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-034",
+      "author": "Loubna (démo)",
+      "city": "Oujda",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "T9der tl9a kolchi",
+      "content": "Fكرة متجر فيه احتياجات القطط والكلاب فبلاصة وحدة عملية، خصوصاً للناس اللي عندهم بجوج.",
+      "topics": [
+        "assortment",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-035",
+      "author": "Taha (démo)",
+      "city": "Fès",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Bghit tailles",
+      "content": "Pour les colliers et accessoires, جدول المقاسات ضروري. Ila تزاد هاد المعلومة غادي تسهل الاختيار.",
+      "topics": [
+        "accessories",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-036",
+      "author": "Kawtar (démo)",
+      "city": "Mohammedia",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "T9sim mzyan",
+      "content": "Les catégories واضحة من الأول: ما محتاجش نعرف اسم الماركة باش نلقى نوع المنتج.",
+      "topics": [
+        "website",
+        "categories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-037",
+      "author": "Ismail (démo)",
+      "city": "Meknès",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Service client مهم",
+      "content": "Lsite كيعطي انطباع مريح. بالنسبة ليا سرعة الجواب على WhatsApp ولا téléphone كتفرق بزاف.",
+      "topics": [
+        "customer-service",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-038",
+      "author": "Meriem (démo)",
+      "city": "Rabat",
+      "pet": "Cat",
+      "rating": 3,
+      "language": "darija-latin",
+      "title": "Maزال محتاج مقارنة",
+      "content": "التصميم سهل، ولكن بغيت مقارنة بين أنواع croquettes حسب العمر والاحتياجات، ماشي غير الاسم والثمن.",
+      "topics": [
+        "product-information",
+        "comparison"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-039",
+      "author": "Amine (démo)",
+      "city": "Tétouan",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-latin",
+      "title": "Prix accessibles",
+      "content": "Ila الجودة والتوفر بقاو مستقرين، هاد النوع ديال الأسعار يقدر يكون مناسب للمشتريات المتكررة.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-040",
+      "author": "Manal (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-latin",
+      "title": "Parcours clair",
+      "content": "Dkhelt, l9it catégorie dyal chat, ومن تما نقدر نكمل. ما حسيتش براسي محتاج شرح باش نستعمل الموقع.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-041",
+      "author": "Zineb (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "الموقع واضح",
+      "content": "دخلت غير باش نشوف الليتيير ولقيت القسم ديالو بسرعة. التصنيفات مرتبة وما كاينش التخربيق.",
+      "topics": [
+        "website",
+        "litter"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-042",
+      "author": "Hiba (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "الثمن مهم",
+      "content": "عجباتني فكرة الأثمنة المعقولة، خصوصاً أن مصاريف الحيوان كتزاد مع الوقت. غير خاص تفاصيل الوزن تكون واضحة.",
+      "topics": [
+        "price",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-043",
+      "author": "Reda (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "تجربة سهلة",
+      "content": "حتى من التليفون التصفح باين ساهل. ما بقيتش كنقلب بزاف باش نوصل للمنتوج.",
+      "topics": [
+        "mobile",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-044",
+      "author": "Mehdi (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "خاص معلومات أكثر",
+      "content": "التصميم زوين، ولكن بغيت نعرف المكونات والمقاسات قبل ما نختار، خصوصاً فالأكل والإكسسوارات.",
+      "topics": [
+        "product-information",
+        "accessories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-045",
+      "author": "Youssef (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "كلشي مجموع",
+      "content": "مزيان نلقى الماكلة، الفريانديس واللعب فمتجر واحد. كيوفر عليا الوقت ديال التقليب.",
+      "topics": [
+        "assortment",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-046",
+      "author": "Chaimae (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "darija-ar",
+      "title": "التوصيل خاصو توضيح",
+      "content": "قبل ما نأكد الطلب بغيت نعرف شحال كياخد التوصيل واش كاين تتبع للطلب.",
+      "topics": [
+        "delivery-information",
+        "tracking"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-047",
+      "author": "Salim (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "أثمنة مناسبة",
+      "content": "الأثمنة اللي باينة فالأمثلة معقولة. المهم تكون جميع المصاريف واضحة قبل تأكيد الطلب.",
+      "topics": [
+        "price",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-048",
+      "author": "Sanae (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "اختيار مزيان",
+      "content": "كاينين الأساسيات ديال الكلاب والقطط، وبغيت نشوف منتجات أكثر مع الوقت.",
+      "topics": [
+        "assortment",
+        "catalog"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-049",
+      "author": "Othmane (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "التصنيفات مفيدة",
+      "content": "قسم التغذية بوحدو وقسم اللعب بوحدو، هادشي كيسهل الاختيار بزاف.",
+      "topics": [
+        "categories",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-050",
+      "author": "Nisrine (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "الأداء عند الاستلام",
+      "content": "وجود الأداء عند الاستلام مريح للناس اللي ما كيبغيوش يخلصو أونلاين.",
+      "topics": [
+        "payment",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-051",
+      "author": "Adil (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "فكرة زوينة",
+      "content": "متجر مغربي مركز على مستلزمات الحيوانات وبأثمنة معقولة، فكرة محتاجينها.",
+      "topics": [
+        "brand",
+        "price"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-052",
+      "author": "Dounia (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 3,
+      "language": "darija-ar",
+      "title": "الصور مهمة",
+      "content": "بغيت صور حقيقية للمنتوج من جميع الجهات، ومعاها الحجم والوزن باش ما يكون حتى لبس.",
+      "topics": [
+        "photos",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-053",
+      "author": "Meryem (démo)",
+      "city": "Salé",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "ساهل فالاستعمال",
+      "content": "القائمة باينة والأزرار واضحين. ما ضيعتش الوقت باش نعرف فين نمشي.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-054",
+      "author": "Rania (démo)",
+      "city": "Agadir",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "العروض كتشد",
+      "content": "قسم العروض زوين، غير يكون الثمن قبل وبعد التخفيض والمدة ديال العرض واضحين.",
+      "topics": [
+        "offers",
+        "price-transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-055",
+      "author": "Aymane (démo)",
+      "city": "Casablanca",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "مناسب للمشتريات الشهرية",
+      "content": "إلى كانت الجودة مزيانة والتوفر مستمر، يقدر يكون اختيار عملي للي كيشري الماكلة كل شهر.",
+      "topics": [
+        "value",
+        "food"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-056",
+      "author": "Yassine (démo)",
+      "city": "Kénitra",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "بغيت فلاتر",
+      "content": "الفئات واضحة، ولكن فلاتر حسب السن والنوع والوزن غادي تسهل الاختيار أكثر.",
+      "topics": [
+        "filters",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-057",
+      "author": "Bilal (démo)",
+      "city": "Marrakech",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "موقع خفيف",
+      "content": "تصفحت من الهاتف وما حسيتش الموقع ثقيل. هادي نقطة مهمة عندي.",
+      "topics": [
+        "mobile",
+        "performance"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-058",
+      "author": "Malak (démo)",
+      "city": "Oujda",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "تفاصيل التوصيل",
+      "content": "الطلب باين ساهل، وباقي خاص معلومات التوصيل والمناطق والثمن تكون ظاهرة من البداية.",
+      "topics": [
+        "delivery-information",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-059",
+      "author": "Salma (démo)",
+      "city": "Fès",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "كلشي فبلاصة وحدة",
+      "content": "عندي قط وكلب، لذلك متجر فيه منتجات بجوج مريح بزاف.",
+      "topics": [
+        "assortment",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-060",
+      "author": "Lina (démo)",
+      "city": "Mohammedia",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "التواصل كيعطي الثقة",
+      "content": "بالنسبة ليا مهم نلقى وسيلة تواصل واضحة إلا كان عندي سؤال على المنتوج ولا الطلب.",
+      "topics": [
+        "customer-service",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-061",
+      "author": "Sami (démo)",
+      "city": "Meknès",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "أثمنة مشجعة",
+      "content": "الثمن المعقول كيخلي الواحد يقارن ويفكر يشري أكثر من حاجة فمرة وحدة.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-062",
+      "author": "Hamza (démo)",
+      "city": "Rabat",
+      "pet": "Cat",
+      "rating": 3,
+      "language": "darija-ar",
+      "title": "معلومات التغذية",
+      "content": "خاص تكون المكونات والقيمة الغذائية والعمر المناسب مكتوبين بوضوح، خصوصاً بالنسبة للقطط الحساسة.",
+      "topics": [
+        "food",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-063",
+      "author": "Karim (démo)",
+      "city": "Tétouan",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "واجهة مرتبة",
+      "content": "ما كايناش فوضى فالأقسام، وكل فئة باينة بوحدها. تجربة التصفح مريحة.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-064",
+      "author": "Yasmine (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "الاختيار كيتوسع",
+      "content": "البداية مزيانة، وغادي يكون أحسن إلا تزادو ماركات وأحجام مختلفة.",
+      "topics": [
+        "catalog",
+        "assortment"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-065",
+      "author": "Imane (démo)",
+      "city": "Salé",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "اللعب ضروري",
+      "content": "عجبني وجود قسم خاص بالألعاب، حيث الكلب ديالي كيحتاج حاجة يشغل بها راسو.",
+      "topics": [
+        "toys",
+        "assortment"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-066",
+      "author": "Nadia (démo)",
+      "city": "Agadir",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "خاص المقاسات",
+      "content": "فالأطواق والإكسسوارات، المقاسات ضرورية. جدول بسيط غادي يمنع الاختيار الغلط.",
+      "topics": [
+        "accessories",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-067",
+      "author": "Ayoub (démo)",
+      "city": "Casablanca",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "فكرة عملية",
+      "content": "بدل ما نتنقل بين بزاف ديال المواقع، نقدر نقلب على الاحتياجات الأساسية فمكان واحد.",
+      "topics": [
+        "convenience",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-068",
+      "author": "Omar (démo)",
+      "city": "Kénitra",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "الثمن واضح",
+      "content": "كنفضل ملي الثمن كيكون باين وما خاصنيش نمشي لآخر خطوة باش نعرفو.",
+      "topics": [
+        "price-transparency",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-069",
+      "author": "Soufiane (démo)",
+      "city": "Marrakech",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "تجربة الهاتف",
+      "content": "استعمال الموقع من التليفون سهل، والتصنيفات ما خذاوش مساحة كبيرة بلا فائدة.",
+      "topics": [
+        "mobile",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-070",
+      "author": "Farah (démo)",
+      "city": "Oujda",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "خدمة الزبناء",
+      "content": "الواجهة كتخلي انطباع مزيان، ولكن سرعة الرد على الأسئلة غادي تكون مهمة بزاف.",
+      "topics": [
+        "customer-service",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-071",
+      "author": "Nour (démo)",
+      "city": "Fès",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "مناسب لميزانية الشهر",
+      "content": "المنتجات اليومية هي اللي كتستهلك الميزانية، لذلك الأثمنة المناسبة كتفرق.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-072",
+      "author": "Maha (démo)",
+      "city": "Mohammedia",
+      "pet": "Cat",
+      "rating": 3,
+      "language": "darija-ar",
+      "title": "خصني تفاصيل الشحن",
+      "content": "قبل الشراء بغيت نعرف واش كاين توصيل للمدينة ديالي وشحال الثمن والمدة.",
+      "topics": [
+        "delivery-information",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-073",
+      "author": "Marouane (démo)",
+      "city": "Meknès",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "الموقع مفهوم",
+      "content": "حتى واحد ما محتاج يكون خبير باش يعرف فين يلقى الماكلة ولا اللعب. هادي ميزة.",
+      "topics": [
+        "website",
+        "usability"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-074",
+      "author": "Aya (démo)",
+      "city": "Rabat",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "تجربة مبدئية زوينة",
+      "content": "التصميم بسيط ولطيف. اللي ناقص هو تقييمات حقيقية ومعلومات أكثر على المنتجات.",
+      "topics": [
+        "website",
+        "reviews",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-075",
+      "author": "Zakaria (démo)",
+      "city": "Tétouan",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "التخفيضات باينة",
+      "content": "عجبني أن العروض كتبان فالبطاقة ديال المنتوج وما خاصنيش نقلب عليها.",
+      "topics": [
+        "offers",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-076",
+      "author": "Ikram (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "التغليف مهم",
+      "content": "بالنسبة للماكلة والرمل، التغليف خاصو يكون محكم باش يوصل المنتوج نقي وسليم.",
+      "topics": [
+        "packaging",
+        "quality"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-077",
+      "author": "Mehdi (démo)",
+      "city": "Salé",
+      "pet": "Dog",
+      "rating": 5,
+      "language": "darija-ar",
+      "title": "فكرة محبوبة",
+      "content": "الهوية ديال MochiPaw لطيفة، واسمها ساهل يتفكر. كنتمنا المحتوى يبقى بنفس الروح.",
+      "topics": [
+        "brand",
+        "experience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-078",
+      "author": "Ghita (démo)",
+      "city": "Agadir",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "darija-ar",
+      "title": "بغيت وصف أدق",
+      "content": "الوصف التفصيلي لكل منتوج غادي يساعدني نعرف واش مناسب لقطي قبل ما نطلب.",
+      "topics": [
+        "product-information",
+        "food"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-079",
+      "author": "Rachid (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une boutique simple à parcourir",
+      "content": "J'aime le fait que les catégories soient visibles tout de suite. On trouve rapidement la nourriture, la litière ou les jouets sans chercher partout.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-080",
+      "author": "Sara (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Des prix qui donnent envie",
+      "content": "Les prix présentés semblent accessibles. Pour me décider, j'aimerais aussi voir clairement le poids, la composition et les frais éventuels.",
+      "topics": [
+        "price",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-081",
+      "author": "Ilyas (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Pratique sur mobile",
+      "content": "J'ai parcouru le site depuis mon téléphone et les rubriques restent faciles à repérer. C'est exactement ce que j'attends d'une boutique en ligne.",
+      "topics": [
+        "mobile",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-082",
+      "author": "Nawal (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Un choix utile",
+      "content": "Le mélange nourriture, friandises et accessoires est pratique. Quelques filtres par taille et âge des animaux seraient un vrai plus.",
+      "topics": [
+        "assortment",
+        "filters"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-083",
+      "author": "Anas (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une bonne idée pour les propriétaires",
+      "content": "Avoir les essentiels pour chiens et chats dans une seule boutique peut vraiment simplifier les achats du quotidien.",
+      "topics": [
+        "convenience",
+        "assortment"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-084",
+      "author": "Loubna (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "fr",
+      "title": "Plus de détails seraient utiles",
+      "content": "La présentation est agréable, mais il manque encore des informations précises sur les matières, les dimensions et l'entretien de certains accessoires.",
+      "topics": [
+        "product-information",
+        "accessories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-085",
+      "author": "Taha (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Navigation sans prise de tête",
+      "content": "Les catégories sont claires et le parcours semble direct. On ne se sent pas perdu dès la page d'accueil.",
+      "topics": [
+        "website",
+        "usability"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-086",
+      "author": "Kawtar (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Le paiement à la livraison, un plus",
+      "content": "C'est rassurant de voir une option de paiement à la livraison. J'aimerais que les conditions soient expliquées simplement avant de commander.",
+      "topics": [
+        "payment",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-087",
+      "author": "Ismail (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Des essentiels à prix doux",
+      "content": "Le positionnement est intéressant pour les achats réguliers. Quand on a un animal, les petites dépenses reviennent vite.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-088",
+      "author": "Meriem (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Les offres attirent l'œil",
+      "content": "La rubrique promotions est facile à repérer. Un affichage très clair du prix initial et du prix réduit serait encore mieux.",
+      "topics": [
+        "offers",
+        "price-transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-089",
+      "author": "Amine (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une interface agréable",
+      "content": "Le site est plutôt léger visuellement, avec des catégories bien séparées. C'est agréable de faire défiler les produits.",
+      "topics": [
+        "website",
+        "design"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-090",
+      "author": "Manal (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "fr",
+      "title": "J'aimerais voir les délais",
+      "content": "Avant de valider un panier, je veux connaître le délai estimé, les villes desservies et le coût de livraison.",
+      "topics": [
+        "delivery-information",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-091",
+      "author": "Zineb (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une sélection facile à comprendre",
+      "content": "Nourriture, friandises, toilettage, litière : les familles de produits sont bien identifiées. C'est un bon point.",
+      "topics": [
+        "categories",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-092",
+      "author": "Hiba (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Bon début",
+      "content": "La boutique a une identité sympathique. J'attends surtout des fiches produits complètes et des photos prises sur les vrais articles.",
+      "topics": [
+        "brand",
+        "photos",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-093",
+      "author": "Reda (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Tout au même endroit",
+      "content": "Je trouve l'idée d'une animalerie en ligne marocaine très pratique, surtout pour éviter de multiplier les commandes sur plusieurs sites.",
+      "topics": [
+        "convenience",
+        "brand"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-094",
+      "author": "Mehdi (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Des informations à compléter",
+      "content": "Pour les croquettes, la composition et les recommandations d'âge devraient être visibles sans devoir chercher longtemps.",
+      "topics": [
+        "food",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-095",
+      "author": "Youssef (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Les catégories font gagner du temps",
+      "content": "Je peux aller directement vers les produits pour chat. C'est simple, logique et adapté à une visite rapide.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-096",
+      "author": "Chaimae (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Un budget mieux maîtrisé",
+      "content": "Des prix accessibles sont importants quand on achète nourriture et friandises régulièrement. J'espère que les tarifs resteront cohérents.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-097",
+      "author": "Salim (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une expérience claire",
+      "content": "Le menu est compréhensible et les boutons d'action sont faciles à repérer. Pas besoin de deviner où cliquer.",
+      "topics": [
+        "website",
+        "usability"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-098",
+      "author": "Sanae (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "fr",
+      "title": "Des photos plus précises",
+      "content": "J'aimerais des vues supplémentaires pour les jouets et les colliers, avec les dimensions exactes. Cela évite les mauvaises surprises.",
+      "topics": [
+        "photos",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-099",
+      "author": "Othmane (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une boutique pensée pour les animaux",
+      "content": "Le ton est chaleureux sans être trop chargé. On comprend rapidement que la boutique s'adresse aux personnes qui aiment leurs compagnons.",
+      "topics": [
+        "brand",
+        "experience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-100",
+      "author": "Nisrine (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Livraison : les infos avant tout",
+      "content": "La commande semble simple. Pour être vraiment à l'aise, je voudrais connaître les délais et les frais avant la dernière étape.",
+      "topics": [
+        "delivery-information",
+        "ordering"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-101",
+      "author": "Adil (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Bonne organisation",
+      "content": "Les produits sont regroupés par besoin, ce qui rend la recherche beaucoup plus naturelle qu'une longue liste.",
+      "topics": [
+        "categories",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-102",
+      "author": "Dounia (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Un catalogue à enrichir",
+      "content": "La base est intéressante. Plus de tailles, de formats et de marques permettraient de choisir selon le profil de chaque animal.",
+      "topics": [
+        "assortment",
+        "catalog"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-103",
+      "author": "Meryem (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une navigation agréable",
+      "content": "Même sans connaître le nom exact d'un produit, les catégories permettent de trouver la bonne famille en quelques clics.",
+      "topics": [
+        "website",
+        "usability"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-104",
+      "author": "Rania (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Service client : un point essentiel",
+      "content": "Une boutique spécialisée doit aussi pouvoir répondre aux questions sur les tailles, les ingrédients et les commandes. C'est ce qui fera la différence.",
+      "topics": [
+        "customer-service",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-105",
+      "author": "Aymane (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une bonne première impression",
+      "content": "L'ensemble est cohérent et facile à parcourir. J'aime particulièrement le fait que les essentiels soient mis en avant.",
+      "topics": [
+        "website",
+        "brand"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-106",
+      "author": "Yassine (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "fr",
+      "title": "Comparer les produits serait utile",
+      "content": "Un petit tableau comparatif pour les croquettes ou les friandises aiderait à choisir sans ouvrir chaque fiche.",
+      "topics": [
+        "comparison",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-107",
+      "author": "Bilal (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Le prix est facile à repérer",
+      "content": "J'apprécie de voir le tarif directement sur les cartes produits. C'est plus simple pour comparer rapidement.",
+      "topics": [
+        "price-transparency",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-108",
+      "author": "Malak (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Des packs seraient intéressants",
+      "content": "Des packs mensuels pour les croquettes ou les friandises pourraient être pratiques, à condition que les quantités et économies soient détaillées.",
+      "topics": [
+        "offers",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-109",
+      "author": "Salma (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Une boutique accessible",
+      "content": "Le positionnement petits prix est pertinent. Prendre soin de son animal ne devrait pas devenir un casse-tête pour le budget.",
+      "topics": [
+        "price",
+        "brand"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-110",
+      "author": "Lina (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "L'essentiel est là",
+      "content": "On retrouve les grandes catégories qu'on utilise au quotidien. J'aimerais voir davantage de filtres pour affiner la recherche.",
+      "topics": [
+        "assortment",
+        "filters"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-111",
+      "author": "Sami (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Simple et rassurant",
+      "content": "L'option de paiement à la livraison est un détail important pour les personnes qui préfèrent payer à réception.",
+      "topics": [
+        "payment",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-112",
+      "author": "Hamza (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Une présentation sympathique",
+      "content": "La marque a un univers visuel doux et facile à retenir. Maintenant, les fiches détaillées feront toute la différence.",
+      "topics": [
+        "brand",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-113",
+      "author": "Karim (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Facile à utiliser",
+      "content": "Je n'ai pas eu besoin de parcourir plusieurs menus pour repérer les produits pour chat. La structure est intuitive.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-114",
+      "author": "Yasmine (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "fr",
+      "title": "Transparence sur les frais",
+      "content": "Je préfère savoir dès le départ combien coûtera la livraison. Une estimation visible dans le panier serait idéale.",
+      "topics": [
+        "delivery-information",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-115",
+      "author": "Imane (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "fr",
+      "title": "Un bon concept local",
+      "content": "Une animalerie en ligne au Maroc avec des catégories claires et des prix accessibles : le concept est pertinent.",
+      "topics": [
+        "brand",
+        "price"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-116",
+      "author": "Nadia (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "fr",
+      "title": "Attention aux descriptions",
+      "content": "Pour les aliments, il faut les ingrédients, le poids net et les conseils d'utilisation. Ce sont des informations essentielles pour moi.",
+      "topics": [
+        "food",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-117",
+      "author": "Ayoub (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Franchement facile",
+      "content": "Franchement, navigation sahlа بزاف. En deux clics l9it catégorie chat, et ça c'est pratique quand on est pressé.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-118",
+      "author": "Omar (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Prix raisonnables",
+      "content": "Les tarifs kaybano m3قولين, surtout pour les produits qu'on rachète chaque mois. Juste afficher les frais de livraison dès le panier.",
+      "topics": [
+        "price",
+        "delivery-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-119",
+      "author": "Soufiane (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une bonne sélection",
+      "content": "Nourriture, litière, jouets… kolchi m9assem مزيان. Ça évite de passer d'un site à l'autre.",
+      "topics": [
+        "assortment",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-120",
+      "author": "Farah (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "mixed",
+      "title": "Plus de détails svp",
+      "content": "Le design زوين, mais j'aimerais voir les dimensions exactes et la matière des accessoires avant de commander.",
+      "topics": [
+        "product-information",
+        "accessories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-121",
+      "author": "Nour (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Mobile friendly",
+      "content": "J'ai testé sur téléphone, tout est واضح وما كاينش زحام. Le menu est facile à utiliser.",
+      "topics": [
+        "mobile",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-122",
+      "author": "Maha (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Livraison à clarifier",
+      "content": "La commande paraît simple, mais délai, frais et zones desservies خاصهم يكونو واضحين avant validation.",
+      "topics": [
+        "delivery-information",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-123",
+      "author": "Marouane (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Le concept me plaît",
+      "content": "Une animalerie marocaine avec des petits prix, c'est une bonne idée. Bghina ghir des fiches produits bien détaillées.",
+      "topics": [
+        "brand",
+        "price"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-124",
+      "author": "Aya (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Des offres visibles",
+      "content": "Les promotions kaybano facilement. Ce serait top d'avoir aussi des packs pour les achats réguliers.",
+      "topics": [
+        "offers",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-125",
+      "author": "Zakaria (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Pas besoin de chercher longtemps",
+      "content": "Les catégories sont logiques, دخلت مباشرة لمنتجات القطط. Simple et efficace.",
+      "topics": [
+        "website",
+        "categories"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-126",
+      "author": "Ikram (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Paiement rassurant",
+      "content": "Le paiement à la livraison kay3ti confiance. J'aimerais juste connaître les conditions exactes avant de passer commande.",
+      "topics": [
+        "payment",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-127",
+      "author": "Mehdi (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une interface clean",
+      "content": "L'interface ما فيهاش بزاف ديال التفاصيل اللي كتشتت. On voit vite les produits et les prix.",
+      "topics": [
+        "website",
+        "design"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-128",
+      "author": "Ghita (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "mixed",
+      "title": "Photos à améliorer",
+      "content": "Pour les jouets, des photos réelles avec les dimensions غادي يعاونو بزاف à choisir correctement.",
+      "topics": [
+        "photos",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-129",
+      "author": "Rachid (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Tout est bien rangé",
+      "content": "Nourriture, friandises, toilettage… كل حاجة فبلاصتها. C'est agréable à parcourir.",
+      "topics": [
+        "categories",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-130",
+      "author": "Sara (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Le budget compte",
+      "content": "Quand tu as un chien, les dépenses الشهرية كتجمع. Des tarifs accessibles sont vraiment appréciés.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-131",
+      "author": "Ilyas (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une expérience simple",
+      "content": "J'ai trouvé la structure intuitive. حتى شي واحد ما متعودش يشري أونلاين يقدر يفهمها بسرعة.",
+      "topics": [
+        "website",
+        "usability"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-132",
+      "author": "Nawal (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Service client à ne pas négliger",
+      "content": "Le site est sympa, mais réponse rapide على WhatsApp pour les questions produits serait un vrai avantage.",
+      "topics": [
+        "customer-service",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-133",
+      "author": "Anas (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Le choix est pratique",
+      "content": "Avoir les produits chat et chien au même endroit مريح بزاف, surtout pour une maison avec plusieurs animaux.",
+      "topics": [
+        "assortment",
+        "convenience"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-134",
+      "author": "Loubna (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Fiches produits importantes",
+      "content": "Pour les croquettes, composition et âge recommandé خاصهم يبانوا من الأول. C'est ce qui aide à décider.",
+      "topics": [
+        "food",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-135",
+      "author": "Taha (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une boutique à suivre",
+      "content": "Le style est cute mais pas trop chargé. كنتمنا يضيفو nouveautés et des produits variés.",
+      "topics": [
+        "brand",
+        "catalog"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-136",
+      "author": "Kawtar (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Transparence avant paiement",
+      "content": "Le prix produit est visible, c'est bien. Mais frais de livraison خاصهم يبانوا قبل la confirmation.",
+      "topics": [
+        "price-transparency",
+        "delivery-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-137",
+      "author": "Ismail (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Simple même sur petit écran",
+      "content": "Sur mobile, les rubriques restent lisibles وما كاينش صداع ديال zoom. Bon point.",
+      "topics": [
+        "mobile",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-138",
+      "author": "Meriem (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "mixed",
+      "title": "J'attends les infos livraison",
+      "content": "Le parcours est clair, mais بلا délai estimé je peux pas organiser la réception. Une estimation serait top.",
+      "topics": [
+        "delivery-information",
+        "tracking"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-139",
+      "author": "Amine (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une idée utile",
+      "content": "Les essentiels pour animaux dans une seule boutique, c'est exactement ce qu'il faut. Moins de recherches, plus de temps avec eux.",
+      "topics": [
+        "convenience",
+        "brand"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-140",
+      "author": "Manal (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Des tailles bien indiquées",
+      "content": "Pour les colliers et harnais, guide des tailles ضروري. Une petite illustration pourrait éviter les erreurs.",
+      "topics": [
+        "accessories",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-141",
+      "author": "Zineb (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Prix affichés clairement",
+      "content": "J'aime voir les prix directement sur les produits. ما محتاجش نفتح chaque fiche juste pour comparer.",
+      "topics": [
+        "price-transparency",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-142",
+      "author": "Hiba (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Une sélection à compléter",
+      "content": "La base est bonne. Plus de choix en tailles et en marques serait encore mieux, surtout pour les chiens de grande taille.",
+      "topics": [
+        "assortment",
+        "catalog"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-143",
+      "author": "Reda (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Litière facile à trouver",
+      "content": "J'ai repéré la catégorie litière rapidement. C'est un petit détail, mais ça rend la visite plus fluide.",
+      "topics": [
+        "litter",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-144",
+      "author": "Mehdi (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Des packs seraient top",
+      "content": "Un pack croquettes + friandises avec prix clair, ça peut être intéressant. المهم تكون الكمية مناسبة.",
+      "topics": [
+        "offers",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-145",
+      "author": "Youssef (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une première impression positive",
+      "content": "Le site est clair et le ton est sympathique. باقي غير التفاصيل ديال المنتجات باش الصورة تكمل.",
+      "topics": [
+        "website",
+        "brand"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-146",
+      "author": "Chaimae (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Clarté des promotions",
+      "content": "Les prix barrés attirent l'œil. Il faut juste que les conditions et la durée de l'offre soient faciles à comprendre.",
+      "topics": [
+        "offers",
+        "price-transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-147",
+      "author": "Salim (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Pour les achats du quotidien",
+      "content": "Je préfère une boutique simple avec les produits essentiels. هادشي كيوفر الوقت وما كيخلينيش نتشتت.",
+      "topics": [
+        "convenience",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-148",
+      "author": "Sanae (démo)",
+      "city": "Tanger",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "La confiance passe par les infos",
+      "content": "Composition, origine, dimensions, livraison… كلما كانت المعلومة واضحة كلما كان القرار أسهل.",
+      "topics": [
+        "product-information",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-149",
+      "author": "Othmane (démo)",
+      "city": "Salé",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Un site agréable",
+      "content": "Les couleurs et les rubriques sont douces, et le parcours ساهل. On comprend vite comment naviguer.",
+      "topics": [
+        "website",
+        "design"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-150",
+      "author": "Nisrine (démo)",
+      "city": "Agadir",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Bon potentiel pour les propriétaires",
+      "content": "Les petits prix sont une bonne promesse. Le plus important, c'est de garder une qualité régulière et des stocks à jour.",
+      "topics": [
+        "price",
+        "quality"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-151",
+      "author": "Adil (démo)",
+      "city": "Casablanca",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Recherche rapide",
+      "content": "Je cherchais des friandises pour chat et la rubrique est bien visible. Très pratique, بلا ما ندور بزاف.",
+      "topics": [
+        "treats",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-152",
+      "author": "Dounia (démo)",
+      "city": "Kénitra",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "mixed",
+      "title": "Il manque des avis vérifiés",
+      "content": "Pour me décider, j'aime lire des retours de vrais acheteurs avec leur animal et le produit concerné. Ça aide beaucoup.",
+      "topics": [
+        "reviews",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-153",
+      "author": "Meryem (démo)",
+      "city": "Marrakech",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Un parcours sans complication",
+      "content": "La structure est intuitive, même pour quelqu'un qui découvre la boutique. C'est un vrai point fort.",
+      "topics": [
+        "website",
+        "usability"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-154",
+      "author": "Rania (démo)",
+      "city": "Oujda",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Le panier doit rester clair",
+      "content": "J'aimerais un récapitulatif simple du panier avec quantités, total et livraison avant confirmation. C'est plus rassurant.",
+      "topics": [
+        "ordering",
+        "transparency"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-155",
+      "author": "Aymane (démo)",
+      "city": "Fès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une boutique qui pense au budget",
+      "content": "Les essentiels à prix doux, c'est une bonne approche. Les propriétaires ont besoin de produits fiables sans exploser le budget.",
+      "topics": [
+        "price",
+        "value"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-156",
+      "author": "Yassine (démo)",
+      "city": "Mohammedia",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Conseils de choix utiles",
+      "content": "Un mini guide selon l'âge, la taille et les besoins de l'animal serait très utile. ماشي كلشي كيعرف يختار croquettes.",
+      "topics": [
+        "guides",
+        "food"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-157",
+      "author": "Bilal (démo)",
+      "city": "Meknès",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Catégories bien pensées",
+      "content": "Chats, chiens, accessoires et offres : كلشي باين من القائمة. Navigation naturelle.",
+      "topics": [
+        "categories",
+        "website"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-158",
+      "author": "Malak (démo)",
+      "city": "Rabat",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Des informations avant la commande",
+      "content": "Le site est simple, mais je veux connaître le délai estimé et le prix final قبل ما نضغط confirmer.",
+      "topics": [
+        "delivery-information",
+        "ordering"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-159",
+      "author": "Salma (démo)",
+      "city": "Tétouan",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Une bonne base",
+      "content": "Le concept est prometteur et la boutique est facile à comprendre. Les détails produits et les avis vérifiés feront la différence.",
+      "topics": [
+        "brand",
+        "website",
+        "reviews"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-160",
+      "author": "Lina (démo)",
+      "city": "Tanger",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Des mots simples et utiles",
+      "content": "On comprend vite où aller, et les produits sont classés par besoin. صراحة تجربة التصفح مريحة.",
+      "topics": [
+        "website",
+        "navigation"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-161",
+      "author": "Sami (démo)",
+      "city": "Salé",
+      "pet": "Dog",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Un peu plus de choix",
+      "content": "Les catégories principales sont là. J'aimerais aussi des filtres par race ou gabarit, surtout pour les accessoires.",
+      "topics": [
+        "assortment",
+        "filters"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-162",
+      "author": "Hamza (démo)",
+      "city": "Agadir",
+      "pet": "Cat",
+      "rating": 5,
+      "language": "mixed",
+      "title": "Le prix se voit tout de suite",
+      "content": "Pas besoin d'ouvrir chaque article pour voir le prix, c'est pratique. باقي غير معلومات الوزن والمكونات.",
+      "topics": [
+        "price-transparency",
+        "product-information"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-163",
+      "author": "Karim (démo)",
+      "city": "Casablanca",
+      "pet": "Dog",
+      "rating": 3,
+      "language": "mixed",
+      "title": "Besoin d'un vrai guide",
+      "content": "Pour choisir une alimentation, un guide simple selon l'âge et l'activité du chien serait vraiment utile.",
+      "topics": [
+        "guides",
+        "food"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    },
+    {
+      "id": "demo-review-164",
+      "author": "Yasmine (démo)",
+      "city": "Kénitra",
+      "pet": "Cat",
+      "rating": 4,
+      "language": "mixed",
+      "title": "Une boutique prometteuse",
+      "content": "Le site est agréable et l'idée est bonne. Avec les vrais avis clients et des détails précis, ce sera encore plus rassurant.",
+      "topics": [
+        "brand",
+        "reviews",
+        "trust"
+      ],
+      "isSample": true,
+      "verifiedPurchase": false,
+      "publishable": false,
+      "status": "demo_only"
+    }
+  ]
+}

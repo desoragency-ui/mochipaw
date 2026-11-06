@@ -35,9 +35,11 @@ HEADER = ['id', 'slug', 'name', 'brand', 'category', 'pet', 'short_description',
           'nutrition', 'usage', 'featured', 'new', 'added_on', 'sample']
 
 CATEGORY_NAMES = {
-    'nourriture-chat': 'Nourriture chat', 'nourriture-chien': 'Nourriture chien', 'friandises': 'Friandises',
-    'jouets': 'Jouets', 'toilettage': 'Toilettage', 'litiere': 'Litière', 'accessoires': 'Accessoires',
+    'nourriture-chat': 'Nourriture chat', 'nourriture-chien': 'Nourriture chien',
+    'litiere': 'Litière', 'accessoires': 'Accessoires',
 }
+# Food, treats and pâtés all live in the two Nourriture categories; toys, grooming, collars,
+# bowls, beds and everything else live in Accessoires.
 
 
 # ---------------------------------------------------------------- fetch
@@ -162,17 +164,11 @@ def classify(product, cats):
     elif 94 in ids:
         category = 'litiere'
     elif ids & {106, 100, 95}:
-        category = 'jouets'
-    elif 238 in ids:
-        category = 'friandises'
-    elif 239 in ids:
-        category = food_pet
-    elif ids & {41, 39}:
-        category = food_pet if FOOD_WORDS.search(name) else 'friandises'
-    elif ids & {40, 26, 220, 221, 37, 24}:
-        category = food_pet
+        category = 'accessoires'  # toys, scratchers, cat trees
+    elif ids & {238, 239, 41, 39, 40, 26, 220, 221, 37, 24}:
+        category = food_pet  # food, treats and pâtés
     elif ids & {25, 42, 127}:
-        category = 'toilettage'
+        category = 'accessoires'  # grooming, hygiene, care
     elif ids & {92, 134, 125, 90, 154, 153, 233, 124, 91, 133}:
         category = 'accessoires'
     else:
@@ -186,6 +182,21 @@ def build():
     products = load_pages('products')
     variations = load_pages('variations')
     cats = {c['id']: c for c in json.loads((CACHE / 'categories.json').read_text(encoding='utf-8'))}
+
+    # The API escapes titles ("Dinde &#038; Riz"): turn them back into plain text.
+    for p in products:
+        p['name'] = html.unescape(p['name'])
+        for brand in p.get('brands', []):
+            brand['name'] = html.unescape(brand['name'])
+        for category in p['categories']:
+            category['name'] = html.unescape(category['name'])
+        for attribute in p.get('attributes', []):
+            attribute['name'] = html.unescape(attribute['name'])
+            for term in attribute['terms']:
+                term['name'] = html.unescape(term['name'])
+    for v in variations:
+        for attribute in v.get('attributes', []):
+            attribute['value'] = html.unescape(attribute.get('value') or '')
     by_parent = {}
     for item in variations:
         by_parent.setdefault(item['parent'], []).append(item)
@@ -266,15 +277,15 @@ def build():
             'reviews': p.get('review_count', 0), 'wc_id': pid,
         })
 
-    # Home page picks: featured = one well-reviewed product per category, new = newest ones with a photo.
+    # Home page picks: featured = two well-reviewed products per category, new = newest ones with a photo.
     chosen = set()
     with_photo = [s for s in sheet if s['row']['images'] and s['row']['stock'] == 'in_stock']
     for category in CATEGORY_NAMES:
         pool = sorted((s for s in with_photo if s['row']['category'] == category and s['row']['pet'] != 'autre'),
                       key=lambda s: (-s['reviews'], s['wc_id']))
-        if pool:
-            pool[0]['row']['featured'] = '1'
-            chosen.add(pool[0]['wc_id'])
+        for pick in pool[:2]:
+            pick['row']['featured'] = '1'
+            chosen.add(pick['wc_id'])
     for s in sorted((s for s in with_photo if s['row']['pet'] != 'autre' and 'black friday' not in s['row']['name'].lower()),
                     key=lambda s: -s['wc_id'])[:8]:
         s['row']['new'] = '1'

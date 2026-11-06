@@ -1,0 +1,41 @@
+---
+import { Star } from 'lucide-react';
+import { t } from '../i18n';
+import type { Locale } from '../lib/types';
+
+export interface DemoReview {
+  id: string;
+  author: string;
+  city: string;
+  pet: string;
+  rating: number;
+  title: string;
+  content: string;
+}
+
+interface Props {
+  review: DemoReview;
+  locale: Locale;
+}
+
+const { review, locale } = Astro.props;
+const d = t(locale);
+---
+
+<article class="flex h-full flex-col gap-3 rounded-card bg-white p-6">
+  <div class="flex items-center justify-between gap-3">
+    <div class="flex gap-0.5" role="img" aria-label={d.reviews.outOf(review.rating)}>
+      {
+        [1, 2, 3, 4, 5].map((star) => (
+          <Star size={18} aria-hidden="true" className={star <= review.rating ? 'fill-orange text-orange' : 'text-brown/25'} />
+        ))
+      }
+    </div>
+    <span class="rounded-full bg-brown/85 px-2.5 py-0.5 text-xs font-bold text-cream">{d.reviews.tag}</span>
+  </div>
+  <h3 class="font-sans text-lg font-extrabold leading-snug" dir="auto">{review.title}</h3>
+  <p class="font-semibold text-brown/80" dir="auto">{review.content}</p>
+  <p class="mt-auto pt-2 text-sm font-bold text-brown/70">
+    {review.author} · {review.city} · {review.pet === 'Cat' ? d.reviews.cat : d.reviews.dog}
+  </p>
+</article>

@@ -1,0 +1,46 @@
+---
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ReviewCard from '../../components/ReviewCard.astro';
+import { site } from '../../data/site';
+import data from '../../data/demo-reviews.json';
+import { langPaths, t } from '../../i18n';
+import Base from '../../layouts/Base.astro';
+
+// The sample reviews exist for the preview only: this page is not built once demoMode is off.
+export const getStaticPaths = () => (site.demoMode ? langPaths() : []);
+const { locale } = Astro.props;
+const d = t(locale);
+
+const reviews = data.reviews;
+const average = (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1).replace('.', ',');
+const rows = [5, 4, 3, 2, 1].map((stars) => ({ stars, count: reviews.filter((review) => review.rating === stars).length }));
+---
+
+<Base locale={locale} path="/avis" title={d.reviews.title}>
+  <Breadcrumbs locale={locale} items={[{ label: d.reviews.title }]} />
+  <div class="shell mt-4">
+    <h1 class="display text-5xl text-purple sm:text-7xl">{d.reviews.title}</h1>
+    <p class="mt-4 max-w-2xl rounded-card bg-blush px-5 py-3 font-extrabold">{d.reviews.note}</p>
+
+    <div class="mt-6 grid gap-6 rounded-card bg-white p-6 sm:grid-cols-[auto_1fr] sm:items-center sm:p-8">
+      <p class="font-display text-3xl font-semibold text-purple sm:text-4xl">{d.reviews.summary(average, reviews.length)}</p>
+      <ul class="grid gap-1.5">
+        {
+          rows.map((row) => (
+            <li class="flex items-center gap-3 text-sm font-bold">
+              <span class="w-20 shrink-0">{d.reviews.stars(row.stars)}</span>
+              <span class="h-2.5 flex-1 overflow-hidden rounded-full bg-cream-deep">
+                <span class="block h-full rounded-full bg-orange" style={`width: ${(row.count / reviews.length) * 100}%`} />
+              </span>
+              <span class="w-8 text-end">{row.count}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <ul class="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+      {reviews.map((review) => <li><ReviewCard review={review} locale={locale} /></li>)}
+    </ul>
+  </div>
+</Base>

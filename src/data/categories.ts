@@ -5,37 +5,16 @@ export const categories: Category[] = [
   {
     slug: 'nourriture-chat',
     name: 'Nourriture chat',
-    description: 'Croquettes et pâtées pour nourrir votre chat chaque jour.',
+    description: 'Croquettes, pâtées et friandises pour nourrir votre chat chaque jour.',
     pet: 'chat',
     image: 'cat-food',
   },
   {
     slug: 'nourriture-chien',
     name: 'Nourriture chien',
-    description: 'Croquettes et pâtées pour les chiens de toutes tailles.',
+    description: 'Croquettes, pâtées et friandises pour les chiens de toutes tailles.',
     pet: 'chien',
     image: 'dog-food',
-  },
-  {
-    slug: 'friandises',
-    name: 'Friandises',
-    description: 'De petites récompenses pour les chats et les chiens.',
-    pet: 'tous',
-    image: 'treats',
-  },
-  {
-    slug: 'jouets',
-    name: 'Jouets',
-    description: 'De quoi jouer, mordiller et se dépenser.',
-    pet: 'tous',
-    image: 'toys',
-  },
-  {
-    slug: 'toilettage',
-    name: 'Toilettage',
-    description: 'Brosses et soins du quotidien pour le pelage.',
-    pet: 'tous',
-    image: 'grooming',
   },
   {
     slug: 'litiere',
@@ -47,7 +26,7 @@ export const categories: Category[] = [
   {
     slug: 'accessoires',
     name: 'Accessoires',
-    description: 'Colliers, laisses et petits indispensables.',
+    description: 'Colliers, laisses, jouets, brosses et petits indispensables.',
     pet: 'tous',
     image: 'accessories',
   },

@@ -1,6 +1,6 @@
 ---
 import { existsSync } from 'node:fs';
-import { Bone, Cat, Dog, Scissors, Shovel, Tag, ToyBrick } from 'lucide-react';
+import { Cat, Dog, Shovel, Tag } from 'lucide-react';
 import { categories } from '../data/categories';
 import { localePath, t } from '../i18n';
 import { imagePath, imageSrcSet } from '../lib/format';
@@ -12,31 +12,22 @@ const d = t(locale);
 const icons = {
   'nourriture-chat': Cat,
   'nourriture-chien': Dog,
-  friandises: Bone,
-  jouets: ToyBrick,
-  toilettage: Scissors,
   litiere: Shovel,
   accessoires: Tag,
 };
 
-// Different sizes on purpose: the grid should not read as a row of equal boxes.
+// Different sizes on purpose: two tall food tiles, two smaller tiles stacked on the right.
 const layout = [
   'col-span-2 lg:col-span-5 lg:row-span-2',
-  'col-span-2 sm:col-span-1 lg:col-span-4 lg:row-span-2',
+  'col-span-2 lg:col-span-4 lg:row-span-2',
   'lg:col-span-3',
   'lg:col-span-3',
-  'lg:col-span-4',
-  'lg:col-span-4',
-  'col-span-2 sm:col-span-1 lg:col-span-4',
 ];
-const tones = ['bg-orange text-brown', 'bg-purple text-cream', 'bg-blush text-brown', 'bg-purple text-cream', 'bg-orange text-brown', 'bg-cream-deep text-brown', 'bg-purple text-cream'];
+const tones = ['bg-orange text-brown', 'bg-purple text-cream', 'bg-cream-deep text-brown', 'bg-orange text-brown'];
 
 // Where each square photo is anchored inside its wide tile, so the key product stays in frame:
-// ball (toys), brush (grooming), litter box and scoop, collar and tag.
+// litter box and scoop, collar and tag.
 const focus: Record<string, string> = {
-  friandises: '50% 35%',
-  jouets: '30% 0%',
-  toilettage: '50% 80%',
   litiere: '50% 65%',
   accessoires: '50% 70%',
 };

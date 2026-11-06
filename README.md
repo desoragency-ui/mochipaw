@@ -12,6 +12,8 @@ npm run dev
 
 Puis ouvrir http://localhost:4321. Pour fabriquer la version finale : `npm run build` (résultat dans `dist`).
 
+Avec beaucoup de produits et de photos, `npm run dev` charge les images lentement. Pour voir le site comme en ligne, rapide : `npm run site` (construit le site, puis l'ouvre sur http://localhost:4321 ; compter environ 1 min 30 avant que la page réponde).
+
 ## Ce que l'on change sans toucher au code
 
 | Pour changer | Fichier |

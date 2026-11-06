@@ -8,6 +8,7 @@
     "dev": "astro dev --port 4321",
     "build": "astro build",
     "preview": "astro preview --port 4321",
+    "site": "astro build && astro preview --port 4321",
     "check": "astro check"
   },
   "devDependencies": {
