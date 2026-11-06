@@ -128,7 +128,7 @@ export const fr = {
     results: (count: number) => `${count} produit${count > 1 ? 's' : ''}`,
     empty: 'Aucun produit ne correspond à ces filtres.',
     more: 'Voir plus de produits',
-    pets: { chat: 'Chat', chien: 'Chien', tous: 'Chat et chien' },
+    pets: { chat: 'Chat', chien: 'Chien', tous: 'Chat et chien', autre: 'Oiseaux, rongeurs, poissons' },
     searchIn: 'Rechercher dans la boutique',
   },
   cats: {

@@ -1,0 +1,428 @@
+#!/usr/bin/env python3
+"""Imports the petworld.ma catalogue into MochiPaw.
+
+Source: the public WooCommerce Store API of petworld.ma (allowed by its robots.txt).
+
+  python -X utf8 tools/import-petworld.py fetch    # raw JSON -> _catalog/cache
+  python -X utf8 tools/import-petworld.py build    # products.csv + review sheet (xlsx)
+  python -X utf8 tools/import-petworld.py images   # photos -> public/images/products (480 and 960 px webp)
+
+Run from the project folder. Every step can be repeated safely.
+"""
+import csv
+import glob
+import html
+import io
+import json
+import re
+import sys
+import time
+import unicodedata
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+from urllib.parse import quote, unquote
+
+BASE = 'https://petworld.ma/wp-json/wc/store/v1'
+UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) MochiPawCatalogImport'
+CACHE = Path('_catalog/cache')
+CSV_OUT = Path('src/data/products.csv')
+SHEET_OUT = Path('_catalog/petworld-products-sheet.xlsx')
+IMG_DIR = Path('public/images/products')
+
+HEADER = ['id', 'slug', 'name', 'brand', 'category', 'pet', 'short_description', 'description', 'price_mad',
+          'original_price_mad', 'images', 'variants', 'sku', 'stock', 'weight', 'attributes', 'ingredients',
+          'nutrition', 'usage', 'featured', 'new', 'added_on', 'sample']
+
+CATEGORY_NAMES = {
+    'nourriture-chat': 'Nourriture chat', 'nourriture-chien': 'Nourriture chien', 'friandises': 'Friandises',
+    'jouets': 'Jouets', 'toilettage': 'Toilettage', 'litiere': 'Litière', 'accessoires': 'Accessoires',
+}
+
+
+# ---------------------------------------------------------------- fetch
+def get(url):
+    url = quote(url, safe=":/?&=%#+~@,;'()*!$[]")  # photo links can hold accents and dashes
+    for attempt in range(4):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': UA})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return r.read(), r.headers
+        except Exception as error:  # noqa: BLE001
+            if attempt == 3:
+                raise
+            time.sleep(2 + attempt * 2)
+            print('retry', url, error, flush=True)
+
+
+def fetch():
+    CACHE.mkdir(parents=True, exist_ok=True)
+    for name, query in (('products', 'per_page=100'), ('variations', 'type=variation&per_page=100')):
+        page = 1
+        while True:
+            target = CACHE / f'{name}-{page}.json'
+            if not target.exists():
+                data, headers = get(f'{BASE}/products?{query}&page={page}')
+                target.write_bytes(data)
+                time.sleep(1)
+            else:
+                data = target.read_bytes()
+            if len(json.loads(data)) < 100:
+                break
+            page += 1
+        print(name, 'pages:', page, flush=True)
+    for name in ('categories', 'brands'):
+        target = CACHE / f'{name}.json'
+        if not target.exists():
+            target.write_bytes(get(f'{BASE}/products/{name}?per_page=100')[0])
+
+
+def load_pages(prefix):
+    files = sorted(glob.glob(str(CACHE / f'{prefix}-*.json')), key=lambda f: int(re.findall(r'-(\d+)\.json', f)[0]))
+    items = []
+    for file in files:
+        items += json.loads(Path(file).read_text(encoding='utf-8'))
+    return items
+
+
+# ---------------------------------------------------------------- text helpers
+def clean(text, limit=None):
+    text = html.unescape(text or '')
+    text = re.sub(r'<li[^>]*>', ' • ', text)
+    text = re.sub(r'</(p|div|h\d|ul|ol|tr)>|<br\s*/?>', ' ', text)
+    text = re.sub(r'<[^>]+>', '', text)
+    text = re.sub(r'\s+', ' ', text.replace('\xa0', ' ')).strip()
+    if limit and len(text) > limit:
+        cut = text[:limit]
+        end = max(cut.rfind('. '), cut.rfind(' '))
+        text = cut[: end if end > limit * 0.6 else limit].rstrip(' ,;') + '…'
+    return text
+
+
+def first_sentence(text, limit=160):
+    if len(text) <= limit:
+        return text
+    match = re.match(r'(.{40,%d}?[.!?])\s' % limit, text)
+    return match.group(1) if match else clean(text, limit)
+
+
+def slugify(text):
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode()
+    return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
+
+
+def money(minor):
+    value = int(minor or 0) / 100
+    return int(value) if value == int(value) else round(value, 2)
+
+
+def fmt(number):
+    return '' if number is None else str(number)
+
+
+def safe(text):
+    return re.sub(r'[|]', '/', text).replace(',', ' ').strip()
+
+
+# ---------------------------------------------------------------- mapping
+FOOD_WORDS = re.compile(r'p[aâ]t[ée]e?|terrine|barquette|bo[iî]te|mousse|sachet fra[iî]cheur|sauce|gelée|gelee|humide|wet|pouch', re.I)
+
+
+def classify(product, cats):
+    """Returns (site category, pet, flags) from the petworld category tree."""
+    ids = set()
+    for category in product['categories']:
+        cid = category['id']
+        while cid:
+            ids.add(cid)
+            cid = cats.get(cid, {}).get('parent', 0)
+    name = product['name'].lower()
+    flags = []
+    chat, chien = 36 in ids, 23 in ids
+    other = bool(ids & {141, 206, 157})
+
+    if chat and chien:
+        pet = 'tous'
+    elif chat:
+        pet = 'chat'
+    elif chien:
+        pet = 'chien'
+    elif other:
+        pet = 'autre'
+        flags.append('Other pet (bird/rodent/fish)')
+    else:
+        guess_cat = re.search(r'\b(chat|chaton|chats|f[ée]lin)\b', name)
+        guess_dog = re.search(r'\b(chien|chiot|chiens|canin)\b', name)
+        pet = 'chat' if guess_cat and not guess_dog else 'chien' if guess_dog and not guess_cat else 'tous'
+        flags.append('Pet guessed from name' if pet != 'tous' else 'Pet to check')
+
+    food_pet = 'nourriture-chat' if chat or pet == 'chat' else 'nourriture-chien'
+    if pet == 'autre':
+        category = 'accessoires'
+    elif 94 in ids:
+        category = 'litiere'
+    elif ids & {106, 100, 95}:
+        category = 'jouets'
+    elif 238 in ids:
+        category = 'friandises'
+    elif 239 in ids:
+        category = food_pet
+    elif ids & {41, 39}:
+        category = food_pet if FOOD_WORDS.search(name) else 'friandises'
+    elif ids & {40, 26, 220, 221, 37, 24}:
+        category = food_pet
+    elif ids & {25, 42, 127}:
+        category = 'toilettage'
+    elif ids & {92, 134, 125, 90, 154, 153, 233, 124, 91, 133}:
+        category = 'accessoires'
+    else:
+        category = 'accessoires'
+        flags.append('Category to check')
+    return category, pet, flags
+
+
+# ---------------------------------------------------------------- build
+def build():
+    products = load_pages('products')
+    variations = load_pages('variations')
+    cats = {c['id']: c for c in json.loads((CACHE / 'categories.json').read_text(encoding='utf-8'))}
+    by_parent = {}
+    for item in variations:
+        by_parent.setdefault(item['parent'], []).append(item)
+
+    names_seen = {}
+    for p in products:
+        names_seen[p['name'].strip().lower()] = names_seen.get(p['name'].strip().lower(), 0) + 1
+
+    rows, sheet = [], []
+    used_slugs = set()
+    for p in products:
+        pid = p['id']
+        category, pet, flags = classify(p, cats)
+        brand = ''
+        if p.get('brands'):
+            brand = p['brands'][0]['name'].strip()
+
+        # price and sizes
+        prices = p['prices']
+        price, original = money(prices['price']), None
+        if prices.get('regular_price') and money(prices['regular_price']) > price and p['on_sale']:
+            original = money(prices['regular_price'])
+        variants = []
+        for v in sorted(by_parent.get(pid, []), key=lambda x: int(x['prices']['price'] or 0)):
+            label = safe(' · '.join(a['value'] for a in v.get('attributes', []) if a.get('value')) or v.get('variation', '').split(':')[-1])
+            if not label:
+                continue
+            vp = money(v['prices']['price'])
+            vo = money(v['prices']['regular_price']) if v['on_sale'] and money(v['prices']['regular_price']) > vp else None
+            variants.append(f'{label}:{vp}' + (f':{vo}' if vo else ''))
+        if variants:
+            price = min(float(x.split(':')[1]) for x in variants)
+            price = int(price) if price == int(price) else price
+            original = None
+            flags.append('Price varies by size')
+        if original:
+            flags.append(f'On sale (was {original})')
+        if not p['is_in_stock']:
+            flags.append('Out of stock')
+        if not p['images']:
+            flags.append('No photo')
+        if 'black friday' in p['name'].lower():
+            flags.append('Black Friday pack (petworld promo name)')
+        if names_seen[p['name'].strip().lower()] > 1:
+            flags.append('Possible duplicate name')
+
+        slug = unquote(p['slug'])
+        if '%' in p['slug'] or not re.fullmatch(r'[a-z0-9-]+', slug):
+            slug = f'{slugify(p["name"])[:70]}-{pid}'
+        slug = slug[:90].strip('-')
+        if slug in used_slugs:
+            slug = f'{slug[:80]}-{pid}'
+        used_slugs.add(slug)
+
+        description = clean(p['description'], 2500)
+        short = clean(p['short_description'], 200) or first_sentence(description)
+        description = description or short or p['name']
+        files = [f'pw{pid}-{i + 1}.webp' for i in range(len(p['images']))]
+        attributes = []
+        for a in p.get('attributes', []):
+            if a.get('has_variations'):
+                continue
+            values = ', '.join(t['name'] for t in a['terms'])
+            if values and a['name'].lower() != 'marque':
+                attributes.append(f'{safe(a["name"])}:{values.replace("|", "/")}')
+
+        rows.append({
+            'id': f'pw{pid}', 'slug': slug, 'name': p['name'].strip(), 'brand': brand, 'category': category, 'pet': pet,
+            'short_description': short, 'description': description, 'price_mad': fmt(price),
+            'original_price_mad': fmt(original), 'images': '|'.join(files), 'variants': '|'.join(variants),
+            'sku': p['sku'] or f'PW-{pid}', 'stock': 'in_stock' if p['is_in_stock'] else 'out_of_stock', 'weight': '',
+            'attributes': '|'.join(attributes), 'ingredients': '', 'nutrition': '', 'usage': '', 'featured': '0',
+            'new': '0', 'added_on': '', 'sample': '0',
+        })
+        sheet.append({
+            'row': rows[-1], 'source_url': p['permalink'], 'photo_urls': [i['src'] for i in p['images']],
+            'source_categories': ' > '.join(c['name'] for c in p['categories']), 'flags': flags,
+            'reviews': p.get('review_count', 0), 'wc_id': pid,
+        })
+
+    # Home page picks: featured = one well-reviewed product per category, new = newest ones with a photo.
+    chosen = set()
+    with_photo = [s for s in sheet if s['row']['images'] and s['row']['stock'] == 'in_stock']
+    for category in CATEGORY_NAMES:
+        pool = sorted((s for s in with_photo if s['row']['category'] == category and s['row']['pet'] != 'autre'),
+                      key=lambda s: (-s['reviews'], s['wc_id']))
+        if pool:
+            pool[0]['row']['featured'] = '1'
+            chosen.add(pool[0]['wc_id'])
+    for s in sorted((s for s in with_photo if s['row']['pet'] != 'autre' and 'black friday' not in s['row']['name'].lower()),
+                    key=lambda s: -s['wc_id'])[:8]:
+        s['row']['new'] = '1'
+
+    # petworld's Black Friday pack photos carry petworld's logo and promo prices: list them last.
+    sheet.sort(key=lambda s: 'black friday' in s['row']['name'].lower())
+
+    CSV_OUT.parent.mkdir(parents=True, exist_ok=True)
+    with CSV_OUT.open('w', encoding='utf-8', newline='') as handle:
+        writer = csv.DictWriter(handle, fieldnames=HEADER, lineterminator='\n')
+        writer.writeheader()
+        writer.writerows(s['row'] for s in sheet)
+    print('products.csv rows:', len(rows), flush=True)
+    write_sheet(sheet)
+
+
+def write_sheet(sheet):
+    from openpyxl import Workbook
+    from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
+    from openpyxl.styles import Alignment, Font, PatternFill
+    from openpyxl.utils import get_column_letter
+    from openpyxl.worksheet.datavalidation import DataValidation
+
+    def txt(value):
+        return ILLEGAL_CHARACTERS_RE.sub('', value) if isinstance(value, str) else value
+
+    wb = Workbook()
+    ws = wb.active
+    ws.title = 'Products'
+    columns = [
+        ('ID', 11), ('Product name', 52), ('Site category', 17), ('Pet', 8), ('Brand', 16), ('Price MAD (now)', 12),
+        ('Old price MAD', 11), ('Sizes / options (label:price)', 34), ('Stock', 12), ('Photos', 8),
+        ('Auto flags', 38), ('Petworld page', 38), ('Photo links (petworld)', 38), ('Petworld categories', 38),
+        ('EDIT PRICE? (yes/no)', 13), ('NEW PRICE MAD', 12), ('EDIT PHOTOS? (yes/no)', 13),
+        ('EDIT PRODUCT INFO? (yes/no)', 14), ('REMOVE? (yes/no)', 11), ('YOUR NOTES', 40),
+    ]
+    ws.append([c[0] for c in columns])
+    for index, (_, width) in enumerate(columns, 1):
+        ws.column_dimensions[get_column_letter(index)].width = width
+        cell = ws.cell(row=1, column=index)
+        cell.font = Font(bold=True, color='FFFFFF')
+        cell.fill = PatternFill('solid', fgColor='5E3EDF' if index <= 14 else 'FF5E36')
+        cell.alignment = Alignment(wrap_text=True, vertical='center')
+    ws.row_dimensions[1].height = 44
+
+    for s in sheet:
+        r = s['row']
+        ws.append([
+            txt(r['id']), txt(r['name']), CATEGORY_NAMES[r['category']], r['pet'], txt(r['brand']),
+            float(r['price_mad']) if r['price_mad'] else None, float(r['original_price_mad']) if r['original_price_mad'] else None,
+            txt(r['variants'].replace('|', '\n')), 'in stock' if r['stock'] == 'in_stock' else 'OUT OF STOCK',
+            len(s['photo_urls']), txt('; '.join(s['flags'])), s['source_url'], '\n'.join(s['photo_urls']),
+            txt(s['source_categories']), '', '', '', '', '', '',
+        ])
+    last = ws.max_row
+    ws.freeze_panes = 'C2'
+    ws.auto_filter.ref = f'A1:{get_column_letter(len(columns))}{last}'
+    yes_no = DataValidation(type='list', formula1='"yes,no"', allow_blank=True)
+    ws.add_data_validation(yes_no)
+    for column in ('O', 'Q', 'R', 'S'):
+        yes_no.add(f'{column}2:{column}{last}')
+    for row in ws.iter_rows(min_row=2, max_row=last):
+        for cell in row:
+            cell.alignment = Alignment(vertical='top', wrap_text=cell.column in (2, 8, 11, 20))
+        for cell in row[14:]:
+            cell.fill = PatternFill('solid', fgColor='FFF1EC')
+
+    guide = wb.create_sheet('How to use')
+    for line in [
+        'MochiPaw x petworld.ma product import',
+        '',
+        f'{len(sheet)} products were imported into the website (src/data/products.csv) with all photos.',
+        'Purple columns = what is on the website now. Orange columns = YOURS to fill in and send back.',
+        '',
+        'EDIT PRICE? = yes if the price must change. Put the price you want in NEW PRICE MAD.',
+        'EDIT PHOTOS? = yes if the photos must be replaced or removed.',
+        'EDIT PRODUCT INFO? = yes if the name, category, pet, brand or description must change (say what in YOUR NOTES).',
+        'REMOVE? = yes to delete the product from the website.',
+        'YOUR NOTES = anything else, for example "change category to Jouets" or "name too long".',
+        '',
+        'Auto flags are hints made by the import: No photo, Out of stock, Price varies by size, Possible duplicate name,',
+        'Category to check, Pet guessed from name, Other pet (bird/rodent/fish).',
+        'Birds, rodents and fish are listed under Accessoires with Pet = autre (they do not show on the Chats / Chiens pages).',
+        '',
+        'Sizes / options column: one line per option, written label:price (or label:price:old price).',
+    ]:
+        guide.append([line])
+    guide.column_dimensions['A'].width = 120
+    guide['A1'].font = Font(bold=True, size=14)
+    SHEET_OUT.parent.mkdir(parents=True, exist_ok=True)
+    wb.save(SHEET_OUT)
+    print('sheet:', SHEET_OUT, flush=True)
+
+
+# ---------------------------------------------------------------- images
+def convert_bytes(args):
+    """Runs in a worker process: decode once, write the 960 px and 480 px webp files."""
+    data, out480, out960 = args
+    from PIL import Image
+    try:
+        image = Image.open(io.BytesIO(data))
+        image.load()
+        image = image.convert('RGBA' if image.mode in ('RGBA', 'LA', 'P') else 'RGB')
+        big = image if image.width <= 960 else image.resize((960, round(image.height * 960 / image.width)), Image.BILINEAR, reducing_gap=2.0)
+        small = big if big.width <= 480 else big.resize((480, round(big.height * 480 / big.width)), Image.BILINEAR)
+        big.save(out960, 'WEBP', quality=78, method=2)
+        small.save(out480, 'WEBP', quality=78, method=2)
+        return None
+    except Exception as error:  # noqa: BLE001
+        return str(error)
+
+
+def images():
+    from concurrent.futures import ProcessPoolExecutor
+    IMG_DIR.mkdir(parents=True, exist_ok=True)
+    tasks = []
+    for p in load_pages('products'):
+        for i, image in enumerate(p['images']):
+            tasks.append((image['src'], f'pw{p["id"]}-{i + 1}'))
+    print('photos to process:', len(tasks), flush=True)
+    counters = {'done': 0, 'failed': 0}
+    failures = []
+
+    with ProcessPoolExecutor(max_workers=3) as workers:
+        def process(task):
+            url, base = task
+            out480, out960 = IMG_DIR / f'{base}-480.webp', IMG_DIR / f'{base}-960.webp'
+            problem = None
+            if not (out480.exists() and out960.exists()):
+                try:
+                    data, _ = get(url)
+                    problem = workers.submit(convert_bytes, (data, str(out480), str(out960))).result()
+                except Exception as error:  # noqa: BLE001
+                    problem = str(error)
+            counters['done'] += 1
+            if problem:
+                counters['failed'] += 1
+                failures.append(f'{url} {problem}')
+            if counters['done'] % 100 == 0:
+                print(f"{counters['done']}/{len(tasks)} done, {counters['failed']} failed", flush=True)
+
+        with ThreadPoolExecutor(max_workers=12) as pool:
+            list(pool.map(process, tasks))
+
+    Path('_catalog/images-failed.txt').write_text('\n'.join(failures), encoding='utf-8')
+    print(f"finished: {counters['done']} processed, {counters['failed']} failed", flush=True)
+
+
+if __name__ == '__main__':
+    step = sys.argv[1] if len(sys.argv) > 1 else ''
+    {'fetch': fetch, 'build': build, 'images': images}.get(step, lambda: print(__doc__))()

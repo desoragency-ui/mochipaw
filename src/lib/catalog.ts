@@ -120,6 +120,25 @@ function load(): Product[] {
 
 export const products = load();
 
+/**
+ * What a product card needs and nothing more. Lists and search send this to the browser,
+ * so a 2,000-product catalogue does not ship every long description with each page.
+ */
+export function slim(product: Product, withText = false): Product {
+  return {
+    ...product,
+    // Search reads the short text; product cards do not.
+    shortDescription: withText ? product.shortDescription.slice(0, 140) : '',
+    sku: '',
+    description: '',
+    images: product.images.slice(0, 1),
+    attributes: {},
+    ingredients: undefined,
+    nutrition: undefined,
+    usage: undefined,
+  };
+}
+
 export const productBySlug = (slug: string) => products.find((item) => item.slug === slug);
 
 export const productsInCategory = (slug: string) =>

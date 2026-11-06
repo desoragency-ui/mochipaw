@@ -7,3 +7,6 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+
+# Raw data downloaded by tools/import-petworld.py
+_catalog/cache/

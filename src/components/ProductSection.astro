@@ -1,5 +1,6 @@
 ---
 import { ProductGrid } from './react/ProductGrid';
+import { slim } from '../lib/catalog';
 import type { Locale, Product } from '../lib/types';
 
 interface Props {
@@ -23,7 +24,7 @@ const { title, products, locale, link } = Astro.props;
           </a>
         )}
       </div>
-      <ProductGrid client:visible products={products} locale={locale} />
+      <ProductGrid client:visible products={products.map((item) => slim(item))} locale={locale} />
     </section>
   )
 }

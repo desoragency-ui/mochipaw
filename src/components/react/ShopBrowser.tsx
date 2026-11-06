@@ -18,7 +18,7 @@ interface Props {
 }
 
 const PAGE = 12;
-const PETS: PetType[] = ['chat', 'chien', 'tous'];
+const PETS: PetType[] = ['chat', 'chien', 'autre', 'tous'];
 
 export function ShopBrowser({ products, categories, locale, hideCategories, emptyText }: Props) {
   const d = t(locale);

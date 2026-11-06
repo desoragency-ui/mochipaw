@@ -5,6 +5,7 @@ import { ShopBrowser } from './react/ShopBrowser';
 import { categories } from '../data/categories';
 import Base from '../layouts/Base.astro';
 import { localePath } from '../i18n';
+import { slim } from '../lib/catalog';
 import type { Locale, Product } from '../lib/types';
 
 interface Props {
@@ -56,6 +57,6 @@ const breadcrumb = {
     </div>
   </header>
   <div class="shell mt-8">
-    <ShopBrowser client:load products={products} categories={categories.map(({ slug, name }) => ({ slug, name }))} locale={locale} hideCategories={hideCategories} emptyText={emptyText} />
+    <ShopBrowser client:load products={products.map((item) => slim(item))}categories={categories.map(({ slug, name }) => ({ slug, name }))} locale={locale} hideCategories={hideCategories} emptyText={emptyText} />
   </div>
 </Base>

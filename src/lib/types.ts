@@ -1,6 +1,7 @@
 export type Locale = 'fr' | 'ar' | 'ary';
 
-export type PetType = 'chat' | 'chien' | 'tous';
+/** `autre` = birds, rodents and fish. They stay out of the Chats and Chiens pages. */
+export type PetType = 'chat' | 'chien' | 'tous' | 'autre';
 
 export type StockStatus = 'in_stock' | 'out_of_stock';
 
