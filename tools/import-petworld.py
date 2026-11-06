@@ -30,6 +30,10 @@ CSV_OUT = Path('src/data/products.csv')
 SHEET_OUT = Path('_catalog/petworld-products-sheet.xlsx')
 IMG_DIR = Path('public/images/products')
 
+BRANDED_FILE = Path('tools/petworld-branded-images.txt')
+BRANDED = {line.strip() for line in BRANDED_FILE.read_text(encoding='utf-8').splitlines()
+           if line.strip() and not line.startswith('#')} if BRANDED_FILE.exists() else set()
+
 HEADER = ['id', 'slug', 'name', 'brand', 'category', 'pet', 'short_description', 'description', 'price_mad',
           'original_price_mad', 'images', 'variants', 'sku', 'stock', 'weight', 'attributes', 'ingredients',
           'nutrition', 'usage', 'featured', 'new', 'added_on', 'sample']
@@ -85,6 +89,15 @@ def load_pages(prefix):
     for file in files:
         items += json.loads(Path(file).read_text(encoding='utf-8'))
     return items
+
+
+# Brands the shop does not sell: matched on the brand tag or the product name.
+EXCLUDED_BRANDS = re.compile(r'\bgosbi\b', re.I)
+
+
+def excluded(product):
+    brands = ' '.join(b['name'] for b in product.get('brands', []))
+    return bool(EXCLUDED_BRANDS.search(html.unescape(product['name']) + ' ' + brands))
 
 
 # ---------------------------------------------------------------- text helpers
@@ -179,7 +192,7 @@ def classify(product, cats):
 
 # ---------------------------------------------------------------- build
 def build():
-    products = load_pages('products')
+    products = [p for p in load_pages('products') if not excluded(p)]
     variations = load_pages('variations')
     cats = {c['id']: c for c in json.loads((CACHE / 'categories.json').read_text(encoding='utf-8'))}
 
@@ -236,8 +249,12 @@ def build():
             flags.append(f'On sale (was {original})')
         if not p['is_in_stock']:
             flags.append('Out of stock')
-        if not p['images']:
-            flags.append('No photo')
+        kept = [(i, img) for i, img in enumerate(p['images']) if f'pw{pid}-{i + 1}' not in BRANDED]
+        removed = len(p['images']) - len(kept)
+        if not kept:
+            flags.append('No photo (petworld-branded photos removed)' if removed else 'No photo')
+        elif removed:
+            flags.append(f'{removed} petworld-branded photo(s) removed')
         if 'black friday' in p['name'].lower():
             flags.append('Black Friday pack (petworld promo name)')
         if names_seen[p['name'].strip().lower()] > 1:
@@ -254,7 +271,7 @@ def build():
         description = clean(p['description'], 2500)
         short = clean(p['short_description'], 200) or first_sentence(description)
         description = description or short or p['name']
-        files = [f'pw{pid}-{i + 1}.webp' for i in range(len(p['images']))]
+        files = [f'pw{pid}-{i + 1}.webp' for i, _ in kept]
         attributes = []
         for a in p.get('attributes', []):
             if a.get('has_variations'):
@@ -272,7 +289,7 @@ def build():
             'new': '0', 'added_on': '', 'sample': '0',
         })
         sheet.append({
-            'row': rows[-1], 'source_url': p['permalink'], 'photo_urls': [i['src'] for i in p['images']],
+            'row': rows[-1], 'source_url': p['permalink'], 'photo_urls': [img['src'] for _, img in kept],
             'source_categories': ' > '.join(c['name'] for c in p['categories']), 'flags': flags,
             'reviews': p.get('review_count', 0), 'wc_id': pid,
         })
@@ -366,7 +383,7 @@ def write_sheet(sheet):
         'REMOVE? = yes to delete the product from the website.',
         'YOUR NOTES = anything else, for example "change category to Jouets" or "name too long".',
         '',
-        'Auto flags are hints made by the import: No photo, Out of stock, Price varies by size, Possible duplicate name,',
+        'Auto flags are hints made by the import: No photo, petworld-branded photos removed, Out of stock, Price varies by size, Possible duplicate name,',
         'Category to check, Pet guessed from name, Other pet (bird/rodent/fish).',
         'Birds, rodents and fish are listed under Accessoires with Pet = autre (they do not show on the Chats / Chiens pages).',
         '',
@@ -403,7 +420,11 @@ def images():
     IMG_DIR.mkdir(parents=True, exist_ok=True)
     tasks = []
     for p in load_pages('products'):
+        if excluded(p):
+            continue
         for i, image in enumerate(p['images']):
+            if f'pw{p["id"]}-{i + 1}' in BRANDED:
+                continue
             tasks.append((image['src'], f'pw{p["id"]}-{i + 1}'))
     print('photos to process:', len(tasks), flush=True)
     counters = {'done': 0, 'failed': 0}

@@ -1,0 +1,56 @@
+# Photos that carry petworld.ma branding. The import skips these and deletes their files.
+# One photo per line: pw<product id>-<photo number>. Edit this list, then run the import again.
+
+# Pet World logo (Black Friday graphics)
+pw10284-1
+pw12405-1
+pw192-1
+pw28338-1
+pw2835-1
+pw29439-1
+pw32569-1
+pw35048-1
+pw35053-1
+pw35056-1
+pw35057-1
+pw35059-1
+pw35072-1
+pw35091-1
+pw35095-1
+pw35103-1
+pw42647-1
+pw51963-1
+pw52142-1
+pw53508-1
+pw53624-1
+pw53662-1
+pw53693-1
+pw54040-1
+pw54044-1
+pw54200-1
+pw54200-2
+pw54212-1
+pw54212-2
+pw54220-1
+pw54300-1
+pw54316-1
+pw54351-1
+pw54357-1
+pw5440-1
+pw54431-1
+pw6336-1
+pw6341-1
+pw96-1
+
+# Promo photos with a "Special OFFER" sticker and petworld prices written on them
+pw22200-1
+pw22204-1
+pw25638-1
+pw26040-1
+pw27508-1
+pw28347-1
+pw41010-1
+pw51968-1
+pw52000-1
+pw52011-1
+pw53795-1
