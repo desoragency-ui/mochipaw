@@ -24,7 +24,10 @@ Le site est publié sur Cloudflare, relié au dépôt GitHub : chaque `git push`
 | Commande de build | `npm run build` |
 | Commande de déploiement | `npx wrangler deploy` |
 | Variable `NODE_OPTIONS` | `--max-old-space-size=4096` |
-| Variable `SITE_URL` | l'adresse publique du site (pour le plan du site) |
+| Variable `SITE_URL` | facultative ; sans elle le site utilise `https://mochipaw.ma` (voir `astro.config.mjs`) |
+
+Adresse du site : `https://mochipaw.ma`, reliée au Worker `mochipaw` (Workers > mochipaw > Settings > Domains & Routes).
+`www.mochipaw.ma` redirige vers `mochipaw.ma` (règle de redirection du domaine, dans Cloudflare > mochipaw.ma > Rules > Redirect Rules).
 
 La version de Node vient de `.node-version`. `public/_headers` règle le cache des images. Cloudflare sert `chats.html` à l'adresse `/chats` sans réglage de plus.
 

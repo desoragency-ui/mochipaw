@@ -3,8 +3,9 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Replace with the real domain when it exists: SITE_URL=https://... npm run build
-const site = process.env.SITE_URL ?? 'https://mochipaw.example';
+// Public address of the live site (canonical links, sitemap, social previews).
+// Override for another address: SITE_URL=https://... npm run build
+const site = process.env.SITE_URL ?? 'https://mochipaw.ma';
 
 export default defineConfig({
   site,
