@@ -9,7 +9,7 @@ import { useCatalog } from './useCatalog';
 export function WishlistPage({ locale }: { locale: Locale }) {
   const d = t(locale);
   const ids = useClientStore($wishlist, []);
-  const products = useCatalog();
+  const products = useCatalog(locale);
   const liked = (products ?? []).filter((item) => ids.includes(item.id));
 
   if (ids.length > 0 && !products) return <div className="h-64" aria-hidden="true" />;

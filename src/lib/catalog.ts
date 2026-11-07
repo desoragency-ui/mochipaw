@@ -1,6 +1,10 @@
 import { existsSync } from 'node:fs';
 import raw from '../data/products.csv?raw';
-import type { PetType, Product, ProductVariant, StockStatus } from './types';
+import translations from '../data/translations.json';
+import type { Locale, PetType, Product, ProductVariant, StockStatus } from './types';
+
+/** English and Arabic product names, written by tools/translate-products.py (see the sheet to review them). */
+const translatedNames = translations as Record<string, { en?: string; ar?: string }>;
 
 /**
  * The whole catalogue comes from src/data/products.csv.
@@ -94,6 +98,7 @@ function load(): Product[] {
       id: get('id'),
       slug: get('slug'),
       name: get('name'),
+      names: translatedNames[get('id')],
       brand: get('brand') || undefined,
       category: get('category'),
       pet: (get('pet') || 'tous') as PetType,
@@ -120,13 +125,21 @@ function load(): Product[] {
 
 export const products = load();
 
+/** The product with its name in the page language (French when no translation exists). */
+export function localize(product: Product, locale: Locale): Product {
+  const translated = locale === 'en' ? product.names?.en : locale === 'ar' ? product.names?.ar : undefined;
+  const { names: _names, ...rest } = product;
+  return translated ? { ...rest, name: translated, nameFr: product.name } : rest;
+}
+
 /**
  * What a product card needs and nothing more. Lists and search send this to the browser,
  * so a 2,000-product catalogue does not ship every long description with each page.
  */
-export function slim(product: Product, withText = false): Product {
+export function slim(product: Product, withText = false, locale: Locale = 'fr'): Product {
   return {
-    ...product,
+    ...localize(product, locale),
+    nameFr: withText ? localize(product, locale).nameFr : undefined,
     // Search reads the short text; product cards do not.
     shortDescription: withText ? product.shortDescription.slice(0, 140) : '',
     sku: '',

@@ -1,0 +1,189 @@
+---
+import { PawPrint } from 'lucide-react';
+import { brands } from '../data/brands';
+import { localePath, t } from '../i18n';
+import type { Locale } from '../lib/types';
+
+const { locale } = Astro.props as { locale: Locale };
+const d = t(locale);
+const shop = localePath(locale, '/boutique');
+const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
+---
+
+<section
+  class="relative mx-[clamp(0.6rem,1.7vw,1.5rem)] mt-20 overflow-hidden rounded-panel bg-orange text-brown"
+  aria-labelledby="brands-title"
+  data-reveal
+>
+  <div class="pattern absolute inset-0 opacity-[0.12]" aria-hidden="true"></div>
+  <span data-drift class="absolute -end-24 -top-28 h-72 w-72 rounded-[58%_42%_46%_54%/56%_48%_52%_44%] bg-blush/60" aria-hidden="true"></span>
+
+  <div class="relative px-6 pb-8 pt-12 sm:px-12">
+    <h2 id="brands-title" class="display flex max-w-3xl flex-wrap items-center gap-x-4 gap-y-1 text-4xl sm:text-6xl">
+      {d.brands.title}
+      <span class="brand-paw grid h-11 w-11 shrink-0 place-items-center rounded-full bg-cream text-purple sm:h-14 sm:w-14" aria-hidden="true">
+        <PawPrint size={26} strokeWidth={2.2} />
+      </span>
+    </h2>
+    <p class="mt-3 max-w-xl text-lg font-bold">{d.brands.text}</p>
+  </div>
+
+  <!-- dir="ltr" on purpose: the band always moves from left to right, in every language. -->
+  <div class="brand-marquee relative pb-12" dir="ltr">
+    <ul class="brand-track" aria-label={d.brands.list}>
+      {
+        [0, 1].map((copy) =>
+          brands.map((brand) => (
+            <li class="brand-item" aria-hidden={copy === 1 ? 'true' : undefined}>
+              <a
+                href={href(brand.name)}
+                class:list={['brand-card', { 'is-dark': brand.dark }]}
+                aria-label={d.brands.open(brand.name)}
+                tabindex={copy === 1 ? -1 : undefined}
+              >
+                <img src={brand.logo} alt={copy === 1 ? '' : brand.name} loading="lazy" decoding="async" draggable="false" />
+              </a>
+            </li>
+          )),
+        )
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .brand-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  }
+
+  .brand-track {
+    display: flex;
+    width: max-content;
+    margin: 0;
+    padding: 0.5rem 0 1rem;
+    list-style: none;
+    /* Moves to the right: the second copy slides in from the left, with no jump. */
+    animation: brands-ltr 36s linear infinite;
+  }
+
+  .brand-marquee:hover .brand-track,
+  .brand-marquee:focus-within .brand-track {
+    animation-play-state: paused;
+  }
+
+  .brand-item {
+    flex: none;
+    margin-inline-end: 1rem;
+  }
+
+  .brand-card {
+    display: grid;
+    place-items: center;
+    width: 9.5rem;
+    height: 5.75rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 26px;
+    background: #fff;
+    box-shadow: 0 6px 0 rgb(34 15 6 / 0.16);
+    transition:
+      transform 0.35s var(--ease-out-soft),
+      box-shadow 0.35s ease;
+  }
+
+  .brand-card.is-dark {
+    background: var(--color-brown);
+  }
+
+  .brand-card img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 3.1rem;
+    object-fit: contain;
+    transition: transform 0.35s var(--ease-out-soft);
+  }
+
+  .brand-card:hover,
+  .brand-card:focus-visible {
+    transform: translateY(-7px) rotate(-2.5deg);
+    box-shadow: 0 14px 0 rgb(34 15 6 / 0.2);
+  }
+
+  .brand-card:hover img,
+  .brand-card:focus-visible img {
+    transform: scale(1.1);
+  }
+
+  .brand-paw {
+    animation: paw-wiggle 3.2s ease-in-out infinite;
+  }
+
+  @media (min-width: 640px) {
+    .brand-item {
+      margin-inline-end: 1.25rem;
+    }
+
+    .brand-card {
+      width: 11.75rem;
+      height: 6.9rem;
+    }
+
+    .brand-card img {
+      max-height: 3.7rem;
+    }
+  }
+
+  @keyframes brands-ltr {
+    from {
+      transform: translate3d(-50%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes paw-wiggle {
+    0%,
+    70%,
+    100% {
+      transform: rotate(0);
+    }
+    78% {
+      transform: rotate(-14deg) scale(1.08);
+    }
+    86% {
+      transform: rotate(10deg) scale(1.08);
+    }
+  }
+
+  /* People who ask for less motion get a still, wrapped grid instead of a moving band. */
+  @media (prefers-reduced-motion: reduce) {
+    .brand-track {
+      width: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      padding-inline: 1rem;
+      animation: none;
+    }
+
+    .brand-item {
+      margin: 0;
+    }
+
+    .brand-item[aria-hidden='true'] {
+      display: none;
+    }
+
+    .brand-marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .brand-paw {
+      animation: none;
+    }
+  }
+</style>

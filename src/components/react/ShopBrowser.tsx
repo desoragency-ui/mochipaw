@@ -1,5 +1,5 @@
-import { SlidersHorizontal } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { SlidersHorizontal, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { t } from '../../i18n';
 import { formatPrice } from '../../lib/format';
 import type { Locale, PetType, Product } from '../../lib/types';
@@ -24,7 +24,7 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
   const d = t(locale);
   const highest = useMemo(() => Math.max(0, ...products.map((item) => item.price)), [products]);
   const brands = useMemo(
-    () => [...new Set(products.map((item) => item.brand).filter(Boolean))] as string[],
+    () => ([...new Set(products.map((item) => item.brand).filter(Boolean))] as string[]).sort((a, b) => a.localeCompare(b)),
     [products],
   );
 
@@ -36,6 +36,12 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
   const [sort, setSort] = useState<Sort>('new');
   const [visible, setVisible] = useState(PAGE);
   const [drawer, setDrawer] = useState(false);
+
+  // A click on a logo of the home page brand band arrives as /boutique?marque=Royal%20Canin.
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get('marque');
+    if (wanted && brands.includes(wanted)) setChosenBrands([wanted]);
+  }, [brands]);
 
   const flip = <T,>(list: T[], value: T) =>
     list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
@@ -101,7 +107,7 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
       )}
       <div>
         <label htmlFor="price-max" className="mb-1 block font-display text-lg font-semibold">
-          {d.shop.price} : {formatPrice(maxPrice)}
+          {d.shop.price} : {formatPrice(maxPrice, locale)}
         </label>
         <input
           id="price-max"
@@ -130,12 +136,12 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
         {filters}
       </aside>
 
-      <div>
+      <div className="min-w-0">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p aria-live="polite" className="font-extrabold">
             {d.shop.results(results.length)}
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex max-w-full min-w-0 flex-wrap items-center gap-2">
             <button type="button" onClick={() => setDrawer(true)} className="btn btn-ghost !min-h-11 !py-2 lg:hidden">
               <SlidersHorizontal size={17} aria-hidden="true" /> {d.shop.openFilters}
             </button>
@@ -146,7 +152,7 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
               id="sort"
               value={sort}
               onChange={(event) => setSort(event.target.value as Sort)}
-              className="field !min-h-11 !w-auto !py-2"
+              className="field !min-h-11 !w-auto !max-w-full !py-2"
             >
               <option value="new">{d.shop.sortNew}</option>
               <option value="asc">{d.shop.sortAsc}</option>
@@ -154,6 +160,23 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
             </select>
           </div>
         </div>
+
+        {chosenBrands.length > 0 && (
+          <ul className="mb-5 flex flex-wrap gap-2" aria-label={d.shop.brand}>
+            {chosenBrands.map((brand) => (
+              <li key={brand}>
+                <button
+                  type="button"
+                  aria-label={`${d.shop.reset} : ${brand}`}
+                  onClick={() => setChosenBrands(chosenBrands.filter((item) => item !== brand))}
+                  className="inline-flex min-h-10 items-center gap-2 rounded-full bg-purple px-4 font-extrabold text-white transition hover:bg-purple-deep"
+                >
+                  {brand} <X size={16} aria-hidden="true" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {results.length === 0 ? (
           <div className="rounded-card bg-white p-10 text-center">

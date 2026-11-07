@@ -4,9 +4,9 @@ import ProductSection from '../../../components/ProductSection.astro';
 import { ProductGallery } from '../../../components/react/ProductGallery';
 import { ProductPurchase } from '../../../components/react/ProductPurchase';
 import { categoryBySlug } from '../../../data/categories';
-import { langPaths, localePath, t } from '../../../i18n';
+import { categoryText, langPaths, localePath, t } from '../../../i18n';
 import Base from '../../../layouts/Base.astro';
-import { products, relatedProducts } from '../../../lib/catalog';
+import { localize, products, relatedProducts } from '../../../lib/catalog';
 import { imagePath } from '../../../lib/format';
 
 export function getStaticPaths() {
@@ -18,9 +18,11 @@ export function getStaticPaths() {
   );
 }
 
-const { locale, product } = Astro.props;
+const { locale } = Astro.props;
+const product = localize(Astro.props.product, locale);
 const d = t(locale);
 const category = categoryBySlug(product.category);
+const categoryName = category ? categoryText(locale, category.slug).name : '';
 const url = new URL(localePath(locale, `/produit/${product.slug}`), Astro.site).href;
 
 // Structured data only describes real products, never sample ones.
@@ -51,7 +53,7 @@ const breadcrumbSchema = {
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: d.pages.home, item: new URL(localePath(locale, '/'), Astro.site).href },
     ...(category
-      ? [{ '@type': 'ListItem', position: 2, name: category.name, item: new URL(localePath(locale, `/categorie/${category.slug}`), Astro.site).href }]
+      ? [{ '@type': 'ListItem', position: 2, name: categoryName, item: new URL(localePath(locale, `/categorie/${category.slug}`), Astro.site).href }]
       : []),
     { '@type': 'ListItem', position: category ? 3 : 2, name: product.name, item: url },
   ],
@@ -75,12 +77,12 @@ const specs = [
 >
   <Breadcrumbs
     locale={locale}
-    items={[...(category ? [{ label: category.name, path: `/categorie/${category.slug}` }] : []), { label: product.name }]}
+    items={[...(category ? [{ label: categoryName, path: `/categorie/${category.slug}` }] : []), { label: product.name }]}
   />
 
-  <div class="shell mt-4 grid items-start gap-8 pb-24 lg:grid-cols-2 lg:gap-12 lg:pb-0">
+  <div class="shell mt-4 grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
     <ProductGallery client:visible images={product.images} name={product.name} locale={locale} />
-    <div class="flex flex-col gap-4">
+    <div class="flex min-w-0 flex-col gap-4">
       {product.brand && <p class="text-sm font-extrabold uppercase tracking-wide text-brown/70">{product.brand}</p>}
       {product.sample && <p class="w-fit rounded-full bg-brown px-3 py-1 text-xs font-bold text-cream">{d.demo.tag}</p>}
       <h1 class="display text-4xl text-purple sm:text-6xl">{product.name}</h1>
@@ -108,4 +110,5 @@ const specs = [
   </div>
 
   <ProductSection title={d.product.related} products={relatedProducts(product)} locale={locale} />
+  <div class="h-24 lg:hidden" aria-hidden="true"></div>
 </Base>

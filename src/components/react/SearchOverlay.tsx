@@ -12,7 +12,7 @@ import { searchProducts, useCatalog } from './useCatalog';
 export function SearchOverlay({ locale }: { locale: Locale }) {
   const d = t(locale);
   const open = useClientStore($searchOpen, false);
-  const products = useCatalog(open);
+  const products = useCatalog(locale, open);
   const [query, setQuery] = useState('');
   const input = useRef<HTMLInputElement>(null);
 
@@ -44,7 +44,7 @@ export function SearchOverlay({ locale }: { locale: Locale }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={d.search.placeholder}
-            className="field !border-0 !bg-transparent !px-0 font-display !text-2xl sm:!text-3xl"
+            className="field !border-0 !bg-transparent !px-0 font-display !text-lg sm:!text-3xl"
           />
         </form>
         <div className="mt-4">
@@ -65,7 +65,7 @@ export function SearchOverlay({ locale }: { locale: Locale }) {
                       </span>
                       <span className="min-w-0">
                         <span className="block font-extrabold leading-snug">{item.name}</span>
-                        <span className="text-sm font-bold text-brown/70">{formatPrice(item.price)}</span>
+                        <span className="text-sm font-bold text-brown/70">{formatPrice(item.price, locale)}</span>
                       </span>
                     </a>
                   </li>

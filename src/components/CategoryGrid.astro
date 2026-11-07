@@ -2,7 +2,7 @@
 import { existsSync } from 'node:fs';
 import { Cat, Dog, Shovel, Tag } from 'lucide-react';
 import { categories } from '../data/categories';
-import { localePath, t } from '../i18n';
+import { categoryText, localePath, t } from '../i18n';
 import { imagePath, imageSrcSet } from '../lib/format';
 import type { Locale } from '../lib/types';
 
@@ -34,6 +34,7 @@ const focus: Record<string, string> = {
 
 const cards = categories.map((item, index) => ({
   ...item,
+  name: categoryText(locale, item.slug).name,
   focus: focus[item.slug] ?? '50% 50%',
   Icon: icons[item.slug as keyof typeof icons],
   hasPhoto: existsSync(`public/images/categories/${item.image}-480.webp`),

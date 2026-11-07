@@ -1,8 +1,11 @@
-import type { Product } from './types';
+import type { Locale, Product } from './types';
 
-/** Safe in the browser: no catalogue data in here. */
-export const formatPrice = (value: number) =>
-  `${new Intl.NumberFormat('fr-MA', { maximumFractionDigits: 2 }).format(value)} DH`;
+/** Safe in the browser: no catalogue data in here. Digits stay 0-9 in every language. */
+export const formatPrice = (value: number, locale: Locale = 'fr') => {
+  if (locale === 'fr') return `${new Intl.NumberFormat('fr-MA', { maximumFractionDigits: 2 }).format(value)} DH`;
+  const number = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
+  return locale === 'en' ? `${number} DH` : `${number} د.م.`;
+};
 
 /** A discount shows only when a real original price exists in the sheet. */
 export function discountPercent(product: Pick<Product, 'price' | 'originalPrice'>) {

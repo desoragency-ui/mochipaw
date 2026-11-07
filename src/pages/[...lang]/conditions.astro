@@ -1,23 +1,18 @@
 ---
 import Article from '../../components/Article.astro';
-import { langPaths } from '../../i18n';
+import { langPaths, t } from '../../i18n';
 
 export const getStaticPaths = langPaths;
 const { locale } = Astro.props;
+const a = t(locale).article.terms;
 ---
 
-<Article
-  locale={locale}
-  path="/conditions"
-  title="Conditions générales"
-  heading="CONDITIONS GÉNÉRALES"
-  description="Les conditions générales de vente de MochiPaw."
->
-  <p class="todo">À compléter avant la mise en ligne : informations légales de la société et conditions de vente, à faire vérifier par un professionnel.</p>
-  <h2>Prix</h2>
-  <p>Les prix sont affichés en dirhams marocains (DH).</p>
-  <h2>Commande</h2>
-  <p>Votre commande est confirmée avec vous sur WhatsApp.</p>
-  <h2>Paiement</h2>
-  <p>Le paiement se fait à la livraison.</p>
+<Article locale={locale} path="/conditions" title={a.title} heading={a.heading} description={a.description}>
+  <p class="todo">{a.todo}</p>
+  <h2>{a.priceTitle}</h2>
+  <p>{a.price}</p>
+  <h2>{a.orderTitle}</h2>
+  <p>{a.order}</p>
+  <h2>{a.payTitle}</h2>
+  <p>{a.pay}</p>
 </Article>

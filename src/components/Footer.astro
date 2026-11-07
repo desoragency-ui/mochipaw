@@ -1,10 +1,10 @@
 ---
 import { categories } from '../data/categories';
 import { site } from '../data/site';
-import { localePath, t } from '../i18n';
+import { activeLocales, categoryText, localeNames, localePath, t } from '../i18n';
 import type { Locale } from '../lib/types';
 
-const { locale } = Astro.props as { locale: Locale };
+const { locale, path = '/' } = Astro.props as { locale: Locale; path?: string };
 const d = t(locale);
 const link = (path: string) => localePath(locale, path);
 const socials = Object.entries(site.social).filter(([, url]) => url);
@@ -23,28 +23,28 @@ const hasContact = Boolean(phone || email || address);
 
     <nav aria-label={d.footer.shop}>
       <h2 class="mb-3 text-xl">{d.footer.shop}</h2>
-      <ul class="flex flex-col gap-1.5 font-semibold">
-        {categories.map((item) => <li><a class="hover:underline" href={link(`/categorie/${item.slug}`)}>{item.name}</a></li>)}
-        <li><a class="hover:underline" href={link('/offres')}>{d.nav.offers}</a></li>
+      <ul class="flex flex-col font-semibold">
+        {categories.map((item) => <li><a class="inline-flex min-h-10 items-center hover:underline" href={link(`/categorie/${item.slug}`)}>{categoryText(locale, item.slug).name}</a></li>)}
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/offres')}>{d.nav.offers}</a></li>
       </ul>
     </nav>
 
     <nav aria-label={d.footer.help}>
       <h2 class="mb-3 text-xl">{d.footer.help}</h2>
-      <ul class="flex flex-col gap-1.5 font-semibold">
-        <li><a class="hover:underline" href={link('/contact')}>{d.pages.contact}</a></li>
-        <li><a class="hover:underline" href={link('/faq')}>{d.pages.faq}</a></li>
-        <li><a class="hover:underline" href={link('/livraison')}>{d.pages.shipping}</a></li>
-        <li><a class="hover:underline" href={link('/retours')}>{d.pages.returns}</a></li>
+      <ul class="flex flex-col font-semibold">
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/contact')}>{d.pages.contact}</a></li>
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/faq')}>{d.pages.faq}</a></li>
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/livraison')}>{d.pages.shipping}</a></li>
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/retours')}>{d.pages.returns}</a></li>
       </ul>
     </nav>
 
     <div>
       <h2 class="mb-3 text-xl">{d.footer.legal}</h2>
-      <ul class="flex flex-col gap-1.5 font-semibold">
-        <li><a class="hover:underline" href={link('/a-propos')}>{d.pages.about}</a></li>
-        <li><a class="hover:underline" href={link('/confidentialite')}>{d.pages.privacy}</a></li>
-        <li><a class="hover:underline" href={link('/conditions')}>{d.pages.terms}</a></li>
+      <ul class="flex flex-col font-semibold">
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/a-propos')}>{d.pages.about}</a></li>
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/confidentialite')}>{d.pages.privacy}</a></li>
+        <li><a class="inline-flex min-h-10 items-center hover:underline" href={link('/conditions')}>{d.pages.terms}</a></li>
       </ul>
       <div class="mt-5 font-semibold">
         {
@@ -70,7 +70,18 @@ const hasContact = Boolean(phone || email || address);
   </div>
   <div class="shell relative flex flex-wrap items-center justify-between gap-3 border-t border-cream/25 py-5 text-sm font-semibold">
     <p>© {new Date().getFullYear()} MochiPaw. {d.footer.rights}</p>
-    <p lang="en">by <a class="font-extrabold underline hover:no-underline" href="https://www.desora.net" target="_blank" rel="noopener">Desora Agency</a></p>
+    {
+      activeLocales.length > 1 && (
+        <nav aria-label={d.nav.language} class="flex items-center gap-1 font-extrabold">
+          {activeLocales.map((item) => (
+            <a href={localePath(item, path)} lang={item} hreflang={item} aria-current={item === locale ? 'true' : undefined} class="inline-flex min-h-10 items-center rounded-full px-3 hover:bg-cream/15 aria-[current=true]:bg-cream aria-[current=true]:text-purple">
+              {localeNames[item]}
+            </a>
+          ))}
+        </nav>
+      )
+    }
+    <p lang="en">by <a class="inline-flex min-h-10 items-center font-extrabold underline hover:no-underline" href="https://www.desora.net" target="_blank" rel="noopener">Desora Agency</a></p>
     {site.payment.cashOnDelivery && <p class="rounded-full bg-cream/15 px-4 py-1.5">{d.footer.payment}</p>}
   </div>
 </footer>

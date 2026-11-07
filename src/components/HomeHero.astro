@@ -17,7 +17,7 @@ const d = t(locale);
     <img
       class="hero-pets"
       src="/images/hero/home-hero-duo.webp"
-      alt="Un golden retriever joyeux avec un bandana violet et un chat tigré blotti contre lui"
+      alt={d.alts.hero}
       width="1086"
       height="1448"
       fetchpriority="high"
@@ -113,33 +113,55 @@ const d = t(locale);
 
   @media (max-width: 767px) {
     .hero {
-      height: 680px;
+      display: flex;
+      flex-direction: column;
+      height: auto;
+      padding: 1.6rem 1.4rem 0;
       border-radius: 30px;
     }
 
     .hero-title {
+      position: static;
+      order: 1;
       font-size: 11.4vw;
     }
 
     .hero-copy {
-      top: calc(1.4rem + 2 * 11.4vw * 0.95 + 0.7rem);
-      bottom: auto;
-      inset-inline-end: 1.4rem;
+      position: static;
+      order: 2;
+      max-width: none;
+      margin-top: 0.9rem;
+      z-index: 2;
     }
 
     .hero-copy p {
       margin-bottom: 0.9rem;
     }
 
+    .hero > picture {
+      position: relative;
+      z-index: 1;
+      order: 3;
+      display: block;
+      width: 92%;
+      max-width: 380px;
+      margin-top: 0.5rem;
+      margin-inline-start: auto;
+      margin-inline-end: -1rem;
+    }
+
+    .hero-pets {
+      position: relative;
+      inset: auto;
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     .hero-blob {
       width: 110vw;
       inset-inline-end: -32%;
       bottom: -12%;
-    }
-
-    .hero-pets {
-      height: 62%;
-      inset-inline-end: -1rem;
     }
 
     .hero-star {

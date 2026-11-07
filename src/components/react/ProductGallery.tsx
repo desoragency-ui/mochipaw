@@ -16,7 +16,7 @@ export function ProductGallery({ images, name, locale }: Props) {
   const [origin, setOrigin] = useState('50% 50%');
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex min-w-0 flex-col gap-3">
       <button
         type="button"
         aria-label={d.product.zoom}
@@ -36,7 +36,7 @@ export function ProductGallery({ images, name, locale }: Props) {
         </span>
       </button>
       {images.length > 1 && (
-        <ul className="flex gap-2.5">
+        <ul className="flex flex-wrap gap-2.5">
           {images.map((file, index) => (
             <li key={file}>
               <button

@@ -14,9 +14,9 @@ const d = t(locale);
   title={d.offers.title}
   intro={d.offers.intro}
   label={d.nav.offers}
-  seoTitle="Offres sur les produits pour animaux"
+  seoTitle={d.seo.offers}
   products={onOffer()}
-  cutout={{ name: 'offers-duo', alt: 'Un corgi et un chat roux assis côte à côte' }}
+  cutout={{ name: 'offers-duo', alt: d.alts.offers }}
   emptyText={d.offers.empty}
   tone="orange"
 />

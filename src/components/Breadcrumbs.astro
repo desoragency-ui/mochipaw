@@ -12,14 +12,14 @@ const d = t(locale);
 const all: Crumb[] = [{ label: d.pages.home, path: '/' }, ...items];
 ---
 
-<nav aria-label="Fil d'Ariane" class="shell pt-5 text-sm font-bold text-brown/70">
+<nav aria-label={d.nav.breadcrumb} class="shell pt-5 text-sm font-bold text-brown/70">
   <ol class="flex flex-wrap items-center gap-1.5">
     {
       all.map((item, index) => (
         <li class="flex items-center gap-1.5">
           {index > 0 && <span aria-hidden="true">/</span>}
           {item.path ? (
-            <a href={localePath(locale, item.path)} class="hover:text-purple">{item.label}</a>
+            <a href={localePath(locale, item.path)} class="inline-flex min-h-10 items-center hover:text-purple">{item.label}</a>
           ) : (
             <span aria-current="page">{item.label}</span>
           )}

@@ -76,12 +76,12 @@ export function ProductCard({ product, locale, eager }: Props) {
             {product.name}
           </a>
         </h3>
-        <div className="mt-auto flex items-end justify-between gap-2 pt-2">
-          <Price price={product.price} originalPrice={product.originalPrice} />
+        <div className="mt-auto flex flex-wrap items-end justify-between gap-x-2 gap-y-2 pt-2">
+          <Price price={product.price} originalPrice={product.originalPrice} locale={locale} />
           {soldOut ? (
             <span className="relative z-10 rounded-full bg-cream-deep px-3 py-2 text-xs font-extrabold">{d.product.outOfStock}</span>
           ) : needsChoice ? (
-            <a href={href} className="btn btn-ghost relative z-10 !min-h-11 !px-4 !py-2 text-sm">
+            <a href={href} className="btn btn-ghost relative z-10 !min-h-11 !px-3.5 !py-2 text-sm">
               {d.product.choose}
             </a>
           ) : (

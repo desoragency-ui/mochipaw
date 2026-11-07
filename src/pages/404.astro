@@ -7,10 +7,10 @@ const locale = 'fr' as const;
 const d = t(locale);
 ---
 
-<Base locale={locale} path="/404" title="Page introuvable">
+<Base locale={locale} path="/404" title={d.seo.notFound}>
   <section class="relative mx-[clamp(0.6rem,1.7vw,1.5rem)] mt-4 flex min-h-[60vh] items-center overflow-hidden rounded-panel bg-purple text-cream">
     <span class="absolute -bottom-24 -end-16 h-96 w-[28rem] rounded-[58%_42%_46%_54%/56%_48%_52%_44%] bg-orange" aria-hidden="true"></span>
-    <Photo name="404-cat" alt="Un chat tigré curieux sort la tête d’un carton" sizes="(min-width: 768px) 46vw, 0px" width={960} height={640} eager class="absolute end-8 top-1/2 hidden w-[44%] -translate-y-1/2 rounded-panel md:block">
+    <Photo name="404-cat" alt={d.alts.notFound} sizes="(min-width: 768px) 46vw, 0px" width={960} height={640} eager class="absolute end-8 top-1/2 hidden w-[44%] -translate-y-1/2 rounded-panel md:block">
       <img src="/images/hero/home-hero-duo-720.webp" alt="" width="720" height="960" class="absolute -bottom-6 end-0 hidden h-[105%] w-auto max-w-none md:block" />
     </Photo>
     <div class="relative max-w-xl px-6 py-14 sm:px-12">

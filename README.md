@@ -36,7 +36,10 @@ La version de Node vient de `.node-version`. `public/_headers` règle le cache d
 | Numéro WhatsApp, contacts, réseaux, zones et prix de livraison | `src/data/site.ts` |
 | Passer de l'aperçu au vrai site | `demoMode: false` dans `src/data/site.ts` |
 | Catégories | `src/data/categories.ts` |
-| Tous les textes du site | `src/i18n/fr.ts` |
+| Tous les textes du site (français) | `src/i18n/fr.ts` |
+| Textes en anglais et en arabe | `src/i18n/en.ts`, `src/i18n/ar.ts` |
+| Noms de produits en anglais et en arabe | `src/data/translations.json` (clé = numéro MP) |
+| Marques du bandeau d'accueil | `src/data/brands.ts` (logos dans `public/images/brands/`) |
 
 ## Remplacer les produits d'exemple
 
@@ -57,11 +60,25 @@ Tant qu'une image manque, le site affiche une tuile de marque, jamais une image 
 La commande s'envoie sur WhatsApp, avec paiement à la livraison. Elle reste en mode démo (rien n'est envoyé)
 tant que `demoMode` est vrai ou que `contact.whatsapp` est vide.
 
-## Arabe et darija
+## Trois langues : français, anglais, arabe
 
-La structure est prête : pages, sens droite-gauche, changement de langue.
-Pour activer une langue : créer son dictionnaire sur le modèle de `src/i18n/fr.ts`, l'ajouter dans `src/i18n/index.ts`,
-ajouter `'ar'` ou `'ary'` à `activeLocales`, et installer la police `@fontsource-variable/noto-sans-arabic`.
+Le français n'a pas de préfixe (`/boutique`). L'anglais est sous `/en/…` et l'arabe sous `/ar/…` (écriture de droite à gauche).
+Les trois langues sont listées dans `activeLocales` (`src/i18n/index.ts`). Chaque langue a son propre `catalog.json` pour la recherche.
+Les noms de produits sont traduits dans `src/data/translations.json` ; les descriptions et caractéristiques restent en français.
+La traduction a été faite à la main, sans relecture par un traducteur : à faire relire avant le lancement officiel.
+Le darija (`ary`) est préparé mais éteint : l'activer = écrire son dictionnaire et l'ajouter à `activeLocales`.
+
+## Numéros de produit (MP)
+
+Chaque produit a un numéro `MP00001` à `MP01952`, utilisé comme référence sur le site, dans le message WhatsApp et dans le tableur
+`_catalog/petworld-products-sheet.xlsx`. La table `tools/mp-ids.json` garde le même numéro pour le même produit quand on relance l'import.
+L'ancien numéro du fournisseur est gardé dans la colonne `supplier_sku` du CSV. Un nouveau produit reçoit le numéro suivant.
+
+## Bandeau des marques
+
+Royal Canin, Pro Plan, Felix, Brit, Ownat, Hill's, Monge, Mera et Reflex Plus défilent de gauche à droite sur l'accueil (dans toutes les langues).
+Un clic sur un logo ouvre la boutique filtrée sur la marque. Les logos appartiennent à leurs propriétaires ; les fichiers d'origine et leurs sources
+sont dans `_brand/logos-source/`, la conversion dans `tools/make-brand-logos.py`.
 
 ## Décisions
 

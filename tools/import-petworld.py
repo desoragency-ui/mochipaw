@@ -36,7 +36,32 @@ BRANDED = {line.strip() for line in BRANDED_FILE.read_text(encoding='utf-8').spl
 
 HEADER = ['id', 'slug', 'name', 'brand', 'category', 'pet', 'short_description', 'description', 'price_mad',
           'original_price_mad', 'images', 'variants', 'sku', 'stock', 'weight', 'attributes', 'ingredients',
-          'nutrition', 'usage', 'featured', 'new', 'added_on', 'sample']
+          'nutrition', 'usage', 'featured', 'new', 'added_on', 'sample', 'supplier_sku']
+
+# Product IDs: MP + 5 digits. Each petworld product keeps the same MP number on every re-import.
+MP_FILE = Path('tools/mp-ids.json')
+TRANSLATIONS = Path('src/data/translations.json')
+
+# petworld gives almost no brand data, so the brand is read from the product name.
+# Order matters: "Purina Felix" is Felix, "Purina Pro Plan" is Pro Plan.
+BRAND_RULES = [
+    ('Pro Plan', re.compile(r'pro\s*-?\s*plan', re.I)),
+    ('Felix', re.compile(r'\bfelix\b', re.I)),
+    ('Royal Canin', re.compile(r'royal\s*canin', re.I)),
+    ("Hill's", re.compile(r"\bhill['’`]?s\b", re.I)),
+    ('Reflex Plus', re.compile(r'\breflex\b', re.I)),
+    ('Brit', re.compile(r'\bbrit\b', re.I)),
+    ('Ownat', re.compile(r'\bownat\b', re.I)),
+    ('Monge', re.compile(r'\bmonge\b', re.I)),
+    ('Mera', re.compile(r'\bmera\b', re.I)),
+]
+
+
+def detect_brand(name):
+    for brand, pattern in BRAND_RULES:
+        if pattern.search(name):
+            return brand
+    return ''
 
 CATEGORY_NAMES = {
     'nourriture-chat': 'Nourriture chat', 'nourriture-chien': 'Nourriture chien',
@@ -226,6 +251,8 @@ def build():
         brand = ''
         if p.get('brands'):
             brand = p['brands'][0]['name'].strip()
+        if not brand:
+            brand = detect_brand(p['name'])
 
         # price and sizes
         prices = p['prices']
@@ -284,9 +311,9 @@ def build():
             'id': f'pw{pid}', 'slug': slug, 'name': p['name'].strip(), 'brand': brand, 'category': category, 'pet': pet,
             'short_description': short, 'description': description, 'price_mad': fmt(price),
             'original_price_mad': fmt(original), 'images': '|'.join(files), 'variants': '|'.join(variants),
-            'sku': p['sku'] or f'PW-{pid}', 'stock': 'in_stock' if p['is_in_stock'] else 'out_of_stock', 'weight': '',
+            'sku': '', 'stock': 'in_stock' if p['is_in_stock'] else 'out_of_stock', 'weight': '',
             'attributes': '|'.join(attributes), 'ingredients': '', 'nutrition': '', 'usage': '', 'featured': '0',
-            'new': '0', 'added_on': '', 'sample': '0',
+            'new': '0', 'added_on': '', 'sample': '0', 'supplier_sku': p['sku'] or f'PW-{pid}',
         })
         sheet.append({
             'row': rows[-1], 'source_url': p['permalink'], 'photo_urls': [img['src'] for _, img in kept],
@@ -310,6 +337,18 @@ def build():
     # petworld's Black Friday pack photos carry petworld's logo and promo prices: list them last.
     sheet.sort(key=lambda s: 'black friday' in s['row']['name'].lower())
 
+    # MP IDs: a product that already has one keeps it; new products get the next free number.
+    mp_ids = json.loads(MP_FILE.read_text(encoding='utf-8')) if MP_FILE.exists() else {}
+    next_number = max([int(v[2:]) for v in mp_ids.values()] + [0]) + 1
+    for s in sheet:
+        old = s['row']['id']
+        if old not in mp_ids:
+            mp_ids[old] = f'MP{next_number:05d}'
+            next_number += 1
+        s['old_id'] = old
+        s['row']['id'] = s['row']['sku'] = mp_ids[old]
+    MP_FILE.write_text(json.dumps(mp_ids, indent=0, sort_keys=True), encoding='utf-8')
+
     CSV_OUT.parent.mkdir(parents=True, exist_ok=True)
     with CSV_OUT.open('w', encoding='utf-8', newline='') as handle:
         writer = csv.DictWriter(handle, fieldnames=HEADER, lineterminator='\n')
@@ -332,26 +371,31 @@ def write_sheet(sheet):
     wb = Workbook()
     ws = wb.active
     ws.title = 'Products'
+    names = json.loads(TRANSLATIONS.read_text(encoding='utf-8')) if TRANSLATIONS.exists() else {}
     columns = [
-        ('ID', 11), ('Product name', 52), ('Site category', 17), ('Pet', 8), ('Brand', 16), ('Price MAD (now)', 12),
-        ('Old price MAD', 11), ('Sizes / options (label:price)', 34), ('Stock', 12), ('Photos', 8),
-        ('Auto flags', 38), ('Petworld page', 38), ('Photo links (petworld)', 38), ('Petworld categories', 38),
+        ('ID (MP)', 10), ('Old ID (petworld)', 12), ('Product name (FR)', 50), ('Name EN', 44), ('Name AR', 44),
+        ('Site category', 17), ('Pet', 8), ('Brand', 14), ('Price MAD (now)', 12),
+        ('Old price MAD', 11), ('Sizes / options (label:price)', 32), ('Stock', 12), ('Photos', 8),
+        ('Auto flags', 36), ('Petworld page', 36), ('Photo links (petworld)', 36), ('Petworld categories', 36),
         ('EDIT PRICE? (yes/no)', 13), ('NEW PRICE MAD', 12), ('EDIT PHOTOS? (yes/no)', 13),
         ('EDIT PRODUCT INFO? (yes/no)', 14), ('REMOVE? (yes/no)', 11), ('YOUR NOTES', 40),
     ]
+    purple_columns = 17
     ws.append([c[0] for c in columns])
     for index, (_, width) in enumerate(columns, 1):
         ws.column_dimensions[get_column_letter(index)].width = width
         cell = ws.cell(row=1, column=index)
         cell.font = Font(bold=True, color='FFFFFF')
-        cell.fill = PatternFill('solid', fgColor='5E3EDF' if index <= 14 else 'FF5E36')
+        cell.fill = PatternFill('solid', fgColor='5E3EDF' if index <= purple_columns else 'FF5E36')
         cell.alignment = Alignment(wrap_text=True, vertical='center')
     ws.row_dimensions[1].height = 44
 
     for s in sheet:
         r = s['row']
+        translated = names.get(r['id'], {})
         ws.append([
-            txt(r['id']), txt(r['name']), CATEGORY_NAMES[r['category']], r['pet'], txt(r['brand']),
+            txt(r['id']), s['old_id'], txt(r['name']), txt(translated.get('en', '')), txt(translated.get('ar', '')),
+            CATEGORY_NAMES[r['category']], r['pet'], txt(r['brand']),
             float(r['price_mad']) if r['price_mad'] else None, float(r['original_price_mad']) if r['original_price_mad'] else None,
             txt(r['variants'].replace('|', '\n')), 'in stock' if r['stock'] == 'in_stock' else 'OUT OF STOCK',
             len(s['photo_urls']), txt('; '.join(s['flags'])), s['source_url'], '\n'.join(s['photo_urls']),
@@ -362,17 +406,23 @@ def write_sheet(sheet):
     ws.auto_filter.ref = f'A1:{get_column_letter(len(columns))}{last}'
     yes_no = DataValidation(type='list', formula1='"yes,no"', allow_blank=True)
     ws.add_data_validation(yes_no)
-    for column in ('O', 'Q', 'R', 'S'):
-        yes_no.add(f'{column}2:{column}{last}')
+    for index, (title, _) in enumerate(columns, 1):
+        if title.endswith('(yes/no)'):
+            letter = get_column_letter(index)
+            yes_no.add(f'{letter}2:{letter}{last}')
+    wrapped = {i for i, (title, _) in enumerate(columns, 1) if title.startswith(('Product name', 'Name ', 'Sizes', 'Auto flags', 'YOUR NOTES'))}
     for row in ws.iter_rows(min_row=2, max_row=last):
         for cell in row:
-            cell.alignment = Alignment(vertical='top', wrap_text=cell.column in (2, 8, 11, 20))
-        for cell in row[14:]:
+            cell.alignment = Alignment(vertical='top', wrap_text=cell.column in wrapped)
+        for cell in row[purple_columns:]:
             cell.fill = PatternFill('solid', fgColor='FFF1EC')
 
     guide = wb.create_sheet('How to use')
     for line in [
         'MochiPaw x petworld.ma product import',
+        '',
+        'ID (MP) = the product ID used on the website and in orders (MP + 5 digits). Old ID = the petworld ID, kept for reference.',
+        'Name EN / Name AR = the English and Arabic names shown on the website in those languages (machine translated: check them).',
         '',
         f'{len(sheet)} products were imported into the website (src/data/products.csv) with all photos.',
         'Purple columns = what is on the website now. Orange columns = YOURS to fill in and send back.',

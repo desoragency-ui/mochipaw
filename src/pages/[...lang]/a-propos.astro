@@ -1,28 +1,27 @@
 ---
 import Article from '../../components/Article.astro';
-import { langPaths, localePath } from '../../i18n';
+import { langPaths, localePath, t } from '../../i18n';
 
 export const getStaticPaths = langPaths;
 const { locale } = Astro.props;
+const d = t(locale);
+const a = d.article.about;
 ---
 
 <Article
   locale={locale}
   path="/a-propos"
-  title="À propos"
-  photo={{ name: 'about-walk', alt: 'Un jeune homme se promène avec son golden retriever au soleil couchant', width: 960, height: 640 }}
-  heading="CHAQUE PATTE MÉRITE SON BONHEUR"
-  description="MochiPaw est une animalerie en ligne marocaine pour chats et chiens : des prix serrés et des produits bien choisis."
+  title={a.title}
+  photo={{ name: 'about-walk', alt: d.alts.about, width: 960, height: 640 }}
+  heading={a.heading}
+  description={a.description}
 >
-  <h2>Qui sommes-nous ?</h2>
-  <p>MochiPaw est une animalerie en ligne marocaine pour les chats et les chiens.</p>
-  <p>Nous pensons que prendre soin de son animal ne devrait pas coûter trop cher. C’est pour cela que nous choisissons des produits qui offrent un bon rapport qualité-prix, à des prix serrés.</p>
-  <h2>Ce que vous trouverez ici</h2>
+  <h2>{a.whoTitle}</h2>
+  <p>{a.who1}</p>
+  <p>{a.who2}</p>
+  <h2>{a.findTitle}</h2>
   <ul>
-    <li>De la nourriture pour chats et chiens</li>
-    <li>Des friandises et des jouets</li>
-    <li>De la litière et des produits de toilettage</li>
-    <li>Des colliers, des laisses et des accessoires du quotidien</li>
+    {a.items.map((item) => <li>{item}</li>)}
   </ul>
-  <p style="margin-top:1.2rem"><a class="btn btn-purple" href={localePath(locale, '/boutique')}>Découvrir la boutique</a></p>
+  <p style="margin-top:1.2rem"><a class="btn btn-purple" href={localePath(locale, '/boutique')}>{a.cta}</a></p>
 </Article>

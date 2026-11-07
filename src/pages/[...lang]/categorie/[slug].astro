@@ -1,7 +1,7 @@
 ---
 import Listing from '../../../components/Listing.astro';
 import { categories } from '../../../data/categories';
-import { langPaths } from '../../../i18n';
+import { categoryText, langPaths, t } from '../../../i18n';
 import { productsInCategory } from '../../../lib/catalog';
 
 export function getStaticPaths() {
@@ -14,15 +14,17 @@ export function getStaticPaths() {
 }
 
 const { locale, category } = Astro.props;
+const text = categoryText(locale, category.slug);
+const d = t(locale);
 ---
 
 <Listing
   locale={locale}
   path={`/categorie/${category.slug}`}
-  title={category.name.toUpperCase()}
-  intro={category.description}
-  label={category.name}
-  seoTitle={`${category.name} au Maroc`}
+  title={text.name.toLocaleUpperCase(locale)}
+  intro={text.description}
+  label={text.name}
+  seoTitle={d.seo.category(text.name)}
   products={productsInCategory(category.slug)}
   hideCategories
   tone={category.pet === 'chien' ? 'orange' : 'purple'}

@@ -37,7 +37,7 @@ export function CartPage({ locale }: { locale: Locale }) {
       <aside className="flex flex-col gap-3 rounded-card bg-white p-6 lg:sticky lg:top-28">
         <p className="flex justify-between font-semibold">
           <span>{d.cart.subtotal}</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span>{formatPrice(subtotal, locale)}</span>
         </p>
         <p className="flex justify-between gap-4 font-semibold">
           <span>{d.cart.shipping}</span>
@@ -45,7 +45,7 @@ export function CartPage({ locale }: { locale: Locale }) {
         </p>
         <p className="flex items-center justify-between border-t-2 border-cream-deep pt-3 font-extrabold">
           <span>{d.cart.total}</span>
-          <span className="font-display text-2xl font-semibold">{formatPrice(subtotal)}</span>
+          <span className="font-display text-2xl font-semibold">{formatPrice(subtotal, locale)}</span>
         </p>
         <a href={localePath(locale, '/commande')} className="btn btn-purple mt-1 w-full">
           {d.cart.checkout}

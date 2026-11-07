@@ -1,4 +1,5 @@
 ---
+import BrandMarquee from '../../components/BrandMarquee.astro';
 import CategoryGrid from '../../components/CategoryGrid.astro';
 import HomeHero from '../../components/HomeHero.astro';
 import HomeSections from '../../components/HomeSections.astro';
@@ -15,6 +16,7 @@ const d = t(locale);
 <Base locale={locale} path="/">
   <HomeHero locale={locale} />
   <CategoryGrid locale={locale} />
+  <BrandMarquee locale={locale} />
   <ProductSection
     title={d.home.bestSellers}
     products={featuredProducts().slice(0, 4)}

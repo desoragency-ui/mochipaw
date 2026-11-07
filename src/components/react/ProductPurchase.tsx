@@ -53,7 +53,7 @@ export function ProductPurchase({ product, locale }: Props) {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-3">
-        <Price price={price} originalPrice={originalPrice} large />
+        <Price price={price} originalPrice={originalPrice} large locale={locale} />
         {off !== null && (
           <span className="rounded-full bg-orange px-3 py-1 text-sm font-extrabold text-brown">
             -{off} % {d.product.off}
@@ -84,7 +84,7 @@ export function ProductPurchase({ product, locale }: Props) {
                   onChange={() => setVariantIndex(index)}
                   className="sr-only"
                 />
-                {item.label} · {formatPrice(item.price)}
+                {item.label} · {formatPrice(item.price, locale)}
               </label>
             ))}
           </div>
@@ -123,7 +123,7 @@ export function ProductPurchase({ product, locale }: Props) {
       </p>
 
       <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 bg-white px-4 py-3 shadow-[0_-8px_24px_rgba(34,15,6,.12)] lg:hidden">
-        <span className="font-display text-xl font-semibold">{formatPrice(price)}</span>
+        <span className="font-display text-xl font-semibold">{formatPrice(price, locale)}</span>
         <button type="button" disabled={soldOut} onClick={add} className="btn btn-purple flex-1 disabled:opacity-50">
           {addLabel}
         </button>

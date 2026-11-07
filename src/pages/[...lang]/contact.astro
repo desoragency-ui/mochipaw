@@ -6,6 +6,7 @@ import { langPaths, t } from '../../i18n';
 export const getStaticPaths = langPaths;
 const { locale } = Astro.props;
 const d = t(locale);
+const a = d.article.contact;
 const { phone, email, address, city, hours } = site.contact;
 const hasDetails = Boolean(phone || email || address || hasWhatsApp());
 ---
@@ -13,19 +14,19 @@ const hasDetails = Boolean(phone || email || address || hasWhatsApp());
 <Article
   locale={locale}
   path="/contact"
-  title="Contact"
-  photo={{ name: 'contact-puppy', alt: 'Un chiot golden retriever qui penche la tête', cutout: true }}
-  heading="ON VOUS ÉCOUTE"
-  description="Contactez MochiPaw, votre animalerie en ligne au Maroc."
+  title={a.title}
+  photo={{ name: 'contact-puppy', alt: d.alts.contact, cutout: true }}
+  heading={a.heading}
+  description={a.description}
 >
   {
     hasDetails ? (
       <>
         {hasWhatsApp() && <p><a class="btn btn-purple" href={`https://wa.me/${site.contact.whatsapp}`}>{d.whatsapp}</a></p>}
-        {phone && <p>Téléphone : {phone}</p>}
-        {email && <p>E-mail : {email}</p>}
-        {address && <p>Adresse : {address}, {city}</p>}
-        {hours && <p>Horaires : {hours}</p>}
+        {phone && <p>{a.phone} : {phone}</p>}
+        {email && <p>{a.email} : {email}</p>}
+        {address && <p>{a.address} : {address}, {city}</p>}
+        {hours && <p>{a.hours} : {hours}</p>}
       </>
     ) : (
       <p class="todo">{d.footer.contactSoon}</p>

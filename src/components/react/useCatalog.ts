@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
-import type { Product } from '../../lib/types';
+import { localePath } from '../../i18n';
+import type { Locale, Product } from '../../lib/types';
 
-let cache: Promise<Product[]> | null = null;
+const cache: Partial<Record<Locale, Promise<Product[]>>> = {};
 
-/** Loads the catalogue only when a feature needs it, so pages stay light. */
-export function loadCatalog() {
-  cache ??= fetch('/catalog.json').then((response) => response.json() as Promise<Product[]>);
-  return cache;
+/** Loads the catalogue (names in the page language) only when a feature needs it, so pages stay light. */
+export function loadCatalog(locale: Locale) {
+  cache[locale] ??= fetch(localePath(locale, '/catalog.json')).then((response) => response.json() as Promise<Product[]>);
+  return cache[locale]!;
 }
 
-export function useCatalog(enabled = true) {
+export function useCatalog(locale: Locale, enabled = true) {
   const [products, setProducts] = useState<Product[] | null>(null);
   useEffect(() => {
-    if (enabled) loadCatalog().then(setProducts);
-  }, [enabled]);
+    if (enabled) loadCatalog(locale).then(setProducts);
+  }, [enabled, locale]);
   return products;
 }
 
@@ -24,11 +25,12 @@ const fold = (text: string) =>
     .replace(/[̀-ͯ]/g, '')
     .toLowerCase();
 
+/** Finds products by name (page language or French), brand, category, short text or MP ID. */
 export function searchProducts(products: Product[], query: string) {
   const words = fold(query).split(/\s+/).filter(Boolean);
   if (words.length === 0) return [];
   return products.filter((item) => {
-    const text = fold(`${item.name} ${item.brand ?? ''} ${item.category} ${item.shortDescription}`);
+    const text = fold(`${item.id} ${item.name} ${item.nameFr ?? ''} ${item.brand ?? ''} ${item.category} ${item.shortDescription}`);
     return words.every((word) => text.includes(word));
   });
 }

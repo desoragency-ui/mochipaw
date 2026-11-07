@@ -7,9 +7,10 @@ import { Drawer } from './Drawer';
 interface Props {
   locale: Locale;
   links: { href: string; label: string }[];
+  languages?: { code: Locale; label: string; href: string; current: boolean }[];
 }
 
-export function MobileNav({ locale, links }: Props) {
+export function MobileNav({ locale, links, languages = [] }: Props) {
   const d = t(locale);
   const [open, setOpen] = useState(false);
 
@@ -35,6 +36,22 @@ export function MobileNav({ locale, links }: Props) {
               </li>
             ))}
           </ul>
+          {languages.length > 1 && (
+            <div role="group" aria-label={d.nav.language} className="mt-6 flex flex-wrap gap-2 font-extrabold">
+              {languages.map((item) => (
+                <a
+                  key={item.code}
+                  href={item.href}
+                  lang={item.code}
+                  hrefLang={item.code}
+                  aria-current={item.current ? 'true' : undefined}
+                  className="inline-flex min-h-11 items-center rounded-full px-5 ring-2 ring-cream/40 transition hover:bg-cream/15 aria-[current=true]:bg-cream aria-[current=true]:text-purple aria-[current=true]:ring-cream"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          )}
           <div className="mt-auto flex flex-col gap-2 pt-8 font-extrabold">
             <a href={localePath(locale, '/favoris')} className="flex min-h-11 items-center gap-3">
               <Heart size={20} aria-hidden="true" /> {d.nav.wishlist}

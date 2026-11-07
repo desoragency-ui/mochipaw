@@ -19,12 +19,12 @@ const { title, products, locale, link } = Astro.props;
       <div class="mb-7 flex flex-wrap items-end justify-between gap-3">
         <h2 class="display max-w-3xl text-4xl text-purple sm:text-6xl">{title}</h2>
         {link && (
-          <a href={link.href} class="font-extrabold text-purple underline underline-offset-4">
+          <a href={link.href} class="inline-flex min-h-11 items-center font-extrabold text-purple underline underline-offset-4">
             {link.label}
           </a>
         )}
       </div>
-      <ProductGrid client:visible products={products.map((item) => slim(item))} locale={locale} />
+      <ProductGrid client:visible products={products.map((item) => slim(item, false, locale))} locale={locale} />
     </section>
   )
 }

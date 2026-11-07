@@ -33,7 +33,7 @@ export function CartLines({ lines, locale, roomy }: Props) {
                 {line.variant && <p className="text-sm font-semibold text-brown/70">{line.variant}</p>}
                 {roomy && (
                   <p className="text-sm text-brown/70">
-                    {d.cart.unit} : {formatPrice(line.price)}
+                    {d.cart.unit} : {formatPrice(line.price, locale)}
                   </p>
                 )}
               </div>
@@ -55,7 +55,7 @@ export function CartLines({ lines, locale, roomy }: Props) {
                 decreaseLabel={d.product.decrease}
                 increaseLabel={d.product.increase}
               />
-              <span className="font-display text-lg font-semibold">{formatPrice(line.price * line.quantity)}</span>
+              <span className="font-display text-lg font-semibold">{formatPrice(line.price * line.quantity, locale)}</span>
             </div>
           </div>
         </li>

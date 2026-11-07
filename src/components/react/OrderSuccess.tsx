@@ -39,7 +39,7 @@ export function OrderSuccess({ locale }: { locale: Locale }) {
           </a>
           <img
             src="/images/photos/order-success-960.webp"
-            alt="Un golden retriever ravi derrière un colis"
+            alt={d.alts.orderSuccess}
             width={960}
             height={720}
             loading="lazy"
@@ -59,13 +59,13 @@ export function OrderSuccess({ locale }: { locale: Locale }) {
                   {line.quantity} × {line.name}
                   {line.variant ? ` (${line.variant})` : ''}
                 </span>
-                <span className="shrink-0 font-extrabold">{formatPrice(line.price * line.quantity)}</span>
+                <span className="shrink-0 font-extrabold">{formatPrice(line.price * line.quantity, locale)}</span>
               </li>
             ))}
           </ul>
           <p className="mt-3 flex justify-between border-t-2 border-cream-deep pt-3 font-extrabold">
             <span>{d.cart.total}</span>
-            <span>{formatPrice(order.total)}</span>
+            <span>{formatPrice(order.total, locale)}</span>
           </p>
         </section>
         <section className="rounded-card bg-white p-6">

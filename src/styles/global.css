@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/fredoka/wght.css';
 @import '@fontsource-variable/nunito-sans/wght.css';
+@import '@fontsource-variable/noto-sans-arabic/wght.css';
+@import '@fontsource-variable/baloo-bhaijaan-2/wght.css';
 
 /* MochiPaw design tokens. Palette and radius come from the brand board. */
 @theme {
@@ -13,8 +15,8 @@
   --color-cream-deep: #f1e8d6;
   --color-blush: #ffd9cc;
 
-  --font-display: 'Fredoka Variable', 'Fredoka', ui-rounded, system-ui, sans-serif;
-  --font-sans: 'Nunito Sans Variable', 'Nunito Sans', system-ui, sans-serif;
+  --font-display: 'Fredoka Variable', 'Fredoka', 'Baloo Bhaijaan 2 Variable', ui-rounded, system-ui, sans-serif;
+  --font-sans: 'Nunito Sans Variable', 'Nunito Sans', 'Noto Sans Arabic Variable', system-ui, sans-serif;
 
   --radius-card: 28px;
   --radius-panel: 40px;
@@ -61,8 +63,23 @@
     height: auto;
   }
 
-  [dir='rtl'] {
-    font-family: 'Noto Sans Arabic', var(--font-sans);
+  /* Arabic: letters must stay joined and need more line height. Latin brand names keep the Latin fonts. */
+  :root[dir='rtl'] body {
+    line-height: 1.75;
+  }
+
+  :root[dir='rtl'] h1,
+  :root[dir='rtl'] h2,
+  :root[dir='rtl'] h3,
+  :root[dir='rtl'] h4,
+  :root[dir='rtl'] .display {
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  /* Sample reviews are written in Arabic on every page, whatever the page language. */
+  [dir='auto'] {
+    font-family: var(--font-sans);
   }
 }
 

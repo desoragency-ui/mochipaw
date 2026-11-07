@@ -41,7 +41,7 @@ export function CartDrawer({ locale }: { locale: Locale }) {
           <div className="flex flex-col gap-3 rounded-t-[28px] bg-white px-6 pb-6 pt-5 shadow-soft">
             <p className="flex items-center justify-between font-extrabold">
               <span>{d.cart.subtotal}</span>
-              <span className="font-display text-2xl font-semibold">{formatPrice(subtotal)}</span>
+              <span className="font-display text-2xl font-semibold">{formatPrice(subtotal, locale)}</span>
             </p>
             <a href={localePath(locale, '/commande')} className="btn btn-purple w-full">
               {d.cart.checkout}

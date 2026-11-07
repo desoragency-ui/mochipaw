@@ -50,9 +50,9 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
       d.checkout.whatsappIntro,
       `${d.success.number} : ${order.number}`,
       ...order.lines.map(
-        (line) => `- ${line.quantity} x ${line.name}${line.variant ? ` (${line.variant})` : ''} : ${formatPrice(line.price * line.quantity)}`,
+        (line) => `- ${line.quantity} x ${line.name} [${line.productId}]${line.variant ? ` (${line.variant})` : ''} : ${formatPrice(line.price * line.quantity, locale)}`,
       ),
-      `${d.cart.total} : ${formatPrice(order.total)}`,
+      `${d.cart.total} : ${formatPrice(order.total, locale)}`,
       `${d.checkout.fullName} : ${order.customer.fullName}`,
       `${d.checkout.phone} : ${order.customer.phone}`,
       `${d.checkout.city} : ${order.customer.city}`,
@@ -170,21 +170,21 @@ export function CheckoutForm({ locale }: { locale: Locale }) {
                 {line.quantity} × {line.name}
                 {line.variant && <span className="block font-semibold text-brown/70">{line.variant}</span>}
               </span>
-              <span className="font-extrabold">{formatPrice(line.price * line.quantity)}</span>
+              <span className="font-extrabold">{formatPrice(line.price * line.quantity, locale)}</span>
             </li>
           ))}
         </ul>
         <p className="mt-1 flex justify-between border-t-2 border-cream-deep pt-3 font-semibold">
           <span>{d.cart.subtotal}</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span>{formatPrice(subtotal, locale)}</span>
         </p>
         <p className="flex justify-between gap-4 font-semibold">
           <span>{d.cart.shipping}</span>
-          <span className="text-end text-brown/70">{shipping === null ? d.cart.shippingTbd : formatPrice(shipping)}</span>
+          <span className="text-end text-brown/70">{shipping === null ? d.cart.shippingTbd : formatPrice(shipping, locale)}</span>
         </p>
         <p className="flex items-center justify-between font-extrabold">
           <span>{d.cart.total}</span>
-          <span className="font-display text-2xl font-semibold">{formatPrice(total)}</span>
+          <span className="font-display text-2xl font-semibold">{formatPrice(total, locale)}</span>
         </p>
         <button type="submit" className="btn btn-purple mt-1 w-full">
           <MessageCircle size={19} aria-hidden="true" />

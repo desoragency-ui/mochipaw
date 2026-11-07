@@ -1,4 +1,4 @@
-export type Locale = 'fr' | 'ar' | 'ary';
+export type Locale = 'fr' | 'en' | 'ar' | 'ary';
 
 /** `autre` = birds, rodents and fish. They stay out of the Chats and Chiens pages. */
 export type PetType = 'chat' | 'chien' | 'tous' | 'autre';
@@ -23,6 +23,10 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
+  /** Translated names (machine translated, listed in the sheet) keyed by language. */
+  names?: { en?: string; ar?: string };
+  /** French name, kept when the name above is translated, so search still finds it. */
+  nameFr?: string;
   brand?: string;
   category: string;
   pet: PetType;

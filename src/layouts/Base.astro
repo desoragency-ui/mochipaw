@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import { CartDrawer } from '../components/react/CartDrawer';
 import { SearchOverlay } from '../components/react/SearchOverlay';
 import { hasWhatsApp, site } from '../data/site';
-import { activeLocales, isRtl, localePath, t } from '../i18n';
+import { activeLocales, htmlLang, isRtl, localePath, ogLocale, t } from '../i18n';
 import type { Locale } from '../lib/types';
 
 interface Props {
@@ -38,12 +38,12 @@ const organization = {
   ...(site.contact.phone ? { telephone: site.contact.phone } : {}),
   ...(site.contact.email ? { email: site.contact.email } : {}),
 };
-const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: siteUrl, inLanguage: 'fr-MA' };
+const website = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: siteUrl, inLanguage: htmlLang(locale) };
 const schemas = [organization, website, ...jsonLd];
 ---
 
 <!doctype html>
-<html lang={locale === 'ary' ? 'ar-MA' : locale} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
+<html lang={htmlLang(locale)} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -55,15 +55,16 @@ const schemas = [organization, website, ...jsonLd];
     {site.demoMode && <meta name="robots" content="noindex" />}
     {activeLocales.length > 1 &&
       activeLocales.map((item) => (
-        <link rel="alternate" hreflang={item === 'ary' ? 'ar-MA' : item} href={new URL(localePath(item, path), Astro.site).href} />
+        <link rel="alternate" hreflang={htmlLang(item)} href={new URL(localePath(item, path), Astro.site).href} />
       ))}
+    {activeLocales.length > 1 && <link rel="alternate" hreflang="x-default" href={new URL(path, Astro.site).href} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="MochiPaw" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, Astro.site).href} />
-    <meta property="og:locale" content="fr_MA" />
+    <meta property="og:locale" content={ogLocale(locale)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
@@ -83,7 +84,7 @@ const schemas = [organization, website, ...jsonLd];
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer locale={locale} />
+    <Footer locale={locale} path={path} />
     <CartDrawer client:idle locale={locale} />
     <SearchOverlay client:idle locale={locale} />
     {

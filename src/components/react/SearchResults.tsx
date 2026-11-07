@@ -6,7 +6,7 @@ import { searchProducts, useCatalog } from './useCatalog';
 
 export function SearchResults({ locale }: { locale: Locale }) {
   const d = t(locale);
-  const products = useCatalog();
+  const products = useCatalog(locale);
   const [query, setQuery] = useState<string | null>(null);
 
   useEffect(() => setQuery(new URLSearchParams(window.location.search).get('q') ?? ''), []);

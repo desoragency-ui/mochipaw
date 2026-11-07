@@ -1,21 +1,16 @@
 ---
 import Article from '../../components/Article.astro';
-import { langPaths } from '../../i18n';
+import { langPaths, t } from '../../i18n';
 
 export const getStaticPaths = langPaths;
 const { locale } = Astro.props;
+const a = t(locale).article.privacy;
 ---
 
-<Article
-  locale={locale}
-  path="/confidentialite"
-  title="Confidentialité"
-  heading="CONFIDENTIALITÉ"
-  description="Comment MochiPaw traite vos données personnelles."
->
-  <p class="todo">À faire vérifier avant la mise en ligne : nom de la société, responsable des données et conformité à la loi marocaine 09-08.</p>
-  <h2>Sur votre appareil</h2>
-  <p>Votre panier, vos favoris et votre dernière commande sont gardés dans votre navigateur, sur votre appareil.</p>
-  <h2>Votre commande</h2>
-  <p>Vos coordonnées servent uniquement à traiter et livrer votre commande.</p>
+<Article locale={locale} path="/confidentialite" title={a.title} heading={a.heading} description={a.description}>
+  <p class="todo">{a.todo}</p>
+  <h2>{a.deviceTitle}</h2>
+  <p>{a.device}</p>
+  <h2>{a.orderTitle}</h2>
+  <p>{a.order}</p>
 </Article>
