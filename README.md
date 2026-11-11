@@ -71,6 +71,14 @@ Les noms de produits sont traduits dans `src/data/translations.json` ; les descr
 La traduction a été faite à la main, sans relecture par un traducteur : à faire relire avant le lancement officiel.
 Le darija (`ary`) est préparé mais éteint : l'activer = écrire son dictionnaire et l'ajouter à `activeLocales`.
 
+## Produits retirés de la boutique
+
+`tools/import-petworld.py` ne garde pas : la catégorie Accessoires (elle reste, vide), les marques Almo Nature et Carnilove,
+les noms avec pack / gratuit / offre / promo / black friday, les produits avec ancien prix barré, sans photo, avec « petworld » ou « médaille »
+dans le texte, et quelques produits nommés (liste `REMOVED_NAMES`). Pour changer une règle : modifier ce fichier, puis lancer
+`python -X utf8 tools/import-petworld.py build` puis `images`. La liste de ce qui est retiré, avec la raison : `_catalog/removed-products.txt`.
+Les pages de la boutique montrent 24 produits avec des numéros de page.
+
 ## Numéros de produit (MP)
 
 Chaque produit a un numéro `MP00001` à `MP01952`, utilisé comme référence sur le site, dans le message WhatsApp et dans le tableur

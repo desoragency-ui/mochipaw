@@ -1,5 +1,5 @@
-import { SlidersHorizontal, X } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { ChevronLeft, ChevronRight, SlidersHorizontal, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { t } from '../../i18n';
 import { formatPrice } from '../../lib/format';
 import type { Locale, PetType, Product } from '../../lib/types';
@@ -17,8 +17,23 @@ interface Props {
   emptyText?: string;
 }
 
-const PAGE = 12;
+const PAGE = 24;
 const PETS: PetType[] = ['chat', 'chien', 'autre', 'tous'];
+
+/** Page numbers to show: first, last, the current page and its neighbours; null = a gap ("…"). */
+function pageList(current: number, total: number): (number | null)[] {
+  const wanted = [...new Set([1, current - 1, current, current + 1, total])]
+    .filter((number) => number >= 1 && number <= total)
+    .sort((a, b) => a - b);
+  const list: (number | null)[] = [];
+  wanted.forEach((number, index) => {
+    const before = wanted[index - 1];
+    if (before !== undefined && number - before === 2) list.push(before + 1);
+    else if (before !== undefined && number - before > 2) list.push(null);
+    list.push(number);
+  });
+  return list;
+}
 
 export function ShopBrowser({ products, categories, locale, hideCategories, emptyText }: Props) {
   const d = t(locale);
@@ -34,8 +49,9 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
   const [maxPrice, setMaxPrice] = useState(highest);
   const [inStock, setInStock] = useState(false);
   const [sort, setSort] = useState<Sort>('new');
-  const [visible, setVisible] = useState(PAGE);
+  const [page, setPage] = useState(1);
   const [drawer, setDrawer] = useState(false);
+  const top = useRef<HTMLDivElement>(null);
 
   // A click on a logo of the home page brand band arrives as /boutique?marque=Royal%20Canin.
   useEffect(() => {
@@ -62,13 +78,23 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
     });
   }, [products, selected, pets, chosenBrands, maxPrice, inStock, sort]);
 
+  // Any change of filter or sort starts again at page 1.
+  useEffect(() => setPage(1), [selected, pets, chosenBrands, maxPrice, inStock, sort]);
+
+  const pageCount = Math.max(1, Math.ceil(results.length / PAGE));
+  const current = Math.min(page, pageCount);
+  const goTo = (number: number) => {
+    setPage(number);
+    top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const reset = () => {
     setSelected([]);
     setPets([]);
     setChosenBrands([]);
     setMaxPrice(highest);
     setInStock(false);
-    setVisible(PAGE);
+    setPage(1);
   };
 
   const check = (label: string, checked: boolean, onChange: () => void) => (
@@ -84,10 +110,7 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
         <fieldset>
           <legend className="mb-1 font-display text-lg font-semibold">{d.shop.category}</legend>
           {categories.map((item) =>
-            check(item.name, selected.includes(item.slug), () => {
-              setSelected(flip(selected, item.slug));
-              setVisible(PAGE);
-            }),
+            check(item.name, selected.includes(item.slug), () => setSelected(flip(selected, item.slug))),
           )}
         </fieldset>
       )}
@@ -137,7 +160,7 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
       </aside>
 
       <div className="min-w-0">
-        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div ref={top} className="mb-5 flex scroll-mt-28 flex-wrap items-center justify-between gap-3">
           <p aria-live="polite" className="font-extrabold">
             {d.shop.results(results.length)}
           </p>
@@ -189,7 +212,7 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
           </div>
         ) : (
           <ul className="grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">
-            {results.slice(0, visible).map((product, index) => (
+            {results.slice((current - 1) * PAGE, current * PAGE).map((product, index) => (
               <li key={product.id}>
                 <ProductCard product={product} locale={locale} eager={index < 4} />
               </li>
@@ -197,12 +220,53 @@ export function ShopBrowser({ products, categories, locale, hideCategories, empt
           </ul>
         )}
 
-        {visible < results.length && (
-          <div className="mt-8 text-center">
-            <button type="button" onClick={() => setVisible(visible + PAGE)} className="btn btn-ghost">
-              {d.shop.more}
-            </button>
-          </div>
+        {pageCount > 1 && (
+          <nav aria-label={d.shop.pagination} className="mt-10 flex flex-col items-center gap-4">
+            <ul className="flex flex-wrap items-center justify-center gap-1">
+              {pageList(current, pageCount).map((number, index) =>
+                number === null ? (
+                  <li key={`gap-${index}`} aria-hidden="true" className="grid h-10 w-6 place-items-center font-extrabold text-brown/60">
+                    …
+                  </li>
+                ) : (
+                  <li key={number}>
+                    <button
+                      type="button"
+                      aria-label={d.shop.page(number)}
+                      aria-current={number === current ? 'page' : undefined}
+                      onClick={() => goTo(number)}
+                      className={`grid h-10 min-w-10 place-items-center rounded-full px-1 font-extrabold transition ${
+                        number === current ? 'bg-purple text-white' : 'bg-white text-brown hover:bg-purple hover:text-white'
+                      }`}
+                    >
+                      {number}
+                    </button>
+                  </li>
+                ),
+              )}
+            </ul>
+            <div className="flex items-center gap-4">
+              <button
+                type="button"
+                aria-label={d.shop.prevPage}
+                disabled={current === 1}
+                onClick={() => goTo(current - 1)}
+                className="grid h-11 w-11 place-items-center rounded-full bg-white text-purple transition hover:bg-purple hover:text-white disabled:opacity-35 disabled:hover:bg-white disabled:hover:text-purple"
+              >
+                <ChevronLeft size={20} aria-hidden="true" className="rtl:rotate-180" />
+              </button>
+              <p className="min-w-28 text-center text-sm font-bold text-brown/70">{d.shop.pageOf(current, pageCount)}</p>
+              <button
+                type="button"
+                aria-label={d.shop.nextPage}
+                disabled={current === pageCount}
+                onClick={() => goTo(current + 1)}
+                className="grid h-11 w-11 place-items-center rounded-full bg-white text-purple transition hover:bg-purple hover:text-white disabled:opacity-35 disabled:hover:bg-white disabled:hover:text-purple"
+              >
+                <ChevronRight size={20} aria-hidden="true" className="rtl:rotate-180" />
+              </button>
+            </div>
+          </nav>
         )}
       </div>
 

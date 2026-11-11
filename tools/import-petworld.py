@@ -125,6 +125,91 @@ def excluded(product):
     return bool(EXCLUDED_BRANDS.search(html.unescape(product['name']) + ' ' + brands))
 
 
+# Listings the shop does not carry (boss orders 2026-11-10). build() writes every removal and its reason
+# to _catalog/removed-products.txt. Edit the rules below, then run build and images again.
+REMOVED_NAMES = (  # exact listings, matched on the plain-letter name
+    'pack webbox lick', 'pack promo pochons en gelee pour chat poulet et fromage', 'mature adulte +7 poulet promo',
+    'griffoir en carton jeu video', 'parfum got pets pour chiens', 'gilet equipe nationale du maroc',
+)
+REMOVED_NAME_WORDS = re.compile(r'\bpacks?\b|gratuit|\boffre|offert|promo|black friday')
+REMOVED_BRANDS = re.compile(r'\balmo\b|carnilove')
+REMOVED_CATEGORIES = {'accessoires'}  # the category stays on the site, empty
+REMOVED_TEXT = re.compile(r'pet ?world')  # petworld links or branding left in the text
+REMOVED_DESCRIPTION_WORDS = re.compile(r'medaille')
+
+
+def plain(text):
+    return unicodedata.normalize('NFKD', html.unescape(text or '')).encode('ascii', 'ignore').decode().lower()
+
+
+def on_sale(p, by_parent):
+    """True when the product, or one of its sizes, shows a crossed-out old price."""
+    prices = p['prices']
+    if p['on_sale'] and prices.get('regular_price') and money(prices['regular_price']) > money(prices['price']):
+        return True
+    return any(v['on_sale'] and money(v['prices']['regular_price']) > money(v['prices']['price'])
+               for v in by_parent.get(p['id'], []))
+
+
+def removal_reason(p, category, by_parent):
+    """Why the shop does not list this product ('' = keep it)."""
+    name = plain(p['name'])
+    brands = plain(' '.join(b['name'] for b in p.get('brands', [])))
+    description = plain(clean(p['description'], 2500) + ' ' + clean(p['short_description'], 200))
+    attributes = plain(' '.join(a['name'] + ' ' + ' '.join(t['name'] for t in a['terms']) for a in p.get('attributes', [])))
+    if any(word in name for word in REMOVED_NAMES):
+        return 'named in the removal list'
+    if category in REMOVED_CATEGORIES:
+        return f'category {category}'
+    if REMOVED_BRANDS.search(name + ' ' + brands):
+        return 'brand Almo Nature / Carnilove'
+    if REMOVED_NAME_WORDS.search(name):
+        return 'pack / gratuit / offer / promo / black friday in the name'
+    if REMOVED_TEXT.search(name + ' ' + description + ' ' + attributes):
+        return 'petworld in the text'
+    if REMOVED_DESCRIPTION_WORDS.search(description):
+        return 'medaille in the description'
+    if not any(f'pw{p["id"]}-{i + 1}' not in BRANDED for i in range(len(p['images']))):
+        return 'no photo'
+    if on_sale(p, by_parent):
+        return 'crossed-out old price'
+    return ''
+
+
+def prepare():
+    """Loads the cache, cleans titles and splits the products into (kept, removed, variations, cats, by_parent)."""
+    products = [p for p in load_pages('products') if not excluded(p)]
+    variations = load_pages('variations')
+    cats = {c['id']: c for c in json.loads((CACHE / 'categories.json').read_text(encoding='utf-8'))}
+
+    # The API escapes titles ("Dinde &#038; Riz"): turn them back into plain text.
+    for p in products:
+        p['name'] = html.unescape(p['name'])
+        for brand in p.get('brands', []):
+            brand['name'] = html.unescape(brand['name'])
+        for category in p['categories']:
+            category['name'] = html.unescape(category['name'])
+        for attribute in p.get('attributes', []):
+            attribute['name'] = html.unescape(attribute['name'])
+            for term in attribute['terms']:
+                term['name'] = html.unescape(term['name'])
+    for v in variations:
+        for attribute in v.get('attributes', []):
+            attribute['value'] = html.unescape(attribute.get('value') or '')
+    by_parent = {}
+    for item in variations:
+        by_parent.setdefault(item['parent'], []).append(item)
+
+    kept, removed = [], []
+    for p in products:
+        reason = removal_reason(p, classify(p, cats)[0], by_parent)
+        if reason:
+            removed.append((p, reason))
+        else:
+            kept.append(p)
+    return kept, removed, variations, cats, by_parent
+
+
 # ---------------------------------------------------------------- text helpers
 def clean(text, limit=None):
     text = html.unescape(text or '')
@@ -217,27 +302,7 @@ def classify(product, cats):
 
 # ---------------------------------------------------------------- build
 def build():
-    products = [p for p in load_pages('products') if not excluded(p)]
-    variations = load_pages('variations')
-    cats = {c['id']: c for c in json.loads((CACHE / 'categories.json').read_text(encoding='utf-8'))}
-
-    # The API escapes titles ("Dinde &#038; Riz"): turn them back into plain text.
-    for p in products:
-        p['name'] = html.unescape(p['name'])
-        for brand in p.get('brands', []):
-            brand['name'] = html.unescape(brand['name'])
-        for category in p['categories']:
-            category['name'] = html.unescape(category['name'])
-        for attribute in p.get('attributes', []):
-            attribute['name'] = html.unescape(attribute['name'])
-            for term in attribute['terms']:
-                term['name'] = html.unescape(term['name'])
-    for v in variations:
-        for attribute in v.get('attributes', []):
-            attribute['value'] = html.unescape(attribute.get('value') or '')
-    by_parent = {}
-    for item in variations:
-        by_parent.setdefault(item['parent'], []).append(item)
+    products, dropped, variations, cats, by_parent = prepare()
 
     names_seen = {}
     for p in products:
@@ -348,6 +413,12 @@ def build():
         s['old_id'] = old
         s['row']['id'] = s['row']['sku'] = mp_ids[old]
     MP_FILE.write_text(json.dumps(mp_ids, indent=0, sort_keys=True), encoding='utf-8')
+
+    # Audit trail of everything the shop does not list (an MP number is never reused).
+    log = sorted('{} | pw{} | {} | {}'.format(mp_ids.get(f'pw{p["id"]}', '-'), p['id'], p['name'], reason) for p, reason in dropped)
+    Path('_catalog/removed-products.txt').write_text(
+        f'{len(dropped)} products not listed by the shop (MP | petworld id | name | reason)\n' + '\n'.join(log) + '\n', encoding='utf-8')
+    print('removed products:', len(dropped), flush=True)
 
     CSV_OUT.parent.mkdir(parents=True, exist_ok=True)
     with CSV_OUT.open('w', encoding='utf-8', newline='') as handle:
@@ -469,9 +540,13 @@ def images():
     from concurrent.futures import ProcessPoolExecutor
     IMG_DIR.mkdir(parents=True, exist_ok=True)
     tasks = []
-    for p in load_pages('products'):
-        if excluded(p):
-            continue
+    listed, _, _, _, _ = prepare()
+    # Photos of products the shop no longer lists are deleted.
+    keep_ids = {str(p['id']) for p in listed}
+    for stale in IMG_DIR.glob('pw*-*.webp'):
+        if re.match(r'pw(\d+)-', stale.name).group(1) not in keep_ids:
+            stale.unlink()
+    for p in listed:
         for i, image in enumerate(p['images']):
             if f'pw{p["id"]}-{i + 1}' in BRANDED:
                 continue

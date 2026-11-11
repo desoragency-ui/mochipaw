@@ -28,20 +28,23 @@ const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
     <p class="mt-3 max-w-xl text-lg font-bold">{d.brands.text}</p>
   </div>
 
-  <!-- dir="ltr" on purpose: the band always moves from left to right, in every language. -->
-  <div class="brand-marquee relative pb-12" dir="ltr">
+  <!--
+    dir="ltr" on purpose: the band moves from left to right in every language, and a drag to the right moves it right.
+    Five identical copies make an endless loop; only the middle one (index 2) is read by screen readers and reachable by Tab.
+  -->
+  <div class="brand-marquee relative mb-12" dir="ltr" data-brand-marquee>
     <ul class="brand-track" aria-label={d.brands.list}>
       {
-        [0, 1].map((copy) =>
+        [0, 1, 2, 3, 4].map((copy) =>
           brands.map((brand) => (
-            <li class="brand-item" aria-hidden={copy === 1 ? 'true' : undefined}>
+            <li class="brand-item" aria-hidden={copy === 2 ? undefined : 'true'}>
               <a
                 href={href(brand.name)}
                 class:list={['brand-card', { 'is-dark': brand.dark }]}
                 aria-label={d.brands.open(brand.name)}
-                tabindex={copy === 1 ? -1 : undefined}
+                tabindex={copy === 2 ? undefined : -1}
               >
-                <img src={brand.logo} alt={copy === 1 ? '' : brand.name} loading="lazy" decoding="async" draggable="false" />
+                <img src={brand.logo} alt={copy === 2 ? brand.name : ''} loading="lazy" decoding="async" draggable="false" />
               </a>
             </li>
           )),
@@ -51,11 +54,158 @@ const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
   </div>
 </section>
 
+<script>
+  // Auto-moves the brand band from left to right. The visitor can also drag it (mouse) or swipe it (touch) in
+  // either direction; the automatic motion waits while they hold it and picks up again 2.5 s after they let go.
+  const COPIES = 5;
+  const SECONDS_PER_LOOP = 36;
+  const WAIT_AFTER_TOUCH = 2500;
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-brand-marquee]').forEach((band) => {
+      const track = band.querySelector<HTMLElement>('.brand-track');
+      if (!track) return;
+
+      let loop = 0; // width of one copy
+      let pos = 0; // exact scroll position, with decimals
+      let hover = false;
+      let focused = false;
+      let touching = false;
+      let dragging = false;
+      let moved = false;
+      let onScreen = false;
+      let holdUntil = 0;
+      let startX = 0;
+      let startScroll = 0;
+      let last = performance.now();
+
+      const measure = () => {
+        const next = track.scrollWidth / COPIES;
+        if (!next) return;
+        // Keep the same place inside the loop when the screen size changes.
+        const fraction = loop ? (((pos - loop * 2) % loop) + loop) % loop / loop : 0;
+        loop = next;
+        pos = loop * 2 + fraction * loop;
+        track.style.transform = '';
+        band.scrollLeft = pos;
+      };
+
+      // One copy further or back looks exactly the same, so jumping by one copy is invisible.
+      const normalize = () => {
+        if (pos < loop) pos += loop * Math.ceil((loop - pos) / loop);
+        else if (pos > loop * 3) pos -= loop * Math.ceil((pos - loop * 3) / loop);
+        else return false;
+        return true;
+      };
+
+      const apply = () => {
+        const whole = Math.floor(pos);
+        band.scrollLeft = whole;
+        track.style.transform = `translate3d(${whole - pos}px, 0, 0)`;
+      };
+
+      const tick = (now: number) => {
+        const dt = Math.min(0.05, (now - last) / 1000);
+        last = now;
+        if (loop) {
+          // Someone moved the band (swipe, drag, wheel, keyboard focus): follow it and wait.
+          if (Math.abs(band.scrollLeft - Math.floor(pos)) > 1.5) {
+            pos = band.scrollLeft;
+            track.style.transform = '';
+            holdUntil = now + WAIT_AFTER_TOUCH;
+          }
+          const busy = touching || dragging || now < holdUntil;
+          const paused = busy || hover || focused || !onScreen || document.hidden;
+          if (!paused) {
+            pos -= (loop / SECONDS_PER_LOOP) * dt; // scrolling backwards = the content moves to the right
+            normalize();
+            apply();
+          } else if (!busy && normalize()) {
+            apply(); // the visitor stopped far from the middle: jump back by whole copies
+          }
+        }
+        requestAnimationFrame(tick);
+      };
+
+      new IntersectionObserver(([entry]) => (onScreen = entry.isIntersecting), { threshold: 0.05 }).observe(band);
+      band.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'mouse') hover = true;
+      });
+      band.addEventListener('pointerleave', () => (hover = false));
+      band.addEventListener('focusin', () => (focused = true));
+      band.addEventListener('focusout', () => (focused = false));
+      band.addEventListener('touchstart', () => (touching = true), { passive: true });
+      const release = () => {
+        touching = false;
+        holdUntil = performance.now() + WAIT_AFTER_TOUCH;
+      };
+      band.addEventListener('touchend', release, { passive: true });
+      band.addEventListener('touchcancel', release, { passive: true });
+
+      // Mouse drag. Touch screens already scroll the band natively.
+      band.addEventListener('pointerdown', (event) => {
+        if (event.pointerType !== 'mouse' || event.button !== 0) return;
+        dragging = true;
+        moved = false;
+        startX = event.clientX;
+        startScroll = band.scrollLeft;
+        band.classList.add('is-dragging');
+      });
+      window.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+        const delta = event.clientX - startX;
+        if (Math.abs(delta) > 6) moved = true;
+        band.scrollLeft = startScroll - delta;
+      });
+      const drop = () => {
+        if (!dragging) return;
+        dragging = false;
+        band.classList.remove('is-dragging');
+        holdUntil = performance.now() + WAIT_AFTER_TOUCH;
+      };
+      window.addEventListener('pointerup', drop);
+      window.addEventListener('pointercancel', drop);
+      band.addEventListener('dragstart', (event) => event.preventDefault());
+      // A drag that ends on a logo must not open the shop.
+      band.addEventListener(
+        'click',
+        (event) => {
+          if (moved) {
+            event.preventDefault();
+            event.stopPropagation();
+            moved = false;
+          }
+        },
+        true,
+      );
+
+      window.addEventListener('resize', measure);
+      measure();
+      requestAnimationFrame(tick);
+    });
+  }
+</script>
+
 <style>
+  /* A scroll box with no visible bar: the script moves it, and a finger or a mouse drag can move it too. */
   .brand-marquee {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
     -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
     mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+  }
+
+  .brand-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .brand-marquee.is-dragging {
+    cursor: grabbing;
   }
 
   .brand-track {
@@ -64,13 +214,7 @@ const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
     margin: 0;
     padding: 0.5rem 0 1rem;
     list-style: none;
-    /* Moves to the right: the second copy slides in from the left, with no jump. */
-    animation: brands-ltr 36s linear infinite;
-  }
-
-  .brand-marquee:hover .brand-track,
-  .brand-marquee:focus-within .brand-track {
-    animation-play-state: paused;
+    will-change: transform;
   }
 
   .brand-item {
@@ -135,15 +279,6 @@ const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
     }
   }
 
-  @keyframes brands-ltr {
-    from {
-      transform: translate3d(-50%, 0, 0);
-    }
-    to {
-      transform: translate3d(0, 0, 0);
-    }
-  }
-
   @keyframes paw-wiggle {
     0%,
     70%,
@@ -166,7 +301,6 @@ const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
       justify-content: center;
       gap: 0.75rem;
       padding-inline: 1rem;
-      animation: none;
     }
 
     .brand-item {
@@ -178,6 +312,8 @@ const href = (name: string) => `${shop}?marque=${encodeURIComponent(name)}`;
     }
 
     .brand-marquee {
+      overflow: visible;
+      cursor: auto;
       -webkit-mask-image: none;
       mask-image: none;
     }

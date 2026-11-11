@@ -59,6 +59,6 @@ const breadcrumb = {
     </div>
   </header>
   <div class="shell mt-8">
-    <ShopBrowser client:load products={products.map((item) => slim(item, false, locale))} categories={categories.map(({ slug }) => ({ slug, name: categoryText(locale, slug).name }))} locale={locale} hideCategories={hideCategories} emptyText={emptyText} />
+    {products.length === 0 && Astro.slots.has('empty') ? <slot name="empty" /> : <ShopBrowser client:load products={products.map((item) => slim(item, false, locale))} categories={categories.map(({ slug }) => ({ slug, name: categoryText(locale, slug).name }))} locale={locale} hideCategories={hideCategories} emptyText={emptyText} />}
   </div>
 </Base>

@@ -51,7 +51,7 @@ const hasContact = Boolean(phone || email || address);
           hasContact ? (
             <address class="not-italic">
               {phone && <p>{phone}</p>}
-              {email && <p>{email}</p>}
+              {email && <p><a class="inline-flex min-h-10 items-center underline hover:no-underline" href={`mailto:${email}`}>{email}</a></p>}
               {address && <p>{address}, {city}</p>}
             </address>
           ) : (

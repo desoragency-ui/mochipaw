@@ -16,7 +16,8 @@ export const site = {
     /** International format without + or spaces, example 2126XXXXXXXX. Empty = checkout stays in demo. */
     whatsapp: '',
     phone: '',
-    email: '',
+    /** Cloudflare Email Routing: hello@ and support@ forward to the shop's Gmail. */
+    email: 'hello@mochipaw.ma',
     address: '',
     city: '',
     hours: '',

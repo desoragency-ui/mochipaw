@@ -1,5 +1,6 @@
 ---
 import Listing from '../../components/Listing.astro';
+import OfferNotify from '../../components/OfferNotify.astro';
 import { langPaths, t } from '../../i18n';
 import { onOffer } from '../../lib/catalog';
 
@@ -19,4 +20,6 @@ const d = t(locale);
   cutout={{ name: 'offers-duo', alt: d.alts.offers }}
   emptyText={d.offers.empty}
   tone="orange"
-/>
+>
+  <Fragment slot="empty"><OfferNotify locale={locale} /></Fragment>
+</Listing>
